@@ -1,19 +1,67 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
 
-class Usuario(models.Model):
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, senha=None, **extra_fields):
+        if not email:
+            raise ValueError("O email é obrigatório")
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(senha)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, senha=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError("Superusuário deve ter is_staff=True.")
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError("Superusuário deve ter is_superuser=True.")
+
+        return self.create_user(email, senha, **extra_fields)
+
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    senha = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
-    telefone = models.CharField(max_length=15)
-    data_criacao = models.DateField(auto_now_add=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    # Adicionando related_name para evitar conflito
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name="usuario_groups",  # Nome customizado do acessor reverso
+        blank=True,
+        help_text="Os grupos aos quais este usuário pertence.",
+        verbose_name="grupos",
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name="usuario_permissions",  # Nome customizado do acessor reverso
+        blank=True,
+        help_text="As permissões específicas para este usuário.",
+        verbose_name="permissões de usuário",
+    )
+
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nome']
 
     class Meta:
         db_table = 'USUARIO'
 
+    def __str__(self):
+        return self.email
 
 class Endereco(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name="endereco")
     logradouro = models.CharField(max_length=255)
     cidade = models.CharField(max_length=255)
     estado = models.CharField(max_length=255)
