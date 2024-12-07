@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # Django REST Framework
     'rest_framework',
     # Core application
-    'core.app.CoreConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'ola_cidadao.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'teste.sqlite3',
     }
 }
 
