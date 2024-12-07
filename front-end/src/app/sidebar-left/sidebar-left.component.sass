@@ -1,0 +1,36 @@
+@use '../../styles.sass' as global
+.container
+  display: flex
+  background-color: global.$main-bg
+  flex-direction: column
+  position: fixed
+  left: 0
+  top: 0
+  height: 100vh
+  width: 310px
+  transition: all 0.3s ease
+  &.close
+    transform: translateX(-100%)
+.sidebar-nav
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+.btnSidebar
+  background-color: global.$btn-background
+  color: global.$main-fontColor
+  font-family: global.$main-fontFamilly
+  font-weight: 600
+  width: 280px
+  height: 50px
+  border: 10px
+  border: none
+  border-radius: 20px
+  gap: 1.5em
+  margin-top: 10px
+  &:hover
+    background-color: global.$btn-hover-bg
+    color: global.$btn-alt-fontColor
+    &:last-child
+      background-color: global.$btn-alt-bg
