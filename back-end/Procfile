@@ -1,0 +1,1 @@
+web: gunicorn olacidadao.wsgi --log-file -
