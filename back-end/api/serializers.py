@@ -30,7 +30,7 @@ class AdministradorSerializer(serializers.ModelSerializer):
 class SecretariaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Secretaria
-        exclude = ['is_superuser'] 
+        fields = '__all__' 
 
 class PostagemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,3 +46,10 @@ class RespostaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resposta
         fields = '__all__'
+
+class ViewInfoSerializer(serializers.Serializer):
+    tipo_usuario = serializers.CharField()
+    dados = serializers.DictField()
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()

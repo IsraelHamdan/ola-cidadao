@@ -1,12 +1,14 @@
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from ..serializers import ViewInfoSerializer
 
 class ViewInfo(APIView):
     """
     Retorna o tipo de usuário logado e suas informações básicas.
     """
     permission_classes = [IsAuthenticated]
+    serializer_class = ViewInfoSerializer
 
     def get(self, request):
         usuario = request.user
@@ -42,7 +44,8 @@ class ViewInfo(APIView):
             tipo = "Desconhecido"
             dados = {}
 
-        return Response({
-            "tipo_usuario": tipo,
-            "dados": dados,
-        })
+        # Usando o serializador para formatar os dados
+        response_data = {"tipo_usuario": tipo, "dados": dados}
+        serializer = self.serializer_class(data=response_data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)

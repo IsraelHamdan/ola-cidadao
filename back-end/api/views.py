@@ -54,6 +54,8 @@ class AdministradorDetailView(generics.RetrieveUpdateDestroyAPIView):
 # Secretaria
 class SecretariaListCreateView(generics.ListCreateAPIView):
     queryset = Secretaria.objects.all()
+    serializer_class = SecretariaSerializer
+
 
 class SecretariaDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Secretaria.objects.all()
