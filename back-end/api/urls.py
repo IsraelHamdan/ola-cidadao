@@ -1,17 +1,23 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+from .views.info_views import ViewInfo
+from django.conf import settings
+from django.conf.urls.static import static
 
-from .resources.viewsInfo import ViewInfo
-from .views import (
-    EnderecoListCreateView, EnderecoDetailView,
-    CidadaoListCreateView, CidadaoDetailView,
-    PrefeituraListCreateView, PrefeituraDetailView,
-    SecretariaListCreateView, SecretariaDetailView,
-    PostagemListCreateView, PostagemDetailView,
-    ManifestacaoListCreateView, ManifestacaoDetailView,
-    RespostaListCreateView, RespostaDetailView, AdministradorListCreateView, AdministradorDetailView 
+from .views.user_views import (
+    AdministradorViewSet, CidadaoCreateView, CidadaoViewSet,    
+    PrefeituraViewSet, 
+    SecretariaViewSet 
 )
 
-from .resources.viewsAuth import LogoutView
+from .views.posts_view import (
+    PostagemViewSet,
+    RespostasPorManifestacaoView,   
+    ManifestacaoViewSet, RespostaViewSet,
+    ManifestacaoRespostasListView
+)
+
+from .views.auth_views import LogoutView
 from django.urls import path
 
 from rest_framework_simplejwt.views import (
@@ -19,6 +25,16 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+router = DefaultRouter()
+router.register(r'manifestacoes', ManifestacaoViewSet, basename='manifestacao')
+router.register(r'postagens', PostagemViewSet, basename='postagem')
+router.register(r'respostas', RespostaViewSet, basename='resposta')
+router.register(r'cidadaos', CidadaoViewSet, basename='cidadao')
+router.register(r'administradores', AdministradorViewSet, basename='administrador')
+router.register(r'prefeituras', PrefeituraViewSet,  basename='prefeitura')
+router.register(r'secretarias', SecretariaViewSet, basename='secretaria')
+
+urlpatterns = router.urls
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -28,35 +44,21 @@ urlpatterns = [
     path('info/', ViewInfo.as_view(), name='info'),
 
 
-    # Endereco
-    path('enderecos/', EnderecoListCreateView.as_view(), name='endereco-list-create'),
-    path('enderecos/<int:pk>/', EnderecoDetailView.as_view(), name='endereco-detail'),
-
-    # Cidadao
-    path('cidadaos/', CidadaoListCreateView.as_view(), name='cidadao-list-create'),
-    path('cidadaos/<int:pk>/', CidadaoDetailView.as_view(), name='cidadao-detail'),
-
-    # Prefeitura
-    path('prefeituras/', PrefeituraListCreateView.as_view(), name='prefeitura-list-create'),
-    path('prefeituras/<int:pk>/', PrefeituraDetailView.as_view(), name='prefeitura-detail'),
-
-    # Prefeitura
-    path('administradores/', AdministradorListCreateView.as_view(), name='administrador-list-create'),
-    path('administradores/<int:pk>/', AdministradorDetailView.as_view(), name='administrador-detail'),
-
-    # Secretaria
-    path('secretarias/', SecretariaListCreateView.as_view(), name='secretaria-list-create'),
-    path('secretarias/<int:pk>/', SecretariaDetailView.as_view(), name='secretaria-detail'),
-
     # Postagem
-    path('postagens/', PostagemListCreateView.as_view(), name='postagem-list-create'),
-    path('postagens/<int:pk>/', PostagemDetailView.as_view(), name='postagem-detail'),
-
-    # Manifestacao
-    path('manifestacoes/', ManifestacaoListCreateView.as_view(), name='manifestacao-list-create'),
-    path('manifestacoes/<int:pk>/', ManifestacaoDetailView.as_view(), name='manifestacao-detail'),
+    # path('postagens/', PostagemListCreateView.as_view(), name='postagem-list-create'),
+    # path('postagens/<int:pk>/', PostagemDetailView.as_view(), name='postagem-detail'),
+    
+    path('manifestacoes/respostasporid/<int:manifestacao_id>/', RespostasPorManifestacaoView.as_view(), name='respostas-por-manifestacao'),
+    path('manifestacoes/respostas/', ManifestacaoRespostasListView.as_view(), name='manifestacao-list'),
+    path('cidadaos/cadastro/', CidadaoCreateView.as_view(), name='cidadao-cadastro'),
 
     # Resposta
-    path('respostas/', RespostaListCreateView.as_view(), name='resposta-list-create'),
-    path('respostas/<int:pk>/', RespostaDetailView.as_view(), name='resposta-detail'),
+    # path('respostas/', RespostaListCreateView.as_view(), name='resposta-list-create'),
+    # path('respostas/<int:pk>/', RespostaDetailView.as_view(), name='resposta-detail'),
 ]
+
+
+urlpatterns += router.urls
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

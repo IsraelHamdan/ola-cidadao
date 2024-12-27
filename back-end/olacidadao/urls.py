@@ -22,7 +22,7 @@ from django.urls import path
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('api/', include('api.urls')),  # Substitua <nome_do_app> pelo nome do seu app
     path('schema/', SpectacularAPIView.as_view(), name='schema'),  # Schema gerado automaticamente
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI

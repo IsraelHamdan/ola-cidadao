@@ -16,6 +16,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+MEDIA_URL = '/media/'  # URL para acessar arquivos de mídia
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Pasta onde os arquivos serão armazenados
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -25,8 +29,10 @@ SECRET_KEY = 'django-insecure-z4%cm84!p@1ek4d+6u3kj4&gihub#p=_os#f7+7uf!7-+@zy!t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['olacidadao-3391b9c80935.herokuapp.com']
+APPEND_SLASH = True
+
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['olacidadao-3391b9c80935.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -42,8 +48,11 @@ INSTALLED_APPS = [
     'api',             # O aplicativo criado
     'drf_spectacular',
     'rest_framework_simplejwt',
+     'corsheaders', # Remove a proteção de CORS
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -94,6 +103,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # Configuração para servir arquivos estáticos no Heroku
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # Remove a proteção de CORS
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
