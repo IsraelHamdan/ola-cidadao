@@ -10,3 +10,17 @@
 .container
   background-color: global.$main-bg
   font-family: 'Poppins'
+
+main
+  width: 100%
+  min-height: 100vh
+  display: grid
+  grid-template-rows: 1fr
+  grid-template-columns: 310px 1fr 280px
+  background: global.$main-bg
+
+app-sidebar-left
+  grid-column: 1 / 2
+
+app-sidebar-right
+  grid-column: 3 /4

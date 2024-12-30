@@ -7,8 +7,9 @@
   position: fixed
   left: 0
   top: 0
-  height: 100vh
+  height: 100%
   width: 310px
+  padding-top: 15px
   transition: all 0.3s ease
   border-right: 1px solid global.$alt-fontColor
   &.close
@@ -43,21 +44,36 @@
   background-color: global.$btn-background
   color: global.$main-fontColor
   font-family: global.$main-fontFamilly
+  font-size: 1em
   font-weight: 600
   width: 280px
   height: 50px
   border: 10px
   border: none
-  border-radius: 20px
-  gap: 1.5em
+  border-radius: 30px
+  padding-left: 15px
+  gap: 10px
   margin-top: 10px
   transition: all .2s ease
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  
   &:hover
     background-color: global.$btn-hover-bg
     color: global.$btn-alt-fontColor
     &:last-child
       background-color: global.$btn-alt-bg
+    i
+      color: white
   &:active
     transform: scale(0.965)
   &:last-child
     margin-top: 25px
+    padding-lefT: 0px
+    display: block
+i
+  color: black
+  font-size: 1.5em
+  transition: all .2s ease
+  
