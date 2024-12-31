@@ -1,0 +1,33 @@
+@use '../../styles.sass' as global
+  
+header
+  padding-top: 10px
+  border-bottom: 1px solid black
+  height: 120px
+  display: flex
+  flex-direction: column 
+  justify-content: center
+  align-items: center
+  gap: 10px
+  
+nav
+  width: 100%
+  padding: 10px 15px 
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+
+  div
+    display: flex
+    gap: 15px
+
+    a
+      color: global.$alt-fontColor
+      &:nth-of-type(1)
+        color: global.$main-fontColor
+
+#popular
+ font-size: 1.35em
+ color: global.$main-fontColor
+ font-weight: 500
