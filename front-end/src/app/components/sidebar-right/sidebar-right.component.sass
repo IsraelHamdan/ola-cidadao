@@ -1,9 +1,9 @@
-@use '../../styles.sass' as global
+@use '../../../styles.sass' as global
 
 .container
   background-color: global.$main-bg
   height: 100%
-  padding: 15px 12px
+  padding: 20px 12px
   transition: all 0.3s ease
   border-left: 1px solid global.$alt-fontColor
   display: flex
@@ -11,7 +11,6 @@
 
 
 .container-busca
- 
   position: relative
   background-color: white
   border-radius: 7px
@@ -36,3 +35,18 @@ input
   color: global.$alt-fontColor
   &:focus
     outline: none
+
+
+ul
+  list-style: none
+  list-style-position: inside
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-end
+  gap: 3px
+  flex-wrap: wrap
+
+  li
+    font-size: 14px
+    color: global.$alt-fontColor
