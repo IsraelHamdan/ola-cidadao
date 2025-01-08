@@ -1,15 +1,19 @@
 @use '../../styles.sass' as global
   
 header
-  padding-top: 10px
-  border-bottom: 1px solid black
+  padding-top: 15px
+  border-bottom: 1px solid global.$alt-fontColor
   height: 120px
   display: flex
   flex-direction: column 
   justify-content: center
   align-items: center
   gap: 10px
-  
+  background-color: global.$main-bg
+  h1
+    font-weight: 500
+
+
 nav
   width: 100%
   padding: 10px 15px 
@@ -20,12 +24,18 @@ nav
 
   div
     display: flex
-    gap: 15px
+    gap: 20px
 
     a
+      transition: all .15s ease
       color: global.$alt-fontColor
       &:nth-of-type(1)
         color: global.$main-fontColor
+      &:hover
+        color: global.$main-fontColor
+
+.feed
+  background-color: global.$main-bg
 
 #popular
  font-size: 1.35em
