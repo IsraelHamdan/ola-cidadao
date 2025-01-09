@@ -1,11 +1,16 @@
 @use '../../../styles.sass' as global
   
+.row
+  display: flex
+  justify-content: space-between
+  align-items: center
+
 .container
-  padding: 10px
+  padding: 15px
 
 .name-section
-  margin-left: -10px
-  width: calc( 100% + 20px)
+  margin-left: -15px
+  width: calc( 100% + 30px)
   border-bottom: 1px solid global.$alt-fontColor
   margin-bottom: 12px
   padding: 10px 10px 10px
@@ -59,3 +64,34 @@
 
   img
     height: 100%
+
+button
+  padding: 12px 15px
+  border-radius: 20px
+  border: none
+  background-color: global.$btn-alt-bg
+  color: white
+  font-weight: bold
+
+nav
+  margin-top: -40px
+  margin-left: -15px
+  width: calc( 100% + 30px)
+  padding: 10px 15px 
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  border-bottom: 1px solid global.$alt-fontColor
+
+  div
+    display: flex
+    gap: 20px
+
+    a
+      transition: all .15s ease
+      color: global.$alt-fontColor
+      &:nth-of-type(1)
+        color: global.$main-fontColor
+      &:hover
+        color: global.$main-fontColor

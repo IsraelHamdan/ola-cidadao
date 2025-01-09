@@ -74,14 +74,21 @@
   display: flex
   justify-content: flex-start
   align-items: center
-  
+  &:last-child
+    background-color: global.$btn-alt-bg
+    color: white
+    &:hover
+      color: global.$btn-alt-bg
+      background-color: white
+      border: 1px solid global.$btn-alt-bg
   &:hover
+    cursor: pointer
     background-color: global.$btn-hover-bg
     color: global.$btn-alt-fontColor
-    &:last-child
-      background-color: global.$btn-alt-bg
     i
       color: white
+  
+    
   &:active
     transform: scale(0.965)
   &:last-child
