@@ -6,6 +6,7 @@ import { FeedComponent } from './components/feed/feed.component';
 import { MetricasComponent } from './pages/metricas/metricas.component';
 import { PrefeituraComponent } from './pages/prefeitura/prefeitura.component';
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
+import { NovaManifestacaoComponent } from './pages/nova-manifestacao/nova-manifestacao.component';
 
 export const routes: Routes = [
   { path: '', component: FeedComponent },
@@ -13,4 +14,5 @@ export const routes: Routes = [
   { path: 'metricas', component: MetricasComponent },
   { path: 'prefeitura', component: PrefeituraComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
+  { path: 'nova-manifestacao', component: NovaManifestacaoComponent },
 ];
