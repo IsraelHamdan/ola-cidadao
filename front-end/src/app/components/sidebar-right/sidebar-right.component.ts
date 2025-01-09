@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-right',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './sidebar-right.component.html',
   styleUrl: './sidebar-right.component.sass'
 })

@@ -1,6 +1,7 @@
 @use '../../../styles.sass' as global
 
 .container
+  width: 260px
   position: fixed
   right: 0
   top: 0
@@ -11,12 +12,21 @@
   border-left: 1px solid global.$alt-fontColor
   display: flex
   flex-direction: column
+  gap: 15px
 
+  p
+    &:nth-of-type(2)
+      padding-left: 10px 
+      font-size: 0.9em
+      color: global.$btn-alt-bg
+      font-weight: 500
+      
 
 .container-busca
   position: relative
   background-color: white
   border-radius: 7px
+  margin-bottom: 6px
   padding: 0px
   i
     position: absolute
@@ -40,16 +50,40 @@ input
     outline: none
 
 
+.tags
+  display: flex
+  flex-direction: column
+  gap: 7px
+
+.tag-item
+  font-size: .86em
+  background-color: global.$colord9
+  padding: 5px 20px 5px 10px
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  gap: 3px
+  border-radius: 20px
+
+  span
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+
+  i
+    font-size: .9em
+
 ul
+  margin-top: 20px
   list-style: none
   list-style-position: inside
   display: flex
-  flex-direction: column
+  flex-direction: row
   justify-content: center
-  align-items: flex-end
-  gap: 3px
+  align-items: center
+  gap: 10px
   flex-wrap: wrap
 
   li
-    font-size: 14px
+    font-size: 12px
     color: global.$alt-fontColor
