@@ -1,46 +1,54 @@
 <head> </head>
 
 <div class="container">
-  <!-- <div class="sidebar-slider">
-    <button type="button" class="btn-slider">Fechar</button>
-  </div> -->
-
   @if(auth.isAuthenticated$ | async){
-  <div class="userInfo">
+    <button (click)="auth.logout()" type="button" class="btn-logout">
+      <i class="fa-solid fa-sign-out-alt"></i>
+      <span>Sair</span>
+    </button>
 
-    <div class="containerUserImg">
-      <a routerLink="/user"><img class="userImg" [src]="user?.picture" alt="{{ user?.name }}" /></a>
+    <div class="userInfo">
+      <div class="containerUserImg">
+        <a routerLink="/user"
+          ><img class="userImg" [src]="user?.picture" alt="{{ user?.name }}"
+        /></a>
+      </div>
+
+      <a routerLink="/user">
+        <h4 class="userName">{{ user?.name }}</h4>
+      </a>
+      <span class="countUserName">{{ user?.nickname }}</span>
     </div>
 
-    <a routerLink="/user">
-      <h4 class="userName">{{ user?.name }}</h4>
-    </a>
-    <span class="countUserName">{{ user?.nickname }}</span>
-  </div>
+    <nav class="sidebar-nav">
+      <button routerLink="/" type="button" class="btnSidebar">
+        <i class="fa-regular fa-compass"></i><span>Publicações</span>
+      </button>
+      <button routerLink="/metricas" type="button" class="btnSidebar">
+        <i class="fa-solid fa-arrow-trend-up"></i><span>Métricas</span>
+      </button>
+      <button routerLink="/prefeitura" type="button" class="btnSidebar">
+        <i class="fa-solid fa-house"></i><span>Prefeitura</span>
+      </button>
+      <button routerLink="/configuracoes" type="button" class="btnSidebar">
+        <i class="fa-solid fa-gear"></i><span>configurações</span>
+      </button>
+      <button
+        routerLink="/nova-manifestacao"
+        type="button"
+        class="btnSidebar btnMainfest"
+      >
+        <span>Manifestar-se</span>
+      </button>
+    </nav>
+  } @else {
+    <p id="out-message">Entre ou cadastre-se para se manifestar</p>
 
-  <nav class="sidebar-nav">
-    <button routerLink="/" type="button" class="btnSidebar">
-      <i class="fa-regular fa-compass"></i><span>Publicações</span>
+    <button class="btnSidebar entrar out" type="button" (click)="auth.loginWithRedirect()">Entrar</button>
+    <button routerLink="/" type="button" class="btnSidebar out">
+      Cadastrar
     </button>
-    <button routerLink="/metricas" type="button" class="btnSidebar">
-      <i class="fa-solid fa-arrow-trend-up"></i><span>Métricas</span>
-    </button>
-    <button routerLink="/prefeitura" type="button" class="btnSidebar">
-      <i class="fa-solid fa-house"></i><span>Prefeitura</span>
-    </button>
-    <button routerLink="/configuracoes" type="button" class="btnSidebar">
-      <i class="fa-solid fa-gear"></i><span>configurações</span>
-    </button>
-    <button routerLink="/nova-manifestacao" type="button" class="btnSidebar btnMainfest">
-      <span>Manifestar-se</span>
-    </button>
-  </nav>
   }
-  @else {
-  <button (click)="auth.loginWithRedirect()">Login</button>
-  }
-
-
 
   <p>Prefeitura de Jequié. Cidade de Jequié, Bahia - Brasil.</p>
 </div>

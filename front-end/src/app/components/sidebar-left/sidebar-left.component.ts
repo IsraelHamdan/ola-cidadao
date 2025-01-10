@@ -11,7 +11,6 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './sidebar-left.component.sass',
 })
 export class SidebarLeftComponent {
-
   constructor(public auth: AuthService) {}
   user?: User | undefined | null;
 
@@ -19,6 +18,6 @@ export class SidebarLeftComponent {
     this.auth.user$.subscribe((user) => {
       this.user = user;
     });
-}
+  }
 
 }

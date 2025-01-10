@@ -20,6 +20,22 @@
     text-align: center
     margin-top: 25px
 
+.btn-logout
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 2px
+  margin: -5px 0px 10px 10px
+  width: max-content
+  padding: 5px
+  color: white
+  border-radius: 5px
+  background-color: rgb(255, 90, 90)
+  border: none
+  i
+    font-size: 1.4em
+    color: white
+
 .sidebar-nav
   display: flex
   align-items: center
@@ -88,7 +104,6 @@
     i
       color: white
   
-    
   &:active
     transform: scale(0.965)
   &:last-child
@@ -100,3 +115,18 @@ i
   font-size: 1.5em
   transition: all .2s ease
   
+#out-message
+  color: global.$main-fontColor
+  font-size: 1.2em
+  font-weight: 600
+  margin: 50px 30px 20px
+
+.out
+  margin-left: 14px
+  padding: 0
+  justify-content: center
+
+  &:nth-of-type(1)
+    background-color: global.$btn-alt-bg
+    color: white
+    
