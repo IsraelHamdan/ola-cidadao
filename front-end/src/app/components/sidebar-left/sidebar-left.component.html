@@ -5,15 +5,17 @@
     <button type="button" class="btn-slider">Fechar</button>
   </div> -->
 
+  @if(auth.isAuthenticated$ | async){
   <div class="userInfo">
+
     <div class="containerUserImg">
-      <a routerLink="/user"><img class="userImg" src="images/cat2.jpg" alt="" /></a>
+      <a routerLink="/user"><img class="userImg" [src]="user?.picture" alt="{{ user?.name }}" /></a>
     </div>
 
     <a routerLink="/user">
-      <h4 class="userName">Jutowisky Latnówiskys</h4>
+      <h4 class="userName">{{ user?.name }}</h4>
     </a>
-    <span class="countUserName">JutowiskyLatnówiskys</span>
+    <span class="countUserName">{{ user?.nickname }}</span>
   </div>
 
   <nav class="sidebar-nav">
@@ -33,6 +35,12 @@
       <span>Manifestar-se</span>
     </button>
   </nav>
+  }
+  @else {
+  <button (click)="auth.loginWithRedirect()">Login</button>
+  }
+
+
 
   <p>Prefeitura de Jequié. Cidade de Jequié, Bahia - Brasil.</p>
 </div>
