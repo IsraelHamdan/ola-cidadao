@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ManifestationComponent } from "../../components/manifestation/manifestation.component";
+import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
 import { AuthService, User } from '@auth0/auth0-angular';
 
 @Component({
@@ -7,7 +7,7 @@ import { AuthService, User } from '@auth0/auth0-angular';
   standalone: true,
   imports: [ManifestationComponent],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.sass'
+  styleUrl: './user.component.sass',
 })
 export class UserComponent {
   constructor(public auth: AuthService) {}
@@ -18,6 +18,5 @@ export class UserComponent {
     this.auth.user$.subscribe((user) => {
       this.user = user;
     });
-}
-
+  }
 }
