@@ -7,10 +7,11 @@ import { MetricasComponent } from './pages/metricas/metricas.component';
 import { PrefeituraComponent } from './pages/prefeitura/prefeitura.component';
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { NovaManifestacaoComponent } from './pages/nova-manifestacao/nova-manifestacao.component';
+import { authGuardFn } from '@auth0/auth0-angular';
 
 export const routes: Routes = [
   { path: '', component: FeedComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user', component: UserComponent, canActivate: [authGuardFn] },
   { path: 'metricas', component: MetricasComponent },
   { path: 'prefeitura', component: PrefeituraComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
