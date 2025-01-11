@@ -4,6 +4,8 @@ import { AsyncPipe } from '@angular/common';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
+import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoService } from '../../../services/cidadao/cidadao.service';
 
 @Component({
   selector: 'app-sidebar-left',
@@ -13,15 +15,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './sidebar-left.component.sass',
 })
 export class SidebarLeftComponent {
-  constructor(private authService: AuthService) {}
-
   user: boolean = true;
-
-  ngOnInit(): void {
-    // this.auth.user$.subscribe((user) => {
-    //   this.user = user;
-    // });
-  }
 
   isModalOpen: boolean = false;
 
@@ -45,5 +39,24 @@ export class SidebarLeftComponent {
 
   onLogout(): void {
     this.authService.logout();
+  }
+
+  userCidadao!: CidadaoDTO;
+
+  constructor(
+    private cidadaoService: CidadaoService,
+    private authService: AuthService
+  ) {}
+
+  // user?: User | undefined | null;
+
+  ngOnInit(): void {
+    this.cidadaoService
+      .getCidadao(8)
+      .subscribe((user) => (this.userCidadao = user));
+
+    // this.auth.user$.subscribe((user) => {
+    //   this.user = user;
+    // });
   }
 }

@@ -16,7 +16,7 @@ export class CidadaoService {
   }
 
   getCidadao(id: number): Observable<CidadaoDTO> {
-    return this.req.get<CidadaoDTO>(`${this.urlRequest}/${id}`);
+    return this.req.get<CidadaoDTO>(`${this.urlRequest}/${id}/`);
   }
 
   getAllCidadaos(): Observable<CidadaoDTO[]> {

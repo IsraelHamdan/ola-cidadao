@@ -15,7 +15,8 @@ export const routes: Routes = [
   { path: 'prefeitura', component: PrefeituraComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'nova-manifestacao', component: NovaManifestacaoComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: '**', redirectTo: 'login' },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'dashboard', component: FeedComponent },
+  {path: 'user', component: UserComponent},
+  { path: '**', redirectTo: '' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
 ];
