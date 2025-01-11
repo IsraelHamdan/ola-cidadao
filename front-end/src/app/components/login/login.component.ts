@@ -18,4 +18,8 @@ export class LoginComponent {
   constructor() {}
 
   ngOnInit(): void {}
+
+  logar() {
+    
+  }
 }

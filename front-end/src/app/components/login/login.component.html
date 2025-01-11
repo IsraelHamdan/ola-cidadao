@@ -7,7 +7,7 @@
     </div>
 
     <div class="body">
-      <h4>Olá, Cidadão! Seja bem vindo.</h4>
+      <h3>Olá, Cidadão! Seja bem vindo.</h3>
 
       <form>
         <div class="form-data">
@@ -15,14 +15,19 @@
           <input type="password" name="senha" id="senha" placeholder="Senha" />
         </div>
 
-        <div class="observation">
-          <input type="checkbox" name="lembrarAcesso" id="lembrarAcesso" />
-          <label for="lembrarAcesso"> Lembrar acesso </label>
+        <div>
+          <div>
+            <input type="checkbox" name="lembrarAcesso" id="lembrarAcesso" />
+            <label for="lembrarAcesso"> Lembrar acesso </label>
+          </div>
+
+          <a href="">Esqueceu?</a>
         </div>
 
-        <button type="button">Entrar</button>
+        <button (click)="logar()" 
+        type="button">Entrar</button>
 
-        <p>Não tem uma conta? Cadastre-se</p>
+        <a href="" class="not-acount">Não tem uma conta? Cadastre-se</a>
       </form>
     </div>
   </div>
