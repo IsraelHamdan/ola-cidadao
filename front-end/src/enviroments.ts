@@ -1,3 +1,3 @@
 export const enviroments = {
-  baseURL: process.env['BASE_URL'],
+  baseURL: 'https://olacidadao-3391b9c80935.herokuapp.com/api',
 };
