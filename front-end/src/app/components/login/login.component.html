@@ -9,10 +9,22 @@
     <div class="body">
       <h3>Olá, Cidadão! Seja bem vindo.</h3>
 
-      <form>
+      <form (ngSubmit)="onSubmit()">
         <div class="form-data">
-          <input type="email" name="email" id="email" placeholder="E-mail" />
-          <input type="password" name="senha" id="senha" placeholder="Senha" />
+          <input
+            [(ngModel)]="credentials.email"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="E-mail"
+          />
+          <input
+            [(ngModel)]="credentials.password"
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Senha"
+          />
         </div>
 
         <div>
@@ -24,8 +36,7 @@
           <a href="">Esqueceu?</a>
         </div>
 
-        <button (click)="logar()" 
-        type="button">Entrar</button>
+        <button type="submit">Entrar</button>
 
         <a href="" class="not-acount">Não tem uma conta? Cadastre-se</a>
       </form>

@@ -1,26 +1,30 @@
 <!-- modal.component.html -->
 <div class="modal-overlay" *ngIf="isOpen" (click)="close()">
-  <div class="modal-content" (click)="$event.stopPropagation()">  
+  <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="header">
       <i (click)="close()" class="fa-solid fa-x"></i>
       <p>Como se manifestar?</p>
     </div>
-  
+
     <div class="body">
       <div>
         <div class="containerUserImg">
-          <img class="userImg" [src]="user?.picture" alt="imagem" />
+          <img class="userImg" [src]="" alt="imagem" />
         </div>
 
-        <textarea name="descricao" id="descricao" placeholder="Escreva sua manifestação, seja específico."></textarea>
+        <textarea
+          name="descricao"
+          id="descricao"
+          placeholder="Escreva sua manifestação, seja específico."
+        ></textarea>
       </div>
-  
+
       <div class="observations">
         <p>Quantidade de manifestações restantes: 3</p>
         <p>300 Caracteres restantes</p>
       </div>
     </div>
-  
+
     <div class="container-buttons">
       <div>
         <button type="button">Selecionar secretaria</button>
@@ -32,9 +36,8 @@
 
       <button type="button">Manifestar</button>
     </div>
-  </div>  
+  </div>
 </div>
-
 
 <!-- <div>
   <div class="header">

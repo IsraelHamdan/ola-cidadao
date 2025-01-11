@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
-import { AuthService, User } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-user',
@@ -10,13 +9,13 @@ import { AuthService, User } from '@auth0/auth0-angular';
   styleUrl: './user.component.sass',
 })
 export class UserComponent {
-  constructor(public auth: AuthService) {}
+  constructor() {}
 
-  user?: User | undefined | null;
+  // user?: User | undefined | null;
 
   ngOnInit(): void {
-    this.auth.user$.subscribe((user) => {
-      this.user = user;
-    });
+    // this.auth.user$.subscribe((user) => {
+    //   this.user = user;
+    // });
   }
 }
