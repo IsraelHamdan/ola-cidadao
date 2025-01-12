@@ -16,7 +16,8 @@ export const routes: Routes = [
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'nova-manifestacao', component: NovaManifestacaoComponent },
   { path: 'dashboard', component: FeedComponent },
-  {path: 'user', component: UserComponent},
+  { path: 'user', component: UserComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
   { path: '', redirectTo: '', pathMatch: 'full' },
 ];

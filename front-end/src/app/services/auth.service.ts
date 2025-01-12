@@ -31,7 +31,7 @@ export class AuthService {
     localStorage.removeItem('user');
 
     // Redirecione para a página de login
-    this.router.navigate(['/login']);
+    this.router.navigate(['/feed']);
   }
 
   isLoggedIn(): boolean {

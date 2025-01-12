@@ -15,7 +15,7 @@ import { CidadaoService } from '../../../services/cidadao/cidadao.service';
   styleUrl: './sidebar-left.component.sass',
 })
 export class SidebarLeftComponent {
-  user: boolean = true;
+  user: boolean = false;
 
   isModalOpen: boolean = false;
 
@@ -28,7 +28,7 @@ export class SidebarLeftComponent {
 
   // ---------- LOGIN
 
-  isLoginOpen: boolean = true;
+  isLoginOpen: boolean = false;
 
   openLogin() {
     this.isLoginOpen = true;
@@ -39,6 +39,7 @@ export class SidebarLeftComponent {
 
   onLogout(): void {
     this.authService.logout();
+    this.user = false;
   }
 
   userCidadao!: CidadaoDTO;
@@ -51,12 +52,18 @@ export class SidebarLeftComponent {
   // user?: User | undefined | null;
 
   ngOnInit(): void {
-    this.cidadaoService
-      .getCidadao(8)
-      .subscribe((user) => (this.userCidadao = user));
 
     // this.auth.user$.subscribe((user) => {
     //   this.user = user;
     // });
+  }
+
+  autorizado(isAutorizado: boolean) {
+    this.user = isAutorizado;
+    if (isAutorizado) {
+      this.cidadaoService.getCidadao(1).subscribe((user) => {
+        this.userCidadao = user;
+      });
+    }
   }
 }
