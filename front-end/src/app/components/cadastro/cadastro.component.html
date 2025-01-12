@@ -1,0 +1,64 @@
+<!-- modal.component.html -->
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="header">
+      <p>Olá, Cidadão!</p>
+      <i (click)="close()" class="fa-solid fa-x"></i>
+    </div>
+
+    <div class="body">
+      <h3>Olá, Cidadão! Seja bem vindo.</h3>
+
+      <form (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Dados pessoais</legend>
+          <div class="form-data">
+            <input type="text" name="nome" id="nome" placeholder="Nome" />
+            <input
+              type="text"
+              name="sobrenome"
+              id="sobrenome"
+              placeholder="Sobrenome"
+            />
+            <input type="number" name="cpf" id="cpf" placeholder="CPF" />
+            <input
+              type="number"
+              name="dataNascimento"
+              id="dataNascimento"
+              placeholder="Data de nascimento"
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Endereço</legend>
+          <div class="form-data">
+            <input
+              type="text"
+              name="logradouro"
+              id="logradouro"
+              placeholder="Logradouro"
+            />
+            <div>
+              <input
+                type="text"
+                name="bairro"
+                id="bairro"
+                placeholder="Bairro"
+              />
+              <input
+                type="number"
+                name="numero"
+                id="numero"
+                placeholder="Numero"
+              />
+            </div>
+            <input type="text" name="cidade" id="cidade" placeholder="Cidade" />
+            <input type="text" name="estado" id="estado" placeholder="Estado" />
+          </div>
+        </fieldset>
+
+        <button type="submit">Cadastrar-se</button>
+      </form>
+    </div>
+  </div>
+</div>

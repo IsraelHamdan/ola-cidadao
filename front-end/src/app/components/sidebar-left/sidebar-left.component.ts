@@ -6,11 +6,17 @@ import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../../services/cidadao/cidadao.service';
+import { CadastroComponent } from '../cadastro/cadastro.component';
 
 @Component({
   selector: 'app-sidebar-left',
   standalone: true,
-  imports: [RouterModule, NovaManifestacaoComponent, LoginComponent],
+  imports: [
+    RouterModule,
+    NovaManifestacaoComponent,
+    LoginComponent,
+    CadastroComponent,
+  ],
   templateUrl: './sidebar-left.component.html',
   styleUrl: './sidebar-left.component.sass',
 })
@@ -52,7 +58,6 @@ export class SidebarLeftComponent {
   // user?: User | undefined | null;
 
   ngOnInit(): void {
-
     // this.auth.user$.subscribe((user) => {
     //   this.user = user;
     // });
@@ -65,5 +70,16 @@ export class SidebarLeftComponent {
         this.userCidadao = user;
       });
     }
+  }
+
+  // CADASTRO
+
+  isCadastroOpen: boolean = false;
+
+  openCadastro() {
+    this.isCadastroOpen = true;
+  }
+  closeCadastro() {
+    this.isCadastroOpen = false;
   }
 }

@@ -42,13 +42,24 @@
     Entrar
   </button>
 
-  <button type="button" class="btnSidebar out">Cadastrar</button>
+  <button (click)="openCadastro()" type="button" class="btnSidebar out">
+    Cadastrar
+  </button>
   }
 
   <p>Prefeitura de Jequié. Cidade de Jequié, Bahia - Brasil.</p>
 </div>
 
-<app-login (autorizacao)="autorizado($event)" [isOpen]="isLoginOpen" [close]="closeLogin.bind(this)"></app-login>
+<app-login
+  (autorizacao)="autorizado($event)"
+  [isOpen]="isLoginOpen"
+  [close]="closeLogin.bind(this)"
+></app-login>
+
+<app-cadastro
+  [isOpen]="isCadastroOpen"
+  [close]="closeCadastro.bind(this)"
+></app-cadastro>
 
 <app-nova-manifestacao
   [isOpen]="isModalOpen"
