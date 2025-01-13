@@ -48,27 +48,22 @@ export class SidebarLeftComponent {
     this.user = false;
   }
 
-  userCidadao!: CidadaoDTO;
+  userCidadao!: CidadaoDTO | undefined | null;
 
-  constructor(
-    private cidadaoService: CidadaoService,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
-  // user?: User | undefined | null;
-
-  ngOnInit(): void {
-    // this.auth.user$.subscribe((user) => {
-    //   this.user = user;
-    // });
-  }
+  ngOnInit(): void {}
 
   autorizado(isAutorizado: boolean) {
     this.user = isAutorizado;
     if (isAutorizado) {
-      this.cidadaoService.getCidadao(1).subscribe((user) => {
-        this.userCidadao = user;
-      });
+      this.userCidadao = this.authService.getUser();
+
+      const user = this.authService.getUser();
+      if (user) {
+        this.user = true; // Define que o usuário está logado
+        this.userCidadao = user; // Carrega os dados do usuário
+      }
     }
   }
 

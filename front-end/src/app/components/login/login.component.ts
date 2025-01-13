@@ -26,12 +26,7 @@ export class LoginComponent {
   ngOnInit(): void {}
 
   onSubmit() {
-    const payload = {
-      email: this.credentials.email, // Converte 'email' para 'username'
-      password: this.credentials.password,
-    };
-
-    this.authService.login(payload).subscribe({
+    this.authService.login(this.credentials).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.access);
         this.router.navigate(['/dashboard']);
@@ -39,9 +34,22 @@ export class LoginComponent {
         this.autorizacao.emit(true);
       },
       error: (err) => {
-        console.error('Erro de login:', err);
-        this.autorizacao.emit(false);
+        console.error('Erro no login:', err);
+        this.autorizacao.emit(false); // Emite evento de falha no login
       },
     });
+
+    // this.authService.login(payload).subscribe({
+    //   next: (response) => {
+    //     localStorage.setItem('token', response.access);
+    //     this.router.navigate(['/dashboard']);
+    //     this.close();
+    //     this.autorizacao.emit(true);
+    //   },
+    //   error: (err) => {
+    //     console.error('Erro de login:', err);
+    //     this.autorizacao.emit(false);
+    //   },
+    // });
   }
 }
