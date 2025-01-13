@@ -11,14 +11,14 @@ import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
   styleUrl: './user.component.sass',
 })
 export class UserComponent {
-  user!: CidadaoDTO;
+  user!: CidadaoDTO | undefined | null;
 
   constructor(private cidadaoService: CidadaoService) {}
 
   // user?: User | undefined | null;
 
   ngOnInit(): void {
-    this.cidadaoService.getCidadao(1).subscribe((user) => this.user = user);
+    this.cidadaoService.getCidadao(1).subscribe((user) => (this.user = user));
 
     // this.auth.user$.subscribe((user) => {
     //   this.user = user;

@@ -12,9 +12,9 @@
       <div class="containerUserImg">
         <img class="userImg" [src]="" alt="" />
       </div>
-      <a routerLink="/user">
-        <h4 class="userName">{{ user.nome! }}</h4>
-      </a>
+
+      <h4 class="userName">{{ user?.nome }}</h4>
+
       <p class="countUserName"></p>
     </div>
     <button type="button">Editar Perfil</button>
