@@ -17,4 +17,6 @@ export interface CidadaoDTO {
   is_superuser?: boolean;
   is_active?: boolean;
   status: status;
+  imagem_perfil: string;
+  imagem_background: string;
 }
