@@ -1,0 +1,78 @@
+@use '../../../styles.sass' as global
+
+header
+  position: sticky
+  display: flex
+  border-bottom: 1px solid global.$alt-fontColor
+  height: 78px
+
+  h3
+    padding: 40px 10px
+    font-weight: 500
+
+.configuracoes
+  background-color: white
+  margin: 0px 10px
+  padding: 20px 20px 
+  display: flex
+  flex-direction: column
+  border-bottom: 1px solid global.$alt-fontColor
+
+  form
+    display: flex
+    flex-direction: column
+
+    input
+      border-radius: 15px
+      border: 1px solid global.$alt-fontColor
+      height: 2em
+    
+    label
+      padding-top: 10px
+
+.title
+  background-color: white
+  margin: 15px 10px 0px
+  padding: 20px 20px 10px
+  border-top-left-radius: 15px
+  border-top-right-radius: 15px
+  display: flex
+  flex-direction: column
+  border-bottom: 1px solid global.$alt-fontColor
+
+  h3
+    font-weight: 500
+    
+.footer
+  background-color: white
+  margin: 0px 10px 
+  padding: 10px 10px
+  border-bottom-left-radius: 15px
+  border-bottom-right-radius: 15px
+
+  button
+    width: 15%
+    padding: 8px
+    border-radius: 20px
+    border: none
+    background-color: global.$btn-alt-bg
+    color: white
+    font-weight: bold
+
+.logout
+  background-color: white
+  margin: 15px 10px
+  padding: 20px 20px
+  border-radius: 15px
+  display: flex
+  justify-content: left
+
+  button
+    border: none
+    background-color: transparent
+
+.out
+  font-weight: bold
+  margin-left: 10px
+    
+

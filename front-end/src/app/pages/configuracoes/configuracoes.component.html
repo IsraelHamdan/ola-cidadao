@@ -1,1 +1,32 @@
-<p>configuracoes works!</p>
+<header>
+    <h3>Configurações</h3>
+</header>
+
+<div class="title">
+    <h3>Alterar Senha</h3>
+</div>
+
+<div class="configuracoes">
+    <form action="submit">
+        <label>Senha atual</label>
+        <input type="text">
+
+        <label>Nova senha</label>
+        <input type="text">
+
+        <label>Confirmar nova senha</label>
+        <input type="text">
+    </form>
+
+</div>
+
+<div class="footer">
+    <button type="submit">Salvar</button>
+</div>
+
+<div class="logout">
+    <button (click)="onLogout()" type="button" class="btn-logout">
+        <i class="fa-solid fa-sign-out-alt"></i>
+        <span class="out">Desconectar conta</span>
+      </button>
+</div>
