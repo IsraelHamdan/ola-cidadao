@@ -27,7 +27,7 @@
   display: flex
   justify-content: space-between
   align-items: center
-  border-bottom: 1px solid black
+  border-bottom: 1px solid global.$border-color
   color: global.$alt-fontColor
   font-weight: 500
 
@@ -52,6 +52,7 @@ textarea
   border: none
   outline: none
   resize: none
+  flex: 0 0 auto
   
   &::placeholder
     font-size: 1em
@@ -74,11 +75,17 @@ textarea
   border-radius: 50%
   margin-bottom: 10px
   overflow: hidden
+  flex: 0 0 auto
   display: flex
-  justify-content: center
+  justify-content: flex-start
+  align-items: flex-end
 
   img
+    position: relative
+    top: -2px
     height: 100%
+    width: 100%
+    object-fit: cover
 
 .container-buttons
   padding: 10px 10px 0px

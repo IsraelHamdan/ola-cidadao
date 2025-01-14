@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 
 @Component({
   selector: 'app-nova-manifestacao',
@@ -12,11 +14,12 @@ export class NovaManifestacaoComponent implements OnInit {
   @Input() isOpen: boolean = true;
   @Input() close: () => void = () => {};
 
-  // user?: User | undefined | null;
+  user?: CidadaoDTO | undefined | null;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
     // this.auth.user$.subscribe((user) => {
     //   this.user = user;
     // });
