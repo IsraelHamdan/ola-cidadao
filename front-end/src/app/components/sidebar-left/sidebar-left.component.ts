@@ -1,17 +1,14 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  OnDestroy,
-  DoCheck,
-} from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoService } from '../../../services/cidadao/cidadao.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
-import { Subscription } from 'rxjs';
+import { Token } from '@angular/compiler';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-left',
@@ -21,34 +18,46 @@ import { Subscription } from 'rxjs';
     NovaManifestacaoComponent,
     LoginComponent,
     CadastroComponent,
+    Pipe
   ],
   templateUrl: './sidebar-left.component.html',
   styleUrl: './sidebar-left.component.sass',
 })
-export class SidebarLeftComponent implements OnInit, OnDestroy, DoCheck {
+export class SidebarLeftComponent {
   user: boolean = false;
-  userCidadao!: CidadaoDTO | undefined | null;
 
   isModalOpen: boolean = false;
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  // ---------- LOGIN
+
   isLoginOpen: boolean = false;
-  isCadastroOpen: boolean = false;
 
-  private subscription!: Subscription;
+  openLogin() {
+    this.isLoginOpen = true;
+  }
+  closeLogin() {
+    this.isLoginOpen = false;
+  }
 
-  constructor(
-    private authService: AuthService,
-    private cd: ChangeDetectorRef
-  ) {}
+  onLogout(): void {
+    this.authService.logout();
+    this.user = false;
+  }
+
+  userCidadao!: CidadaoDTO | undefined | null;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.subscription = this.authService.user$.subscribe((user) => {
-      this.userCidadao = user;
-      this.user = !!user;
-      this.cd.detectChanges();
-    });
-
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    if (localStorage.getItem('user')) {
+      this.userCidadao = this.authService.getUser();
       this.user = true;
     }
   }
@@ -57,46 +66,27 @@ export class SidebarLeftComponent implements OnInit, OnDestroy, DoCheck {
     this.userCidadao = this.authService.getUser();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  autorizado(isAutorizado: boolean) {
+    this.user = isAutorizado;
+    if (isAutorizado) {
+      this.userCidadao = this.authService.getUser();
+
+      // const userData = this.authService.getUser();
+      // if (userData) {
+      //   this.user = true; // Define que o usuário está logado
+      //   this.userCidadao = userData; // Carrega os dados do usuário
+      // }
+    }
   }
 
-  openModal() {
-    this.isModalOpen = true;
-  }
+  // CADASTRO
 
-  closeModal() {
-    this.isModalOpen = false;
-  }
-
-  openLogin() {
-    this.isLoginOpen = true;
-  }
-
-  closeLogin() {
-    this.isLoginOpen = false;
-  }
+  isCadastroOpen: boolean = false;
 
   openCadastro() {
     this.isCadastroOpen = true;
   }
-
   closeCadastro() {
     this.isCadastroOpen = false;
-  }
-
-  onLogout(): void {
-    this.authService.logout();
-    this.user = false;
-    this.userCidadao = null;
-  }
-
-  autorizado(isAutorizado: boolean): void {
-    this.user = isAutorizado;
-    if (isAutorizado) {
-      this.userCidadao = this.authService.getUser();
-    } else {
-      this.userCidadao = null;
-    }
   }
 }

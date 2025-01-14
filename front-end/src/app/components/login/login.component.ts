@@ -15,21 +15,31 @@ export class LoginComponent {
   @Input() isOpen: boolean = false;
   @Input() close: () => void = () => {};
 
-  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter();
+  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter(); // Expor com @Output
+
+  userAutorizado: boolean = true;
 
   credentials = { email: '', password: '' };
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit(): void {}
+
   onSubmit() {
-    this.authService.login(this.credentials).subscribe({
+    const payload = {
+      email: this.credentials.email, // Converte 'email' para 'username'
+      password: this.credentials.password,
+    };
+
+    this.authService.login(payload).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.access);
+        this.router.navigate(['/dashboard']);
         this.close();
         this.autorizacao.emit(true);
       },
       error: (err) => {
-        console.error('Erro no login:', err);
+        console.error('Erro de login:', err);
         this.autorizacao.emit(false);
       },
     });
