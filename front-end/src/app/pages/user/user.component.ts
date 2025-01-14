@@ -3,11 +3,12 @@ import { ManifestationComponent } from '../../components/manifestation/manifesta
 import { CidadaoService } from '../../../services/cidadao/cidadao.service';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ManifestationComponent],
+  imports: [ManifestationComponent, CommonModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.sass',
 })

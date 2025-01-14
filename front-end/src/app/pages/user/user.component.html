@@ -10,14 +10,14 @@
   <div class="row">
     <div class="userInfo">
       <div class="containerUserImg">
-        <img class="userImg" [src]="" alt="" />
+        <img class="userImg" [src]="user?.imagem_perfil" alt="" />
       </div>
 
-      <h4 class="userName">{{ user?.nome }}</h4>
+      <h4 class="userName">{{ user?.nome | titlecase }}</h4>
 
-      <p class="countUserName"></p>
+      <p class="countUserName">{{user?.email}}</p>
     </div>
-    <button type="button">Editar Perfil</button>
+    <button class="btn-default" type="button">Editar Perfil</button>
   </div>
 
   <nav>
