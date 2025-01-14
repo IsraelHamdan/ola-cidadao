@@ -41,7 +41,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.isLoggedInSubject.next(false); // Atualiza o estado de login
-    this.router.navigate(['/login']);
+    this.router.navigate(['/dashboard']);
   }
 
   getToken(): string | null {
