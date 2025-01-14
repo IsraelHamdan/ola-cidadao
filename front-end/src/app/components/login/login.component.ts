@@ -15,41 +15,23 @@ export class LoginComponent {
   @Input() isOpen: boolean = false;
   @Input() close: () => void = () => {};
 
-  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter(); // Expor com @Output
-
-  userAutorizado: boolean = true;
+  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter();
 
   credentials = { email: '', password: '' };
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   onSubmit() {
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.access);
-        this.router.navigate(['/dashboard']);
         this.close();
         this.autorizacao.emit(true);
       },
       error: (err) => {
         console.error('Erro no login:', err);
-        this.autorizacao.emit(false); // Emite evento de falha no login
+        this.autorizacao.emit(false);
       },
     });
-
-    // this.authService.login(payload).subscribe({
-    //   next: (response) => {
-    //     localStorage.setItem('token', response.access);
-    //     this.router.navigate(['/dashboard']);
-    //     this.close();
-    //     this.autorizacao.emit(true);
-    //   },
-    //   error: (err) => {
-    //     console.error('Erro de login:', err);
-    //     this.autorizacao.emit(false);
-    //   },
-    // });
   }
 }

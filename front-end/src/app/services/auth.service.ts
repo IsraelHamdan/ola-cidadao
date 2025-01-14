@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,27 +12,36 @@ export class AuthService {
   private tokenEndpoint = '/token/';
   private cidadaoEndpoint = '/cidadaos/';
 
+  private userSubject = new BehaviorSubject<any>(null);
+  user$ = this.userSubject.asObservable();
+
   constructor(private http: HttpClient, private router: Router) {}
+
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http
-      .post<{ access: string; refresh: string }>( // Modificar para refletir a estrutura correta da resposta
+      .post<{ access: string; refresh: string }>(
         `${this.baseUrl}${this.tokenEndpoint}`,
         credentials
       )
       .pipe(
         tap((response) => {
-          console.log('Resposta do login:', response); // Log completo da resposta
           if (response?.access) {
-            // Verificar se existe a chave 'access' com o token
-            console.log('Token de acesso obtido na resposta:', response.access); // Verificar o token
-            localStorage.setItem('token', response.access); // Salvar o token de acesso no localStorage
-            this.fetchUserDetails(); // Chamar para buscar os dados do usuário
-          } else {
-            console.error('Token de acesso não encontrado na resposta.');
+            localStorage.setItem('token', response.access);
+            this.fetchUserDetails();
+            this.isLoggedInSubject.next(true); // Atualiza o estado de login
           }
         })
       );
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.isLoggedInSubject.next(false); // Atualiza o estado de login
+    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
@@ -95,11 +104,11 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
+  // logout(): void {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   this.router.navigate(['/login']);
+  // }
 
   isLoggedIn(): boolean {
     return !!this.getToken();

@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  OnDestroy,
+  DoCheck,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
-import { CidadaoService } from '../../../services/cidadao/cidadao.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-left',
@@ -20,61 +25,78 @@ import { CadastroComponent } from '../cadastro/cadastro.component';
   templateUrl: './sidebar-left.component.html',
   styleUrl: './sidebar-left.component.sass',
 })
-export class SidebarLeftComponent {
+export class SidebarLeftComponent implements OnInit, OnDestroy, DoCheck {
   user: boolean = false;
+  userCidadao!: CidadaoDTO | undefined | null;
 
   isModalOpen: boolean = false;
+  isLoginOpen: boolean = false;
+  isCadastroOpen: boolean = false;
+
+  private subscription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private cd: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription = this.authService.user$.subscribe((user) => {
+      this.userCidadao = user;
+      this.user = !!user;
+      this.cd.detectChanges();
+    });
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = true;
+    }
+  }
+
+  ngDoCheck(): void {
+    this.userCidadao = this.authService.getUser();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   openModal() {
     this.isModalOpen = true;
   }
+
   closeModal() {
     this.isModalOpen = false;
   }
 
-  // ---------- LOGIN
-
-  isLoginOpen: boolean = false;
-
   openLogin() {
     this.isLoginOpen = true;
   }
+
   closeLogin() {
     this.isLoginOpen = false;
+  }
+
+  openCadastro() {
+    this.isCadastroOpen = true;
+  }
+
+  closeCadastro() {
+    this.isCadastroOpen = false;
   }
 
   onLogout(): void {
     this.authService.logout();
     this.user = false;
+    this.userCidadao = null;
   }
 
-  userCidadao!: CidadaoDTO | undefined | null;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {}
-
-  autorizado(isAutorizado: boolean) {
+  autorizado(isAutorizado: boolean): void {
     this.user = isAutorizado;
     if (isAutorizado) {
       this.userCidadao = this.authService.getUser();
-
-      const user = this.authService.getUser();
-      if (user) {
-        this.user = true; // Define que o usuário está logado
-        this.userCidadao = user; // Carrega os dados do usuário
-      }
+    } else {
+      this.userCidadao = null;
     }
-  }
-
-  // CADASTRO
-
-  isCadastroOpen: boolean = false;
-
-  openCadastro() {
-    this.isCadastroOpen = true;
-  }
-  closeCadastro() {
-    this.isCadastroOpen = false;
   }
 }
