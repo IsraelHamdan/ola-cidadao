@@ -1,6 +1,6 @@
 import { Component, Pipe } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +18,7 @@ import { pipe } from 'rxjs';
     NovaManifestacaoComponent,
     LoginComponent,
     CadastroComponent,
-    Pipe
+    CommonModule,
   ],
   templateUrl: './sidebar-left.component.html',
   styleUrl: './sidebar-left.component.sass',
