@@ -1,0 +1,82 @@
+@use '../../../styles.sass' as global
+
+
+header
+  position: sticky
+  display: flex
+  border-bottom: 1px solid global.$border-color
+  height: 78px
+
+  h3
+    padding: 40px 10px
+    font-weight: 500
+
+.profile-info
+  margin: 0px 10px 
+  display: flex
+  flex-direction: column
+  margin: 20px
+  position: relative
+  height: auto
+  padding-bottom: 15%
+
+.profile-pic
+  border: 4px solid global.$main-bg
+  width: 35%
+  border-radius: 50%
+
+.bio
+  position: absolute
+  top: 6rem
+  width: 40%
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  h3
+    font-weight: 500
+
+  h5
+    color: global.$alt-fontColor
+    font-weight: 400
+  
+
+.container-pic
+  width: 100%
+  height: 150px
+  border-radius: 20px
+  overflow: hidden
+
+  img
+    max-width: 100%
+    object-fit: cover
+    
+.tabs
+  border-bottom: 1px solid global.$border-color
+  a
+    padding-left: 20px
+    color: global.$alt-fontColor
+
+.tags
+  display: flex
+  gap: 7px
+  padding: 10px
+  border-bottom: 1px solid global.$border-color
+
+.tag-item
+  font-size: .86em
+  background-color: global.$colord9
+  padding: 5px 20px 5px 10px
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  gap: 3px
+  border-radius: 20px
+
+  span
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+
+  i
+    font-size: .9em

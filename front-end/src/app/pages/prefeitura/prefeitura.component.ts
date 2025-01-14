@@ -9,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class PrefeituraComponent {
 
+  cidade: string = "teste";
+  // img_perfil: string = "";
+  // img_background: string = "";
+
 }
