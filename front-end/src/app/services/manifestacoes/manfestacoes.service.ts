@@ -24,4 +24,5 @@ export class ManfestacoesService {
   ): Observable<ResponseManifestacao<Manifestacao[]>> {
     return this.http.get<ResponseManifestacao<Manifestacao[]>>(url);
   }
+
 }

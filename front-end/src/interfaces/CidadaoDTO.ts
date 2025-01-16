@@ -1,22 +1,30 @@
 import { Endereco } from './endereco';
 
-enum status {
-  'LOGADO',
-  'DESLOGADO',
-}
+// enum status {
+//   'LOGADO',
+//   'DESLOGADO',
+// }
 
 export interface CidadaoDTO {
-  endereco: Endereco;
-  password: string;
+  nome: string;
+  cpf: string;
+  data_nascimento: Date;
   email: string;
   telefone: string;
-  cpf: string;
-  nome: string;
-  dataNascimento: Date;
+  password: string;
   last_login?: Date;
   is_superuser?: boolean;
   is_active?: boolean;
-  status: status;
-  imagem_perfil: string;
-  imagem_background: string;
+  status?: string;
+  imagem_perfil?: string;
+  imagem_background?: string;
+  endereco: {
+    id?: number;
+    logradouro: string;
+    bairro: string;
+    numero: string;
+    cidade: string;
+    estado: string;
+    cep: string;
+  };
 }
