@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Manifestacao } from '../../interfaces/Manifestacao';
-import { enviroments } from '../../enviroments';
-import { ResponseManifestacao } from '../../interfaces/ResponseManifestacao';
+import { Manifestacao } from '../../../interfaces/Manifestacao';
+import { enviroments } from '../../../enviroments';
+import { ResponseManifestacao } from '../../../interfaces/ResponseManifestacao';
 
 @Injectable({
   providedIn: 'root',

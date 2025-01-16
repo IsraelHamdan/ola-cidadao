@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/token/auth.service';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 
 @Component({

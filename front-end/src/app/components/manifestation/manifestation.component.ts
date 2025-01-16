@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
-import { ManfestacoesService } from '../../../services/manifestacoes/manfestacoes.service';
+import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

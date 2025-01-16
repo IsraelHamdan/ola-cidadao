@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { enviroments } from '../../enviroments';
 import { HttpClient } from '@angular/common/http';
-import { CreateAdminDTO } from '../../interfaces/CreateAdminDTO';
+import { CreateAdminDTO } from '../../../interfaces/CreateAdminDTO';
 import { Observable } from 'rxjs';
-import { AdminDTO } from '../../interfaces/AdminDTO';
+import { AdminDTO } from '../../../interfaces/AdminDTO';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
-  private urlRequest = `${enviroments.baseURL}/admistradores`;
+  private urlRequest = `${environment.baseURL}/admistradores/`;
   constructor(private req: HttpClient) {}
 
   createAdmin(admin: CreateAdminDTO): Observable<AdminDTO> {

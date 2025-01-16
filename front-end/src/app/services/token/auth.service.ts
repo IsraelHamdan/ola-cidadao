@@ -3,29 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { LoginCredentials } from '../../../interfaces/loginCredentials';
+import { LoginResponse } from '../../../interfaces/LoginResponse';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'https://olacidadao-3391b9c80935.herokuapp.com/api';
-  private tokenEndpoint = '/token/';
+  private baseUrl = environment.baseURL;
+  private tokenEndpoint = 'token/';
   private cidadaoEndpoint = '/cidadaos/';
-
-  private userSubject = new BehaviorSubject<any>(null);
-  user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  login(credentials: { email: string; password: string }): Observable<any> {
+  login(credentials: LoginCredentials): Observable<any> {
     return this.http
-      .post<{ access: string; refresh: string }>(
-        `${this.baseUrl}${this.tokenEndpoint}`,
-        credentials
-      )
+      .post<LoginResponse>(`${this.baseUrl}/${this.tokenEndpoint}`, credentials)
       .pipe(
         tap((response) => {
           if (response?.access) {
@@ -46,7 +43,7 @@ export class AuthService {
 
   getToken(): string | null {
     const token = localStorage.getItem('token');
-    // console.log('Token recuperado do localStorage:', token); // Log para verificar se o token foi recuperado
+    console.log('Token recuperado do localStorage:', token); // Log para verificar se o token foi recuperado
     return token;
   }
 
@@ -103,12 +100,6 @@ export class AuthService {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
-
-  // logout(): void {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user');
-  //   this.router.navigate(['/login']);
-  // }
 
   isLoggedIn(): boolean {
     return !!this.getToken();

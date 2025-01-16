@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { enviroments } from '../../enviroments';
 import { HttpClient } from '@angular/common/http';
-import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CidadaoService {
-  private urlRequest = `${enviroments.baseURL}/cidadaos`;
+  private urlRequest = `${environment.baseURL}/cidadaos/`;
   constructor(private req: HttpClient) {}
 
   createCidadao(cidadao: CidadaoDTO): Observable<CidadaoDTO> {

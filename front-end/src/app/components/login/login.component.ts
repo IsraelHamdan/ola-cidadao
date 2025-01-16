@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/token/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
