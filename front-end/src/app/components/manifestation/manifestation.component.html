@@ -1,4 +1,4 @@
-<div class="manifestation">
+<!-- <div class="manifestation">
   <p>
     Minha rua está muito esburacada muito ruim de andar e os caramba a 4, que
     prefeito é esse gente? eu hein, votei atoa foi? inclusive uma idosa pisou
@@ -56,66 +56,73 @@
     <span>135 Apoiam</span>
     <span>155 Visualizações</span>
   </div>
-</div>
+</div> -->
 
 <!-- LOOP -->
+<div (scroll)="onScroll($event)" class="manifestations-container">
+  <div
+    class="manifestation"
+    *ngFor="let manifestation of manifestations"
+    (scroll)="onScroll($event)"
+  >
+    <p>
+      {{ manifestation.conteudo }}
+    </p>
 
-<div class="manifestation" *ngFor="let manifestation of allManifestations">
-  <p>
-    {{ manifestation.conteudo }}
-  </p>
-
-  <div *ngIf="manifestation.imagem" class="feed-image">
-    <img [src]="manifestation.imagem" alt="" />
-  </div>
-
-  <div class="feed-information-1">
-    <div class="tags">
-      @if (manifestation.nome_orgao) {
-      <div class="tag-item pending">
-        <i class="fa-regular fa-clock"></i>
-        <span>Pendente de resposta</span>
-      </div>
-
-      <div class="tag-item">
-        <i class="fa-solid fa-hashtag"></i>
-        <span> {{ manifestation.nome_orgao }} </span>
-      </div>
-      }
+    <div *ngIf="manifestation.imagem" class="feed-image">
+      <img [src]="manifestation.imagem" alt="" />
     </div>
 
-    <a class="share" href="#" title="Compartilhar"
-      ><i class="fa-solid fa-share-from-square"></i
-    ></a>
-  </div>
+    <div class="feed-information-1">
+      <div class="tags">
+        @if (manifestation.nome_orgao) {
+        <div class="tag-item pending">
+          <i class="fa-regular fa-clock"></i>
+          <span>Pendente de resposta</span>
+        </div>
 
-  <div class="container-information-feed">
-    <div class="user-information">
-      <div class="user-information-image">
-        <img src="images/cat2.jpg" alt="" />
+        <div class="tag-item">
+          <i class="fa-solid fa-hashtag"></i>
+          <span> {{ manifestation.nome_orgao }} </span>
+        </div>
+        }
       </div>
 
-      <div class="name">
-        <h4>{{ manifestation.nome_cidadao }}</h4>
-        <span>2 minutos atrás</span>
+      <a class="share" href="#" title="Compartilhar"
+        ><i class="fa-solid fa-share-from-square"></i
+      ></a>
+    </div>
+
+    <div class="container-information-feed">
+      <div class="user-information">
+        <div class="user-information-image">
+          <img src="images/cat2.jpg" alt="" />
+        </div>
+
+        <div class="name">
+          <h4>{{ manifestation.nome_cidadao }}</h4>
+          <span>2 minutos atrás</span>
+        </div>
+      </div>
+
+      <div class="container-btn-interation">
+        <div class="btn-interation">
+          <i class="fa-solid fa-arrow-down"></i>
+          <span>Descer</span>
+        </div>
+
+        <div class="btn-interation">
+          <i class="fa-solid fa-arrow-up"></i>
+          <span>Subir</span>
+        </div>
       </div>
     </div>
 
-    <div class="container-btn-interation">
-      <div class="btn-interation">
-        <i class="fa-solid fa-arrow-down"></i>
-        <span>Descer</span>
-      </div>
-
-      <div class="btn-interation">
-        <i class="fa-solid fa-arrow-up"></i>
-        <span>Subir</span>
-      </div>
+    <div class="comments">
+      <span>{{ manifestation.qtd_up }} Apoiam</span>
+      <span>155 Visualizações</span>
     </div>
   </div>
 
-  <div class="comments">
-    <span>{{ manifestation.qtd_up }} Apoiam</span>
-    <span>155 Visualizações</span>
-  </div>
+  <div *ngIf="loading" class="loading-spinner"></div>
 </div>
