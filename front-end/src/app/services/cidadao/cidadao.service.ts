@@ -8,29 +8,29 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class CidadaoService {
-  private urlRequest = `${environment.baseURL}/cidadaos/`;
-  constructor(private req: HttpClient) {}
+  private urlRequest = `${environment.baseURL}/cidadaos/cadastro/`;
+  constructor(private http: HttpClient) {}
 
-  createCidadao(cidadao: CidadaoDTO): Observable<CidadaoDTO> {
-    return this.req.post<CidadaoDTO>(`${this.urlRequest}`, cidadao);
+  createCidadao(cidadao: FormData): Observable<any> {
+    return this.http.post<any>(this.urlRequest, cidadao); // Note que o tipo do parâmetro foi ajustado para FormData
   }
 
   getCidadao(id: number): Observable<CidadaoDTO> {
-    return this.req.get<CidadaoDTO>(`${this.urlRequest}/${id}/`);
+    return this.http.get<CidadaoDTO>(`${this.urlRequest}/${id}/`);
   }
 
   getAllCidadaos(): Observable<CidadaoDTO[]> {
-    return this.req.get<CidadaoDTO[]>(`${this.urlRequest}`);
+    return this.http.get<CidadaoDTO[]>(`${this.urlRequest}`);
   }
 
   updateCidadao(
     id: number,
     cidadao: Partial<CidadaoDTO>
   ): Observable<CidadaoDTO> {
-    return this.req.patch<CidadaoDTO>(`${this.urlRequest}/${id}`, cidadao);
+    return this.http.patch<CidadaoDTO>(`${this.urlRequest}/${id}`, cidadao);
   }
 
   deleteCidadao(id: number) {
-    return this.req.delete(`${this.urlRequest}/${id}`);
+    return this.http.delete(`${this.urlRequest}/${id}`);
   }
 }
