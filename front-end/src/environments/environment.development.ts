@@ -1,8 +1,4 @@
 export const environment = {
   production: false,
-  auth0: {
-    domain: process.env['DOMAIN'],
-    clientId: process.env['CLIENT_ID'],
-  },
-  baseURL: process.env['BASE_URL'],
+  baseURL: 'https://olacidadao-3391b9c80935.herokuapp.com/api',
 };
