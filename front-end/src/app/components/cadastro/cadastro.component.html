@@ -9,30 +9,46 @@
     <div class="body">
       <h3>Olá, Cidadão! Seja bem vindo.</h3>
 
-      <form (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" [formGroup]="formCadastro">
         <fieldset>
           <legend>Dados pessoais</legend>
           <div class="form-data">
-            <input type="text" name="nome" id="nome" placeholder="Nome" />
             <input
+              formControlName="nome"
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Nome"
+            />
+            <!-- <input
+              formControlName="sobrenome"
               type="text"
               name="sobrenome"
               id="sobrenome"
               placeholder="Sobrenome"
-            />
-            <input type="number" name="cpf" id="cpf" placeholder="CPF" />
+            /> -->
             <input
+              formControlName="cpf"
               type="number"
+              name="cpf"
+              id="cpf"
+              placeholder="CPF"
+            />
+            <input
+              formControlName="data_nascimento"
+              type="date"
               name="dataNascimento"
               id="dataNascimento"
               placeholder="Data de nascimento"
             />
           </div>
         </fieldset>
+
         <fieldset>
           <legend>Endereço</legend>
           <div class="form-data">
             <input
+              formControlName="logradouro"
               type="text"
               name="logradouro"
               id="logradouro"
@@ -40,20 +56,94 @@
             />
             <div>
               <input
+                formControlName="bairro"
                 type="text"
                 name="bairro"
                 id="bairro"
                 placeholder="Bairro"
               />
               <input
-                type="number"
+                formControlName="numero"
+                type="text"
                 name="numero"
                 id="numero"
                 placeholder="Numero"
               />
             </div>
-            <input type="text" name="cidade" id="cidade" placeholder="Cidade" />
-            <input type="text" name="estado" id="estado" placeholder="Estado" />
+            <input
+              formControlName="cidade"
+              type="text"
+              name="cidade"
+              id="cidade"
+              placeholder="Cidade"
+            />
+            <input
+              formControlName="estado"
+              type="text"
+              name="estado"
+              id="estado"
+              placeholder="Estado"
+            />
+            <input
+              formControlName="cep"
+              type="text"
+              name="cep"
+              id="cep"
+              placeholder="cep"
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dados de acesso</legend>
+          <div class="form-data">
+            <input
+              formControlName="email"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="email"
+            />
+            <div>
+              <input
+                formControlName="telefone"
+                type="tel"
+                name="telefone"
+                id="telefone"
+                placeholder="telefone"
+              />
+              <input
+                formControlName="password"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+              />
+            </div>
+            <input
+              type="password"
+              name="confirm-password"
+              id="confirm-password"
+              placeholder="confirm-password"
+            />
+
+            <input
+              formControlName="imagem_perfil"
+              type="file"
+              name="imagem_perfil"
+              id="imagem_perfil"
+              accept="image/*"
+              title="."
+            />
+
+            <input
+              formControlName="imagem_background"
+              type="file"
+              name="imagem_background"
+              id="imagem_background"
+              accept="image/*"
+              title="."
+            />
           </div>
         </fieldset>
 
