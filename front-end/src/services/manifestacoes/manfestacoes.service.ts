@@ -18,4 +18,10 @@ export class ManfestacoesService {
   getAllManifestations(): Observable<ResponseManifestacao<Manifestacao[]>> {
     return this.http.get<ResponseManifestacao<Manifestacao[]>>(this.apiUrl);
   }
+
+  getPaginatedManifestations(
+    url: string
+  ): Observable<ResponseManifestacao<Manifestacao[]>> {
+    return this.http.get<ResponseManifestacao<Manifestacao[]>>(url);
+  }
 }
