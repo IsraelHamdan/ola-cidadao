@@ -138,4 +138,19 @@
   overflow-y: auto
   padding: 10px
 
+.loading-spinner
+  display: block
+  margin: 0 auto
+  text-align: center
+  color: global.$btn-alt-bg
+  height: 80px
+  width: 80px
+  border: 10px solid global.$btn-alt-bg
+  border-radius: 50%
+  border-top-color: transparent
+  animation: spinner 1.5s ease infinite
+
+  @keyframes spinner 
+    100% 
+      transform: rotate(360deg)  
     
