@@ -1,14 +1,14 @@
 export interface Manifestacao {
   id: number;
-  tipo: string;
   conteudo: string;
+  tipo: string;
   data_criacao: string;
-  status: string;
-  qtd_up: number;
-  qtd_down: number;
-  cidadao: number;
   nome_cidadao: string;
-  orgao: number;
+  cidadao: number;
   nome_orgao: string;
   imagem: string;
+  orgao: number;
+  qtd_up: number;
+  qtd_down: number;
+  status: string;
 }
