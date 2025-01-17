@@ -49,6 +49,8 @@ export class CadastroComponent {
       cep: ['', Validators.required],
       imagem_perfil: [null],
       imagem_background: [null],
+
+      confirm_password: ['', Validators.required],
     });
   }
 
@@ -89,7 +91,10 @@ export class CadastroComponent {
     formData.append('endereco.cep', formValue.cep);
 
     this.cidadaoService.createCidadao(formData).subscribe({
-      next: (res) => console.log('Cadastro realizado com sucesso!', res),
+      next: (res) => {
+        console.log('Cadastro realizado com sucesso!', res);
+        this.formCadastro.reset();
+      },
       error: (err) => console.error('Erro no cadastro:', err),
     });
   }
