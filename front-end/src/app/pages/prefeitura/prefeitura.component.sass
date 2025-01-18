@@ -1,61 +1,158 @@
 @use '../../../styles.sass' as global
-
-
-header
-  position: sticky
+  
+.row
   display: flex
-  border-bottom: 1px solid global.$border-color
-  height: 78px
-
-  h3
-    padding: 40px 10px
-    font-weight: 500
-
-.profile-info
-  margin: 0px 10px 
-  display: flex
-  flex-direction: column
-  margin: 20px
-  position: relative
-  height: auto
-  padding-bottom: 15%
-
-.profile-pic
-  border: 4px solid global.$main-bg
-  width: 35%
-  border-radius: 50%
-
-.bio
-  position: absolute
-  top: 6rem
-  width: 40%
-  display: flex
-  flex-direction: column
+  justify-content: space-between
   align-items: center
 
+.container
+  padding: 15px 15px 0px
+
+.name-section
+  margin-left: -15px
+  width: calc( 100% + 30px)
+  border-bottom: 1px solid global.$border-color
+  margin-bottom: 12px
+  padding: 10px 10px 10px
+
   h3
     font-weight: 500
 
-  h5
-    color: global.$alt-fontColor
-    font-weight: 400
-  
-
-.container-pic
+.background
   width: 100%
   height: 150px
-  border-radius: 20px
+  border-radius: 15px
   overflow: hidden
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+
+  &:hover
+    cursor: pointer
+    &::before, &::after
+      opacity: 1
+      
+  &::before
+    color: white
+    content: 'Alterar capa'
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 45%
+    top: 44%
+    z-index: 10
+    opacity: 0
+    transition: all .2s ease
+
+  &::after
+    background-color: global.$image-hover
+    content: ''
+    position: absolute
+    width: 100%
+    height: 100%
+    opacity: 0
+    transition: all .2s ease
 
   img
-    max-width: 100%
+    width: 100%
+    height: 100%
     object-fit: cover
-    
-.tabs
+
+.userInfo
+  width: max-content
+  position: relative
+  top: -57px
+  left: 80px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-start
+  margin-bottom: 20px
+  color: global.$main-fontColor
+
+.userName
+  font-size: 1.05em
+  font-weight: 600
+  color: global.$main-fontColor
+
+  i
+    color: #455FDE
+
+.countUserName
+  font-size: .85em
+  color: global.$alt-fontColor
+  
+
+.containerUserImg 
+  border: 4px solid global.$main-bg
+  background: global.$main-fontColor
+  width: 110px
+  height: 110px
+  border-radius: 50%
+  margin-bottom: 5px
+  overflow: hidden
+  display: flex
+  justify-content: center
+  position: relative
+  left: 20px
+
+  &:hover
+    cursor: pointer
+    &::before, &::after
+      opacity: 1
+      
+
+  &::before
+    color: white
+    content: 'Alterar'
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 37%
+    left: 26%
+    z-index: 10
+    opacity: 0
+    transition: all .2s ease
+
+  &::after
+    background-color: global.$image-hover
+    content: ''
+    position: absolute
+    width: 100%
+    height: 100%
+    opacity: 0
+    transition: all .2s ease
+  
+  img
+    height: 100%
+    width: 100%
+    object-fit: cover
+
+nav
+  margin-top: -50px
+  margin-left: -15px
+  width: calc( 100% + 30px)
+  padding: 10px 15px 
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
   border-bottom: 1px solid global.$border-color
-  a
-    padding-left: 20px
-    color: global.$alt-fontColor
+
+  div
+    display: flex
+    gap: 20px
+
+    a
+      transition: all .15s ease
+      color: global.$alt-fontColor
+      &:nth-of-type(1)
+        color: global.$main-fontColor
+        font-weight: 500
+      &:hover
+        color: global.$main-fontColor
+
 
 .tags
   display: flex
@@ -64,8 +161,8 @@ header
   border-bottom: 1px solid global.$border-color
 
 .tag-item
-  font-size: .86em
-  background-color: global.$colord9
+  font-size: 1em
+  background-color: white
   padding: 5px 20px 5px 10px
   display: flex
   justify-content: flex-start
