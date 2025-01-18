@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './manifestation.component.sass',
 })
 export class ManifestationComponent implements OnInit {
+  @Input() padding!: string;
   // allManifestations: Manifestacao[] = [];
 
   // ngDoCheck(): void {

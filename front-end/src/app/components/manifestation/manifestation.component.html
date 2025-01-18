@@ -59,7 +59,11 @@
 </div> -->
 
 <!-- LOOP -->
-<div (scroll)="onScroll($event)" class="manifestations-container">
+<div
+  (scroll)="onScroll($event)"
+  class="manifestations-container"
+  [style.padding]="padding"
+>
   <div
     class="manifestation"
     *ngFor="let manifestation of manifestations"
