@@ -10,13 +10,13 @@ import { ResponseManifestacao } from '../../../interfaces/ResponseManifestacao';
 })
 export class ManfestacoesService {
   private baseApiUrl = environment.baseURL;
-  private apiUrl = `${this.baseApiUrl}/manifestacoes/`;
+  private apiUrl = `${this.baseApiUrl}/manifestacoes`;
   allManifestations!: Manifestacao[];
 
   constructor(private http: HttpClient) {}
 
   getAllManifestations(): Observable<ResponseManifestacao<Manifestacao[]>> {
-    return this.http.get<ResponseManifestacao<Manifestacao[]>>(this.apiUrl);
+    return this.http.get<ResponseManifestacao<Manifestacao[]>>(`${this.apiUrl}/respostas/`);
   }
 
   getPaginatedManifestations(
