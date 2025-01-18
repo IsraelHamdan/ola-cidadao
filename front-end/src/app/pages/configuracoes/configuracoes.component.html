@@ -1,32 +1,51 @@
 <header>
-    <h3>Configurações</h3>
+  <h3>Configurações</h3>
 </header>
 
-<div class="title">
+<div class="container">
+  <div class="title">
     <h3>Alterar Senha</h3>
-</div>
+  </div>
 
-<div class="configuracoes">
+  <div class="configuracoes">
     <form action="submit">
-        <label>Senha atual</label>
-        <input type="text">
+      <label for="current-password">Senha atual</label>
+      <input
+        name="current-password"
+        id="current-password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Senha atual"
+      />
 
-        <label>Nova senha</label>
-        <input type="text">
+      <label for="new-password">Nova senha</label>
+      <input
+        name="new-password"
+        id="new-password"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Nova senha"
+      />
 
-        <label>Confirmar nova senha</label>
-        <input type="text">
+      <label for="confirm-new-password">Confirmar nova senha</label>
+      <input
+        name="confirm-new-password"
+        id="confirm-new-password"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirmar senha"
+      />
     </form>
+  </div>
 
-</div>
-
-<div class="footer">
-    <button type="submit">Salvar</button>
+  <div class="footer">
+    <button type="submit" class="btn-default">Salvar</button>
+  </div>
 </div>
 
 <div class="logout">
-    <button (click)="onLogout()" type="button" class="btn-logout">
-        <i class="fa-solid fa-sign-out-alt"></i>
-        <span class="out">Desconectar conta</span>
-      </button>
+  <button (click)="onLogout()" type="button" class="btn-logout">
+    <i class="fa-solid fa-sign-out-alt"></i>
+    <span class="out">Desconectar conta</span>
+  </button>
 </div>
