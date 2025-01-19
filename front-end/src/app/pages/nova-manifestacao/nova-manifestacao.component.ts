@@ -7,9 +7,12 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SecretariasService } from '../../services/secretarias/secretarias.service';
+import { Secretaria } from '../../../interfaces/SecretariaDTO';
 
 @Component({
   selector: 'app-nova-manifestacao',
@@ -23,6 +26,7 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   @Input() close: () => void = () => {};
 
   conteudoLength: string = '';
+  secretarias: Secretaria[] = [];
 
   user!: CidadaoDTO | undefined | null;
   formNovaManifestacao!: FormGroup;
@@ -31,7 +35,8 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
     private authService: AuthService,
     private fb: FormBuilder,
     private manifestacaoService: ManfestacoesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private secretariaService: SecretariasService
   ) {}
 
   ngOnInit(): void {
@@ -39,9 +44,13 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
 
     this.formNovaManifestacao = this.fb.group({
       conteudo: [''],
-      nome_orgao: [''],
+      orgao: ['', [Validators.required]],
       tipo: [''],
       imagem: [null],
+    });
+
+    this.secretariaService.getAllSecretarias().subscribe((response) => {
+      this.secretarias = response.results;
     });
   }
 
@@ -64,9 +73,8 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
     const nome_cidadao = user.nome;
 
     formData.append('conteudo', formValue.conteudo);
-    formData.append('nome_orgao', formValue.nome_orgao);
+    formData.append('orgao', formValue.orgao);
     formData.append('nome_cidadao', nome_cidadao);
-    formData.append('orgao', '1');
     formData.append('tipo', formValue.tipo);
 
     const imageManifestacaoInput = (
