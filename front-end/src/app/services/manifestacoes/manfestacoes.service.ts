@@ -1,9 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { environment } from '../../../environments/environment';
 import { ResponseManifestacao } from '../../../interfaces/ResponseManifestacao';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -32,16 +33,26 @@ export class ManfestacoesService {
   }
 
   // Cria uma nova manifestação e emite um evento ao concluir
-  createManifestation(manifestacao: FormData): Observable<any> {
-    return new Observable((observer) => {
-      this.http.post(`${this.apiUrl}/`, manifestacao).subscribe({
-        next: (res) => {
-          this.manifestationCreated.emit(); // Notifica a criação
-          observer.next(res);
-          observer.complete();
-        },
-        error: (err) => observer.error(err),
-      });
-    });
+  // createManifestation(manifestacao: FormData): Observable<any> {
+  //   return new Observable((observer) => {
+  //     this.http.post(`${this.apiUrl}/`, manifestacao).subscribe({
+  //       next: (res) => {
+  //         this.manifestationCreated.emit(); // Notifica a criação
+  //         observer.next(res);
+  //         observer.complete();
+  //       },
+  //       error: (err) => observer.error(err),
+  //     });
+  //   });
+  // }
+
+
+  createManifestation(manifestacao: FormData): Observable<FormData> {
+    return this.http.post<FormData>(`${this.apiUrl}/`, manifestacao).pipe(
+      tap(() => {
+        this.manifestationCreated.emit(); // Emite o evento
+      })
+    );
   }
+  
 }
