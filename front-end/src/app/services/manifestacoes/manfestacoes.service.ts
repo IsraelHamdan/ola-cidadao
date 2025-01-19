@@ -1,5 +1,5 @@
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { environment } from '../../../environments/environment';
@@ -11,23 +11,37 @@ import { ResponseManifestacao } from '../../../interfaces/ResponseManifestacao';
 export class ManfestacoesService {
   private baseApiUrl = environment.baseURL;
   private apiUrl = `${this.baseApiUrl}/manifestacoes`;
-  allManifestations!: Manifestacao[];
+
+  // Emissor de eventos para notificações de novas manifestações
+  manifestationCreated = new EventEmitter<void>();
 
   constructor(private http: HttpClient) {}
 
+  // Obtém todas as manifestações
   getAllManifestations(): Observable<ResponseManifestacao<Manifestacao[]>> {
     return this.http.get<ResponseManifestacao<Manifestacao[]>>(
       `${this.apiUrl}/respostas/`
     );
   }
 
+  // Obtém manifestações paginadas
   getPaginatedManifestations(
     url: string
   ): Observable<ResponseManifestacao<Manifestacao[]>> {
     return this.http.get<ResponseManifestacao<Manifestacao[]>>(url);
   }
 
+  // Cria uma nova manifestação e emite um evento ao concluir
   createManifestation(manifestacao: FormData): Observable<any> {
-    return this.http.post<FormData>(`${this.apiUrl}/`, manifestacao);
+    return new Observable((observer) => {
+      this.http.post(`${this.apiUrl}/`, manifestacao).subscribe({
+        next: (res) => {
+          this.manifestationCreated.emit(); // Notifica a criação
+          observer.next(res);
+          observer.complete();
+        },
+        error: (err) => observer.error(err),
+      });
+    });
   }
 }

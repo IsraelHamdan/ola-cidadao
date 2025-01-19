@@ -53,32 +53,31 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   onSubmit(): void {
     const formValue = this.formNovaManifestacao.value;
     const formData = new FormData();
-
+  
     const user: CidadaoDTO = JSON.parse(localStorage.getItem('user')!);
     const nome_cidadao = user.nome;
-
+  
     formData.append('conteudo', formValue.conteudo);
     formData.append('nome_orgao', formValue.nome_orgao);
     formData.append('nome_cidadao', nome_cidadao);
     formData.append('orgao', '1');
     formData.append('tipo', formValue.tipo);
-
+  
     const imageManifestacaoInput = (
       document.getElementById('manifestacao-image') as HTMLInputElement
     ).files;
-
+  
     if (imageManifestacaoInput && imageManifestacaoInput.length > 0) {
       formData.append('imagem', imageManifestacaoInput[0]);
     }
-
+  
     this.manifestacaoService.createManifestation(formData).subscribe({
       next: (res) => {
-        console.log('Manifestacao criada com sucesso!', res);
+        console.log('Manifestação criada com sucesso!', res);
         this.formNovaManifestacao.reset();
         this.close();
-        
       },
-      error: (err) => console.error('Erro na crição de manifestação', err),
+      error: (err) => console.error('Erro na criação de manifestação', err),
     });
   }
 }
