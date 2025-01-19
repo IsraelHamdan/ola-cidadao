@@ -10,6 +10,9 @@
       <h3>Olá, Cidadão! Seja bem vindo.</h3>
 
       <form (ngSubmit)="onSubmit()">
+        <div class="alert" *ngIf="alert">
+          <span>Usuário não encontrado</span>
+        </div>
         <div class="form-data">
           <input
             [(ngModel)]="credentials.email"
@@ -36,7 +39,7 @@
           <a href="">Esqueceu?</a>
         </div>
 
-        <button type="submit">Entrar</button>
+        <button class="btn-default" type="submit">Entrar</button>
 
         <a href="" class="not-acount">Não tem uma conta? Cadastre-se</a>
       </form>

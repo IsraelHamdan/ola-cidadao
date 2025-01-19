@@ -26,7 +26,7 @@ import { pipe } from 'rxjs';
 export class SidebarLeftComponent {
   user: boolean = false;
 
-  isModalOpen: boolean = true;
+  isModalOpen: boolean = false;
 
   openModal() {
     this.isModalOpen = true;
