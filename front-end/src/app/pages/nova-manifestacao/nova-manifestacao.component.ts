@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nova-manifestacao',
@@ -27,7 +28,8 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private manifestacaoService: ManfestacoesService
+    private manifestacaoService: ManfestacoesService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -51,33 +53,39 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   }
 
   onSubmit(): void {
+    this.spinner.show();
+
     const formValue = this.formNovaManifestacao.value;
     const formData = new FormData();
-  
+
     const user: CidadaoDTO = JSON.parse(localStorage.getItem('user')!);
     const nome_cidadao = user.nome;
-  
+
     formData.append('conteudo', formValue.conteudo);
     formData.append('nome_orgao', formValue.nome_orgao);
     formData.append('nome_cidadao', nome_cidadao);
     formData.append('orgao', '1');
     formData.append('tipo', formValue.tipo);
-  
+
     const imageManifestacaoInput = (
       document.getElementById('manifestacao-image') as HTMLInputElement
     ).files;
-  
+
     if (imageManifestacaoInput && imageManifestacaoInput.length > 0) {
       formData.append('imagem', imageManifestacaoInput[0]);
     }
-  
+
     this.manifestacaoService.createManifestation(formData).subscribe({
       next: (res) => {
         console.log('Manifestação criada com sucesso!', res);
         this.formNovaManifestacao.reset();
         this.close();
+        this.spinner.hide();
       },
-      error: (err) => console.error('Erro na criação de manifestação', err),
+      error: (err) => {
+        console.error('Erro na criação de manifestação', err);
+        this.spinner.hide();
+      },
     });
   }
 }

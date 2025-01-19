@@ -32,7 +32,8 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/ngx-spinner/animations/ball-spin-fade.css"
             ],
             "scripts": []
           },
