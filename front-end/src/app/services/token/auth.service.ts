@@ -43,7 +43,7 @@ export class AuthService {
 
   getToken(): string | null {
     const token = localStorage.getItem('token');
-    console.log('Token recuperado do localStorage:', token); // Log para verificar se o token foi recuperado
+    // console.log('Token recuperado do localStorage:', token); // Log para verificar se o token foi recuperado
     return token;
   }
 

@@ -6,35 +6,71 @@
       <p>Como se manifestar?</p>
     </div>
 
-    <div class="body">
-      <div>
-        <div class="containerUserImg">
-          <img class="userImg" [src]="user?.imagem_perfil" alt="imagem" loading="lazy" />
+    <form (ngSubmit)="onSubmit()" [formGroup]="formNovaManifestacao">
+      <div class="body">
+        <div>
+          <div class="containerUserImg">
+            <img
+              class="userImg"
+              [src]="user?.imagem_perfil"
+              alt="imagem"
+              loading="lazy"
+            />
+          </div>
+          <textarea
+            formControlName="conteudo"
+            name="conteudo"
+            id="conteudo"
+            placeholder="Escreva sua manifestação, seja específico."
+          ></textarea>
         </div>
-
-        <textarea
-          name="descricao"
-          id="descricao"
-          placeholder="Escreva sua manifestação, seja específico."
-        ></textarea>
+        <div class="observations">
+          <p>Quantidade de manifestações restantes: 3</p>
+          <p>300 Caracteres restantes</p>
+        </div>
       </div>
+      <div class="container-buttons">
+        <div>
+          <!-- <button type="button">Selecionar secretaria</button> -->
+          <select
+            formControlName="nome_orgao"
+            name="nome_orgao"
+            id="nome_orgao"
+            title="nome_orgao"
+          >
+            <option value="secretaria_infraestrutura">
+              Secretaria de Infraestrutura
+            </option>
+            <option value="secretaria_segurança">
+              Secretaria de Segurança
+            </option>
+            <option value="secretaria_educacao">Secretaria de Educação</option>
+            <option value="secretaria_dados_ciberneticos">
+              Secretaria de Dados Cibernéticos
+            </option>
+          </select>
 
-      <div class="observations">
-        <p>Quantidade de manifestações restantes: 3</p>
-        <p>300 Caracteres restantes</p>
+          <select formControlName="tipo" name="tipo" id="tipo" title="tipo">
+            <option value="Denuncia">Denúncia</option>
+            <option value="Ajuda">Ajuda</option>
+          </select>
+
+          <button (click)="anexar()" type="button">
+            <i class="fa-solid fa-paperclip"></i>
+            <span>Anexar</span>
+          </button>
+          <input
+            formControlName="imagem"
+            hidden
+            id="manifestacao-image"
+            type="file"
+            name="manifestacao-image"
+            id="manifestacao-image"
+            title="manifestacao-image"
+          />
+        </div>
+        <button id="submit" type="submit">Manifestar</button>
       </div>
-    </div>
-
-    <div class="container-buttons">
-      <div>
-        <button type="button">Selecionar secretaria</button>
-        <button type="button">
-          <i class="fa-solid fa-paperclip"></i>
-          <span>Anexar</span>
-        </button>
-      </div>
-
-      <button type="button">Manifestar</button>
-    </div>
+    </form>
   </div>
 </div>

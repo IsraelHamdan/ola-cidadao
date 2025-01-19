@@ -16,7 +16,9 @@ export class ManfestacoesService {
   constructor(private http: HttpClient) {}
 
   getAllManifestations(): Observable<ResponseManifestacao<Manifestacao[]>> {
-    return this.http.get<ResponseManifestacao<Manifestacao[]>>(`${this.apiUrl}/respostas/`);
+    return this.http.get<ResponseManifestacao<Manifestacao[]>>(
+      `${this.apiUrl}/respostas/`
+    );
   }
 
   getPaginatedManifestations(
@@ -25,4 +27,7 @@ export class ManfestacoesService {
     return this.http.get<ResponseManifestacao<Manifestacao[]>>(url);
   }
 
+  createManifestation(manifestacao: FormData): Observable<any> {
+    return this.http.post<FormData>(`${this.apiUrl}/`, manifestacao);
+  }
 }

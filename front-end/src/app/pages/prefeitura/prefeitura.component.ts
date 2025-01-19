@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { PrefeiturasService } from '../../services/prefeituras/prefeituras.service';
-import { Prefeitura } from '../../../interfaces/prefeituraDTO';
+import { Prefeitura } from '../../../interfaces/PrefeituraDTO';
 import { ManifestationComponent } from "../../components/manifestation/manifestation.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-prefeitura',
   standalone: true,
-  imports: [ManifestationComponent],
+  imports: [ManifestationComponent, CommonModule],
   templateUrl: './prefeitura.component.html',
   styleUrl: './prefeitura.component.sass',
 })

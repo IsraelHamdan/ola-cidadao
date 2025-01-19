@@ -9,8 +9,9 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './manifestation.component.html',
   styleUrl: './manifestation.component.sass',
+  
 })
-export class ManifestationComponent implements OnInit {
+export class ManifestationComponent implements OnInit, DoCheck {
   @Input() padding!: string;
   // allManifestations: Manifestacao[] = [];
 
@@ -25,6 +26,11 @@ export class ManifestationComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log('Componente inicializado');
+    this.loadInitialData();
+  }
+  
+  ngDoCheck(): void {
+    console.log('mudou');
     this.loadInitialData();
   }
 
