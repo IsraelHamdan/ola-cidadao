@@ -79,7 +79,7 @@
 
     <div class="feed-information-1">
       <div class="tags">
-        @if (manifestation.nome_orgao) {
+        @if (manifestation.orgao) {
         <div class="tag-item pending">
           <i class="fa-regular fa-clock"></i>
           <span>Pendente de resposta</span>
@@ -100,7 +100,10 @@
     <div class="container-information-feed">
       <div class="user-information">
         <div class="user-information-image">
-          <img src="images/cat2.jpg" alt="" loading="lazy" />
+          
+          <!-- <img src="images/cat2.jpg" alt="" loading="lazy" /> -->
+
+          <h2> {{ manifestation.nome_cidadao.substring(0, 1) | uppercase }}</h2>
         </div>
 
         <div class="name">
