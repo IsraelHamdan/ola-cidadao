@@ -15,25 +15,31 @@
 
 .modal-content 
   background: white
-  padding: 10px 20px
   border-radius: 15px
-  width: 500px
+  width: 600px
   text-align: center
 
 .header
-  padding: 0px 10px 3px
-  margin-left: -20px
-  width: calc(100% + 40px)
+  padding: 10px
+  width: 100%
   display: flex
   justify-content: space-between
   align-items: center
   border-bottom: 1px solid global.$border-color
   color: global.$alt-fontColor
+  font-size: .9em
   font-weight: 500
+
+  *
+    transition: all .15s ease
+    &:hover
+      cursor: pointer
+      color: global.$main-fontColor
 
 .body
   display: flex
   flex-direction: column
+  padding: 10px 15px 10px 10px
   min-height: 200px
   div
     &:nth-of-type(1)
@@ -52,7 +58,7 @@ textarea
   border: none
   outline: none
   resize: none
-  flex: 0 0 auto
+  flex: 1 0 auto
   
   &::placeholder
     font-size: 1em
@@ -87,10 +93,9 @@ textarea
     object-fit: cover
 
 .container-buttons
-  padding: 10px 10px 0px
-  margin-left: -20px
-  width: calc(100% + 40px)
-  border-top: 1px solid black
+  padding: 10px
+  width: 100%
+  border-top: 1px solid global.$border-color
   display: flex
   justify-content: space-between
   align-items: center
@@ -106,6 +111,21 @@ textarea
     padding: 8px 13px
     border-radius: 20px
     border: none
+
+    &:first-of-type
+      display: flex
+      justify-content: center
+      align-items: center
+      gap: 3px
+
+select
+  border-radius: 5px
+  font-size: .88em
+  border: 1px solid global.$alt-fontColor
+
+  &:hover
+    cursor: pointer
+
 
 #submit
   transition: all .2s ease

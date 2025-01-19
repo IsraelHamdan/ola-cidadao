@@ -22,35 +22,40 @@
             name="conteudo"
             id="conteudo"
             placeholder="Escreva sua manifestação, seja específico."
+            [(ngModel)]="conteudoLength"
+            maxlength="300"
           ></textarea>
         </div>
         <div class="observations">
           <p>Quantidade de manifestações restantes: 3</p>
-          <p>300 Caracteres restantes</p>
+          <p [class.error]="conteudoLength.length >= 300" >{{ 300 - conteudoLength.length }} Caracteres restantes</p>
         </div>
       </div>
       <div class="container-buttons">
         <div>
-          <!-- <button type="button">Selecionar secretaria</button> -->
-          <select
-            formControlName="nome_orgao"
-            name="nome_orgao"
-            id="nome_orgao"
-            title="nome_orgao"
-          >
-            <option value="secretaria_infraestrutura">
-              Secretaria de Infraestrutura
-            </option>
-            <option value="secretaria_segurança">
-              Secretaria de Segurança
-            </option>
-            <option value="secretaria_educacao">Secretaria de Educação</option>
-            <option value="secretaria_dados_ciberneticos">
-              Secretaria de Dados Cibernéticos
-            </option>
-          </select>
+          <div class="select-wrapper">
+            <select
+              formControlName="nome_orgao"
+              name="nome_orgao"
+              id="nome_orgao"
+              title="nome_orgao"
+            >
+              <option value="" selected disabled >Selecione uma secretaria</option>
+              <option value="secretaria_infraestrutura">
+                Secretaria de Infraestrutura
+              </option>
+              <option value="secretaria_segurança">
+                Secretaria de Segurança
+              </option>
+              <option value="secretaria_educacao">Secretaria de Educação</option>
+              <option value="secretaria_dados_ciberneticos">
+                Secretaria de Dados Cibernéticos
+              </option>
+            </select>
+          </div>
 
           <select formControlName="tipo" name="tipo" id="tipo" title="tipo">
+            <option value="" selected disabled>Selecione o tipo</option>
             <option value="Denuncia">Denúncia</option>
             <option value="Ajuda">Ajuda</option>
           </select>

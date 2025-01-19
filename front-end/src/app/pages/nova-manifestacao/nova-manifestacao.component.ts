@@ -22,6 +22,8 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   @Input() isOpen: boolean = true;
   @Input() close: () => void = () => {};
 
+  conteudoLength: string = '';
+
   user!: CidadaoDTO | undefined | null;
   formNovaManifestacao!: FormGroup;
 
