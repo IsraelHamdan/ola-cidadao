@@ -18,6 +18,8 @@ export class ManifestationComponent implements OnInit {
   nextUrl: string | null = null;
   loading = false;
 
+  options: boolean[] = [];
+
   constructor(private manifestacoesService: ManfestacoesService) {}
 
   ngOnInit(): void {
@@ -35,6 +37,8 @@ export class ManifestationComponent implements OnInit {
       this.manifestations = response.results;
       this.nextUrl = response.next;
       this.loading = false;
+
+      this.options = new Array(this.manifestations.length).fill(false);
     });
   }
 
@@ -47,6 +51,12 @@ export class ManifestationComponent implements OnInit {
           this.manifestations = [...this.manifestations, ...response.results];
           this.nextUrl = response.next;
           this.loading = false;
+
+          // Expande o array options para incluir novas manifestações
+          this.options = [
+            ...this.options,
+            ...new Array(response.results.length).fill(false),
+          ];
         });
     }
   }
@@ -57,5 +67,12 @@ export class ManifestationComponent implements OnInit {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 10) {
       this.loadNextPage();
     }
+  }
+
+  moreOptions(index: number) {
+    // Fecha todas as opções antes de abrir a selecionada
+    this.options = this.options.map((_, i) =>
+      i === index ? !this.options[i] : false
+    );
   }
 }

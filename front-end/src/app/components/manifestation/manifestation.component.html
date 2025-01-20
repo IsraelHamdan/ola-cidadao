@@ -66,12 +66,25 @@
 >
   <div
     class="manifestation"
-    *ngFor="let manifestation of manifestations"
+    *ngFor="let manifestation of manifestations; let i = index"
     (scroll)="onScroll($event)"
   >
     <p>
       {{ manifestation.conteudo }}
     </p>
+
+    <i (click)="moreOptions(i)" id="more" class="fa-solid fa-ellipsis"></i>
+
+    <div *ngIf="options[i]" class="moreOptions">
+      <button type="button">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>Editar</span>
+      </button>
+      <button type="button">
+        <i class="fa-solid fa-trash"></i>
+        <span>Apagar</span>
+      </button>
+    </div>
 
     <div *ngIf="manifestation.imagem" class="feed-image">
       <img [src]="manifestation.imagem" alt="" />

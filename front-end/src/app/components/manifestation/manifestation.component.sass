@@ -6,6 +6,7 @@
   padding: 10px
 
 .manifestation
+  position: relative
   background-color: white
   margin: 3px 0px 12px
   padding: 20px 20px 10px
@@ -160,3 +161,47 @@
     100% 
       transform: rotate(360deg)  
     
+#more
+  color: global.$main-fontColor
+  position: absolute
+  top: 10px
+  right: 10px
+  padding: 8px
+  font-size: 1.1em
+  background-color: global.$main-bg
+  border-radius: 50%
+  transition: all .15s ease
+  &:hover
+    cursor: pointer
+  &:active  
+    transform: scale(0.95)
+
+.moreOptions
+  position: absolute
+  background-color: global.$main-bg
+  right: 10px
+  width: max-content
+  top: 48px
+  padding: 20px
+  border-radius: 7px
+  display: flex
+  flex-direction: column
+  gap: 7px
+  box-shadow: 1px 2px 4px #11111161
+
+  button
+    font-weight: 600
+    color: global.$main-fontColor
+    display: flex
+    gap: 5px
+    transition: all .15s ease
+
+    &:hover
+      color: global.$btn-alt-bg
+
+    &:not(:first-of-type)
+      border-top: 1px solid global.$border-color
+      padding-top: 10px
+   
+
+      
