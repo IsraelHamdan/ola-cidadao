@@ -4,6 +4,7 @@ import { SidebarLeftComponent } from './components/sidebar-left/sidebar-left.com
 import { SidebarRightComponent } from './components/sidebar-right/sidebar-right.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { NgxSpinnerComponent } from 'ngx-spinner';
+import { HeaderMobileComponent } from "./components/header-mobile/header-mobile.component";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { NgxSpinnerComponent } from 'ngx-spinner';
     SidebarRightComponent,
     MainContentComponent,
     NgxSpinnerComponent,
-  ],
+    HeaderMobileComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
 })
