@@ -37,3 +37,24 @@ app-sidebar-right
 
   app-sidebar-right
     display: none
+
+@media screen and (min-width: 765px) 
+  app-header-mobile
+    display: none !important
+
+@media screen and (max-width: 764px) 
+  main
+    grid-template-rows: auto auto
+    grid-template-columns: 1fr
+
+  app-header-mobile
+    display: flex
+    grid-row: 1 / 2
+    grid-column: 1 / 4
+
+  app-sidebar-left
+    display: none
+
+  app-main-content
+    grid-row: 2 / 3
+    grid-column: 1 / 4
