@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
+import { TimeAgoPipe } from '../../pipes/timeAgo';
 
 @Component({
   selector: 'app-manifestation',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TimeAgoPipe],
   templateUrl: './manifestation.component.html',
   styleUrl: './manifestation.component.sass',
 })
