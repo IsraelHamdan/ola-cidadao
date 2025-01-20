@@ -59,9 +59,15 @@
       </div>
     </button>
   </nav>
-  
+
   <button id="manifestar" (click)="openModal()" type="button" title=".">
     <i class="fa-solid fa-plus"></i>
   </button>
   }
+
 </header>
+
+<app-nova-manifestacao
+  [isOpen]="isModalOpen"
+  [close]="closeModal.bind(this)"
+></app-nova-manifestacao>

@@ -3,11 +3,12 @@ import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NovaManifestacaoComponent } from "../../pages/nova-manifestacao/nova-manifestacao.component";
 
 @Component({
   selector: 'app-header-mobile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NovaManifestacaoComponent],
   templateUrl: './header-mobile.component.html',
   styleUrl: './header-mobile.component.sass',
 })
