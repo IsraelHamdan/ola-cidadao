@@ -159,7 +159,7 @@ nav
   gap: 7px
   padding: 10px
   border-bottom: 1px solid global.$border-color
-  overflow: scroll
+  overflow-x: scroll
 
 .tag-item
   font-size: 1em
@@ -178,3 +178,23 @@ nav
 
   i
     font-size: .9em
+
+@media screen and (max-width: 420px)
+  nav
+    margin-top: 7px
+  
+
+  .row
+    flex-direction: column
+
+    button
+      margin-top: -50px
+      position: relative
+
+  .userInfo
+    align-items: center
+    left: 0px
+    margin-bottom: 0px
+
+    .containerUserImg 
+      left: 0px

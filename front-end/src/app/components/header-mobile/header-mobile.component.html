@@ -34,8 +34,34 @@
       [close]="closeModal.bind(this)"
     ></app-nova-manifestacao> -->
 
-    <nav>
-      <button type="button">a</button>
-    </nav>
+  <nav class="">
+    <button routerLink="/" type="button" title=".">
+      <i class="fa-regular fa-compass"></i>
+    </button>
+
+    <button type="button" title=".">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+    <button routerLink="/metricas" type="button" title=".">
+      <i class="fa-solid fa-arrow-trend-up"></i>
+    </button>
+
+    <button routerLink="/prefeitura" type="button" title=".">
+      <i class="fa-solid fa-house"></i>
+    </button>
+
+    <button type="button" title="perfil">
+      <div class="containerUserImg">
+        <a routerLink="/user"
+          ><img class="userImg" [src]="userCidadao.imagem_perfil" alt=""
+        /></a>
+      </div>
+    </button>
+  </nav>
+  
+  <button id="manifestar" (click)="openModal()" type="button" title=".">
+    <i class="fa-solid fa-plus"></i>
+  </button>
   }
 </header>
