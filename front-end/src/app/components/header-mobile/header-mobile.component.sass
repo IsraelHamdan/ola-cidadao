@@ -1,0 +1,157 @@
+@use '../../../styles.sass' as global
+
+
+.container
+  display: flex
+
+  flex-direction: row
+  
+  // position: fixed
+  // left: 0
+  // top: 0
+  // height: 100%
+
+  width: 100%
+  padding-top: 10px
+  transition: all 0.3s ease
+  border-right: 1px solid global.$border-color
+  &.close
+    transform: translateX(-100%)
+  p
+    color: global.$alt-fontColor
+    font-size: 14px
+    text-align: center
+    margin-top: 25px
+
+// .btn-logout
+//   display: flex
+//   align-items: center
+//   justify-content: center
+//   gap: 2px
+//   margin: -5px 0px 10px 10px
+//   width: max-content
+//   padding: 5px
+//   color: global.$main-fontColor
+//   border-radius: 5px
+//   background-color: global.$colord9
+//   border: none
+//   font-weight: bold
+//   i
+//     font-size: 1.4em
+//     color: global.$main-fontColor
+
+.sidebar-nav
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+.row-1
+  width: 100%
+  display: flex
+  justify-content: space-between
+  padding: 10px 15px
+
+  button
+    background-color: transparent
+    border: none
+
+.userInfo
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  gap: 10px
+  color: global.$main-fontColor
+
+.userName
+  font-size: 1.05em
+  font-weight: 600
+  color: global.$main-fontColor
+
+.countUserName
+  font-size: .85em
+  color: global.$alt-fontColor
+
+.containerUserImg 
+  background: global.$main-fontColor
+  width: 60px
+  height: 60px
+  border-radius: 50%
+  overflow: hidden
+  display: flex
+  justify-content: center
+
+  img
+    height: 100%
+
+.btnSidebar
+  background-color: global.$btn-background
+  color: global.$main-fontColor
+  font-family: global.$main-fontFamilly
+  font-size: 1em
+  font-weight: 600
+  width: 280px
+  height: 50px
+  border: 10px
+  border: none
+  border-radius: 30px
+  padding-left: 15px
+  gap: 10px
+  margin-top: 10px
+  transition: all .2s ease
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  &:last-child
+    background-color: global.$btn-alt-bg
+    color: white
+    &:hover
+      color: global.$btn-alt-bg
+      background-color: white
+      border: 1px solid global.$btn-alt-bg
+  &:hover
+    cursor: pointer
+    background-color: global.$btn-hover-bg
+    color: global.$btn-alt-fontColor
+    i
+      color: white
+  
+  &:active
+    transform: scale(0.965)
+  &:last-child
+    margin-top: 25px
+    padding-lefT: 0px
+    display: block
+i
+  color: black
+  font-size: 1.5em
+  transition: all .2s ease
+  
+#out-message
+  color: global.$main-fontColor
+  font-size: 1.2em
+  font-weight: 600
+  margin: 50px 30px 20px
+
+.out
+  margin-left: 14px
+  padding: 0
+  justify-content: center
+
+  &:nth-of-type(1)  
+    &:hover
+        color: global.$btn-alt-bg
+        background-color: white
+        border: 1px solid global.$btn-alt-bg
+
+  &:nth-of-type(1)
+    background-color: global.$btn-alt-bg
+    color: white
+    
+nav
+  background-color: red
+  position: absolute
+  bottom: 50px
+  left: 50%
+  display: flex

@@ -1,0 +1,41 @@
+<header class="container">
+  @if (userCidadao) {
+
+  <div class="row-1">
+    <div class="userInfo">
+      <div class="containerUserImg">
+        <a routerLink="/user"
+          ><img class="userImg" [src]="userCidadao.imagem_perfil" alt=""
+        /></a>
+      </div>
+      <a routerLink="/user">
+        <h4 class="userName">{{ userCidadao.nome | titlecase }}</h4>
+      </a>
+    </div>
+
+    <button routerLink="/configuracoes" type="button" title="configuracoes">
+      <i class="fa-solid fa-gear"></i>
+    </button>
+  </div>
+
+  <!-- <app-login
+      (autorizacao)="autorizado($event)"
+      [isOpen]="isLoginOpen"
+      [close]="closeLogin.bind(this)"
+    ></app-login>
+    
+    <app-cadastro
+      [isOpen]="isCadastroOpen"
+      [close]="closeCadastro.bind(this)"
+    ></app-cadastro>
+    
+    <app-nova-manifestacao
+      [isOpen]="isModalOpen"
+      [close]="closeModal.bind(this)"
+    ></app-nova-manifestacao> -->
+
+    <nav>
+      <button type="button">a</button>
+    </nav>
+  }
+</header>
