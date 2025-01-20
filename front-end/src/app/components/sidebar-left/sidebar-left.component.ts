@@ -9,6 +9,7 @@ import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
 import { Token } from '@angular/compiler';
 import { pipe } from 'rxjs';
+import { HeaderMobileComponent } from '../header-mobile/header-mobile.component';
 
 @Component({
   selector: 'app-sidebar-left',
