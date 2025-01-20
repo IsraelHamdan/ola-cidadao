@@ -23,9 +23,22 @@
       <i class="fa-solid fa-hashtag"></i>
       <span>Secretaria de Infraestrutura</span>
     </div>
+
+    <div *ngIf="tags">
+      <div class="tag-item">
+        <i class="fa-solid fa-hashtag"></i>
+        <span>Secretaria de Infraestrutura</span>
+      </div>
+      <div class="tag-item">
+        <i class="fa-solid fa-hashtag"></i>
+        <span>Secretaria de Infraestrutura</span>
+      </div>
+    </div>
   </div>
 
-  <p routerLink="/">Mais Secretarias...</p>
+  <button type="button" (click)="moreTags()">
+    {{ tags ? "Mostrar menos..." : "Mais Secretarias..." }}
+  </button>
 
   <ul>
     <li>Privacidade</li>
