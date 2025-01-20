@@ -43,9 +43,9 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
     this.user = this.authService.getUser();
 
     this.formNovaManifestacao = this.fb.group({
-      conteudo: [''],
+      conteudo: ['', [Validators.required]],
       orgao: ['', [Validators.required]],
-      tipo: [''],
+      tipo: ['', [Validators.required]],
       imagem: [null],
     });
 
@@ -71,7 +71,10 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
 
     const user: CidadaoDTO = JSON.parse(localStorage.getItem('user')!);
     const nome_cidadao = user.nome;
+    let now = new Date();
+    let data_criacao = now.toISOString();
 
+    formData.append('data_criacao', data_criacao);
     formData.append('conteudo', formValue.conteudo);
     formData.append('orgao', formValue.orgao);
     formData.append('nome_cidadao', nome_cidadao);

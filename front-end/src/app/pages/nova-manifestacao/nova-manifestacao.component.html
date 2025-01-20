@@ -24,6 +24,10 @@
             placeholder="Escreva sua manifestação, seja específico."
             [(ngModel)]="conteudoLength"
             maxlength="300"
+            [class.danger]="
+              formNovaManifestacao.get('conteudo')?.touched &&
+              formNovaManifestacao.get('conteudo')?.invalid
+            "
           ></textarea>
         </div>
         <div class="observations">
@@ -41,20 +45,41 @@
               name="orgao"
               id="orgao"
               title="orgao"
+              [class.danger]="
+                formNovaManifestacao.get('orgao')?.touched &&
+                formNovaManifestacao.get('orgao')?.invalid
+              "
             >
               <option value="" selected disabled>
                 Selecione uma secretaria
               </option>
-              <option [value]="secretaria.id" *ngFor="let secretaria of secretarias">
+              <option
+                [value]="secretaria.id"
+                *ngFor="let secretaria of secretarias"
+              >
                 {{ secretaria.nome }}
               </option>
             </select>
           </div>
 
-          <select formControlName="tipo" name="tipo" id="tipo" title="tipo">
+          <select
+            formControlName="tipo"
+            name="tipo"
+            id="tipo"
+            title="tipo"
+            [class.danger]="
+              formNovaManifestacao.get('tipo')?.touched &&
+              formNovaManifestacao.get('tipo')?.invalid
+            "
+          >
             <option value="" selected disabled>Selecione o tipo</option>
             <option value="Denuncia">Denúncia</option>
             <option value="Ajuda">Ajuda</option>
+            <option value="Solicitação">Solicitação</option>
+            <option value="Elogio">Elogio</option>
+            <option value="Sugestao">Sugestão</option>
+            <option value="Sugestao">Sugestão</option>
+            <option value="Esclarecimento">Esclarecimento</option>
           </select>
 
           <button (click)="anexar()" type="button">
@@ -71,9 +96,10 @@
             title="manifestacao-image"
           />
         </div>
-        <button id="submit" type="submit">Manifestar</button>
+        <button class="btn-default" id="submit" type="submit" [disabled]="formNovaManifestacao.invalid">Manifestar</button>
       </div>
     </form>
+
     <div
       *ngIf="
         formNovaManifestacao.get('orgao')?.touched &&
@@ -81,6 +107,22 @@
       "
     >
       <small class="text-danger">Por favor, selecione uma secretaria.</small>
+    </div>
+    <div
+      *ngIf="
+        formNovaManifestacao.get('tipo')?.touched &&
+        formNovaManifestacao.get('tipo')?.invalid
+      "
+    >
+      <small class="text-danger">Por favor, selecione uma tipo.</small>
+    </div>
+    <div
+      *ngIf="
+        formNovaManifestacao.get('conteudo')?.touched &&
+        formNovaManifestacao.get('conteudo')?.invalid
+      "
+    >
+      <small class="text-danger">Por favor, selecione descreva a manifestação.</small>
     </div>
   </div>
 </div>

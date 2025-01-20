@@ -18,6 +18,7 @@
   border-radius: 15px
   width: 600px
   text-align: center
+  padding-bottom: 10px
 
 .header
   padding: 10px
@@ -126,10 +127,19 @@ select
   &:hover
     cursor: pointer
 
+  option
+    &:not(:first-of-type)
+      color: global.$main-fontColor
 
 #submit
   transition: all .2s ease
+  color: white
 
-  &:hover
-    color: white
-    background-color: global.$main-fontColor
+  &:disabled
+    background-color: #de4545b4
+    cursor: not-allowed
+
+
+.error
+  border-color: #DE4545
+  color: #DE4545
