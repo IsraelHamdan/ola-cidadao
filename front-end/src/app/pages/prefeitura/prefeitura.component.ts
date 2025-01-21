@@ -4,11 +4,12 @@ import { PrefeiturasService } from '../../services/prefeituras/prefeituras.servi
 import { Prefeitura } from '../../../interfaces/PrefeituraDTO';
 import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
 import { CommonModule } from '@angular/common';
+import { PostagensComponent } from "../../components/postagens/postagens.component";
 
 @Component({
   selector: 'app-prefeitura',
   standalone: true,
-  imports: [ManifestationComponent, CommonModule],
+  imports: [ManifestationComponent, CommonModule, PostagensComponent],
   templateUrl: './prefeitura.component.html',
   styleUrl: './prefeitura.component.sass',
 })
