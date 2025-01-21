@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [ManifestationComponent, RouterOutlet, RouterModule, PostagensComponent, CommonModule],
+  imports: [RouterOutlet, RouterModule, CommonModule],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.sass'
 })
