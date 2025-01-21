@@ -15,11 +15,10 @@
   gap: 15px
 
   button
-      text-align: left
-      padding-left: 10px 
-      font-size: 0.9em
-      color: global.$btn-alt-bg
-      font-weight: 500
+    text-align: left
+    padding-left: 10px 
+    font-size: 0.9em
+    font-weight: 500
       
 
 .container-busca
@@ -55,6 +54,15 @@ input
   flex-direction: column
   gap: 7px
 
+  .hideTags
+    display: flex
+    flex-direction: column
+    gap: 7px
+
+
+#moreTags
+  color: global.$btn-alt-bg
+
 .tag-item
   font-size: .86em
   background-color: global.$colord9
@@ -87,3 +95,6 @@ ul
   li
     font-size: 12px
     color: global.$alt-fontColor
+
+    &:hover
+      text-decoration: underline

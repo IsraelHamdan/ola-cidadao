@@ -7,42 +7,42 @@
   <p>Secretarias com mais manifestações</p>
 
   <div class="tags">
-    <div class="tag-item">
+    <button type="button" class="tag-item">
       <i class="fa-solid fa-hashtag"></i>
       <span>Secretaria de Infraestrutura</span>
-    </div>
-    <div class="tag-item">
+    </button>
+    <button type="button" class="tag-item">
       <i class="fa-solid fa-hashtag"></i>
       <span>Secretaria de Segurança</span>
-    </div>
-    <div class="tag-item">
+    </button>
+    <button type="button" class="tag-item">
       <i class="fa-solid fa-hashtag"></i>
       <span>Secretaria de Dados Ciberné...</span>
-    </div>
-    <div class="tag-item">
+    </button>
+    <button type="button" class="tag-item">
       <i class="fa-solid fa-hashtag"></i>
       <span>Secretaria de Infraestrutura</span>
-    </div>
+    </button>
 
-    <div *ngIf="tags">
-      <div class="tag-item">
+    <div class="hideTags" type="button" *ngIf="tags">
+      <button type="button" class="tag-item">
         <i class="fa-solid fa-hashtag"></i>
         <span>Secretaria de Infraestrutura</span>
-      </div>
-      <div class="tag-item">
+      </button>
+      <button type="button" class="tag-item">
         <i class="fa-solid fa-hashtag"></i>
         <span>Secretaria de Infraestrutura</span>
-      </div>
+      </button>
     </div>
   </div>
 
-  <button type="button" (click)="moreTags()">
+  <button id="moreTags" type="button" (click)="moreTags()">
     {{ tags ? "Mostrar menos..." : "Mais Secretarias..." }}
   </button>
 
   <ul>
-    <li>Privacidade</li>
-    <li>Termos de uso</li>
-    <li>Ajuda</li>
+    <li><a href="">Privacidade</a></li>
+    <li><a href="">Termos de uso</a></li>
+    <li><a href="">Ajuda</a></li>
   </ul>
 </div>

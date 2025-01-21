@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
 import { PrefeiturasService } from '../../services/prefeituras/prefeituras.service';
 import { Prefeitura } from '../../../interfaces/PrefeituraDTO';
-import { ManifestationComponent } from "../../components/manifestation/manifestation.component";
+import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

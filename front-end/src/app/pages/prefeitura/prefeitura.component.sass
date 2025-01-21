@@ -144,7 +144,8 @@ nav
     display: flex
     gap: 20px
 
-    a
+    button
+      font-size: 1.1em
       transition: all .15s ease
       color: global.$alt-fontColor
       &:nth-of-type(1)
@@ -152,7 +153,6 @@ nav
         font-weight: 500
       &:hover
         color: global.$main-fontColor
-
 
 .tags
   display: flex
@@ -178,6 +178,9 @@ nav
 
   i
     font-size: .9em
+
+.selected
+  background-color: global.$btn-alt-bg
 
 @media screen and (max-width: 420px)
   nav
