@@ -8,14 +8,49 @@ import { PrefeituraComponent } from './pages/prefeitura/prefeitura.component';
 import { ConfiguracoesComponent } from './pages/configuracoes/configuracoes.component';
 import { NovaManifestacaoComponent } from './pages/nova-manifestacao/nova-manifestacao.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PostagensComponent } from './components/postagens/postagens.component';
+import { ManifestationComponent } from './components/manifestation/manifestation.component';
 
 export const routes: Routes = [
-  { path: '', component: FeedComponent },
+  {
+    path: '', // Rota principal
+    component: FeedComponent, // Componente que contém o router-outlet principal
+    children: [
+      {
+        path: '', // Rota padrão dentro de FeedComponent
+        component: ManifestationComponent,
+      },
+      {
+        path: 'postagens', // Rota para o componente Postagens
+        component: PostagensComponent,
+      },
+      {
+        path: 'manifestacoes', // Rota para o componente Manifestation
+        component: ManifestationComponent,
+      },
+    ],
+  },
   { path: 'metricas', component: MetricasComponent },
   { path: 'prefeitura', component: PrefeituraComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'nova-manifestacao', component: NovaManifestacaoComponent },
-  { path: 'dashboard', component: FeedComponent },
+
+  // {
+  //   path: 'dashboard', // Componente A
+  //   component: FeedComponent,
+  //   children: [
+  //     {
+  //       path: '', // Página padrão do dashboard (componente B)
+  //       component: ManifestationComponent,
+  //       children: [
+  //         { path: 'manifestacoes', component: ManifestationComponent }, // Outlet de B
+  //         { path: 'postagens', component: PostagensComponent }, // Outlet de B
+  //       ],
+  //     },
+  //   ],
+  // },
+
+
   { path: 'user', component: UserComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
