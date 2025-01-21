@@ -3,6 +3,7 @@ import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-manifestation',
@@ -20,7 +21,10 @@ export class ManifestationComponent implements OnInit {
 
   options: boolean[] = [];
 
-  constructor(private manifestacoesService: ManfestacoesService) {}
+  constructor(
+    private manifestacoesService: ManfestacoesService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.loadInitialData();
@@ -74,5 +78,14 @@ export class ManifestationComponent implements OnInit {
     this.options = this.options.map((_, i) =>
       i === index ? !this.options[i] : false
     );
+  }
+
+  deleteManifestation(id: number) {
+    this.spinner.show();
+
+    this.manifestacoesService.deleteManifestation(id).subscribe(() => {
+      this.loadInitialData();
+      this.spinner.hide();
+    });
   }
 }

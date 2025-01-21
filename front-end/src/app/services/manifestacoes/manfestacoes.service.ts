@@ -46,7 +46,6 @@ export class ManfestacoesService {
   //   });
   // }
 
-
   createManifestation(manifestacao: FormData): Observable<FormData> {
     return this.http.post<FormData>(`${this.apiUrl}/`, manifestacao).pipe(
       tap(() => {
@@ -54,5 +53,8 @@ export class ManfestacoesService {
       })
     );
   }
-  
+
+  deleteManifestation(id: number): Observable<FormData> {
+    return this.http.delete<FormData>(`${this.apiUrl}/${id}/`);
+  }
 }
