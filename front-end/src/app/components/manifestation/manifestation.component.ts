@@ -33,6 +33,7 @@ export class ManifestationComponent implements OnInit {
   ngOnInit(): void {
     this.loadInitialData();
 
+    this.userLogged = this.auth.isLoggedIn();
     this.auth.userLogged.subscribe(() => {
       this.loadInitialData();
       this.userLogged = this.auth.isLoggedIn();
@@ -96,5 +97,15 @@ export class ManifestationComponent implements OnInit {
       this.loadInitialData();
       this.spinner.hide();
     });
+  }
+
+  like(manifestacao: Manifestacao) {
+    manifestacao.liked = !manifestacao.liked;
+    manifestacao.disliked = false;
+  }
+
+  dislike(manifestacao: Manifestacao) {
+    manifestacao.disliked = !manifestacao.disliked;
+    manifestacao.liked = false;
   }
 }

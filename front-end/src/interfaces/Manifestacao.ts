@@ -11,4 +11,6 @@ export interface Manifestacao {
   qtd_up: number;
   qtd_down: number;
   status: string;
+  liked: boolean; 
+  disliked: boolean;
 }

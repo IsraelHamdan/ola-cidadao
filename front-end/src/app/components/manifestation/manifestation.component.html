@@ -73,7 +73,12 @@
       {{ manifestation.conteudo }}
     </p>
 
-    <i *ngIf="userLogged" (click)="moreOptions(i)" id="more" class="fa-solid fa-ellipsis"></i>
+    <i
+      *ngIf="userLogged"
+      (click)="moreOptions(i)"
+      id="more"
+      class="fa-solid fa-ellipsis"
+    ></i>
 
     <div *ngIf="options[i]" class="moreOptions">
       <button type="button">
@@ -125,12 +130,15 @@
       </div>
 
       <div class="container-btn-interation">
-        <div class="btn-interation">
+        <div
+          [class.disliked]="manifestation.disliked"
+          (click)="dislike(manifestation)"
+          class="btn-interation">
           <i class="fa-solid fa-arrow-down"></i>
           <span>Descer</span>
         </div>
 
-        <div class="btn-interation">
+        <div [class.liked]="manifestation.liked" (click)="like(manifestation)" class="btn-interation">
           <i class="fa-solid fa-arrow-up"></i>
           <span>Subir</span>
         </div>

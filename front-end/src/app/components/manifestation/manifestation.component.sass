@@ -107,21 +107,19 @@
   font-weight: 600
   transition: all .2s ease
 
-  &:nth-of-type(2)
-    background-color: global.$btn-alt-bg
-    color: white   
-    &:hover
-      color: global.$btn-alt-bg
-      background-color: white
-      border: 1px solid global.$btn-alt-bg
   &:hover
-    color: #ff4848
-    background-color: white
-    border: 1px solid #ff4848
     transform: scale(1.03)
     cursor: pointer
   &:active
     transform: scale(0.98)
+
+.liked
+  background-color: global.$btn-alt-bg
+  color: white   
+
+.disliked
+  background-color: #ff4848
+  color: white   
 
 .share
   transition: all .2s ease
