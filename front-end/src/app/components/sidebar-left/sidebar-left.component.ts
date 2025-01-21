@@ -10,6 +10,7 @@ import { CadastroComponent } from '../cadastro/cadastro.component';
 import { Token } from '@angular/compiler';
 import { pipe } from 'rxjs';
 import { HeaderMobileComponent } from '../header-mobile/header-mobile.component';
+import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 
 @Component({
   selector: 'app-sidebar-left',
@@ -50,11 +51,12 @@ export class SidebarLeftComponent {
   onLogout(): void {
     this.authService.logout();
     this.user = false;
+    
   }
 
   userCidadao!: CidadaoDTO | undefined | null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private manifestacaoService: ManfestacoesService) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('user')) {

@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Manifestacao } from '../../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { AuthService } from '../../services/token/auth.service';
 
 @Component({
   selector: 'app-manifestation',
@@ -23,11 +25,18 @@ export class ManifestationComponent implements OnInit {
 
   constructor(
     private manifestacoesService: ManfestacoesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private auth: AuthService
   ) {}
 
+  userLogged: boolean = false;
   ngOnInit(): void {
     this.loadInitialData();
+
+    this.auth.userLogged.subscribe(() => {
+      this.loadInitialData();
+      this.userLogged = this.auth.isLoggedIn();
+    });
 
     // Inscreve-se no evento de criação para atualizar a lista automaticamente
     this.manifestacoesService.manifestationCreated.subscribe(() => {

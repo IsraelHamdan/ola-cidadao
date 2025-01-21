@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, switchMap } from 'rxjs/operators';
@@ -17,6 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  userLogged = new EventEmitter<void>();
+
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
@@ -29,6 +31,7 @@ export class AuthService {
             localStorage.setItem('token', response.access);
             this.fetchUserDetails();
             this.isLoggedInSubject.next(true); // Atualiza o estado de login
+            this.userLogged.emit();
           }
         })
       );
@@ -39,6 +42,7 @@ export class AuthService {
     localStorage.removeItem('user');
     this.isLoggedInSubject.next(false); // Atualiza o estado de login
     this.router.navigate(['/dashboard']);
+    this.userLogged.emit();
   }
 
   getToken(): string | null {

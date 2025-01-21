@@ -73,7 +73,7 @@
       {{ manifestation.conteudo }}
     </p>
 
-    <i (click)="moreOptions(i)" id="more" class="fa-solid fa-ellipsis"></i>
+    <i *ngIf="userLogged" (click)="moreOptions(i)" id="more" class="fa-solid fa-ellipsis"></i>
 
     <div *ngIf="options[i]" class="moreOptions">
       <button type="button">
