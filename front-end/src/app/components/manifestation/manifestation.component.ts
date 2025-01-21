@@ -102,13 +102,13 @@ export class ManifestationComponent implements OnInit {
 
   like(manifestacao: Manifestacao) {
     manifestacao.liked = !manifestacao.liked;
-    manifestacao.disliked = false;
-
+    
     if (manifestacao.liked) {
       manifestacao.qtd_up++;
-
-      if(manifestacao.qtd_down) {
+      
+      if(manifestacao.disliked) {
         manifestacao.qtd_down--;
+        manifestacao.disliked = false;
       }
     } else {
       manifestacao.qtd_up--;
@@ -117,13 +117,13 @@ export class ManifestationComponent implements OnInit {
 
   dislike(manifestacao: Manifestacao) {
     manifestacao.disliked = !manifestacao.disliked;
-    manifestacao.liked = false;
-
+    
     if (manifestacao.disliked) {
       manifestacao.qtd_down++;
-
-      if(manifestacao.qtd_up) {
+      
+      if(manifestacao.liked) {
         manifestacao.qtd_up--;
+        manifestacao.liked = false;
       }
     } else {
       manifestacao.qtd_down--;
