@@ -4,13 +4,21 @@
   </div>
 
   <div class="background">
-    <img [src]="user?.imagem_background" alt="" loading="lazy" />
+    @if (user?.imagem_background) {
+      <img [src]="user!.imagem_background" alt="" loading="lazy" />
+    }
   </div>
 
   <div class="row">
     <div class="userInfo">
       <div class="containerUserImg">
-        <img class="userImg" [src]="user?.imagem_perfil" alt="" loading="lazy" />
+        @if (user!.imagem_perfil) {
+          <img class="userImg" [src]="user!.imagem_perfil" alt="" />
+        } @else {
+          <h1>{{ user!.nome.substring(0, 1) | uppercase }}</h1>
+        }
+
+
       </div>
 
       <h4 class="userName">{{ user?.nome | titlecase }}</h4>

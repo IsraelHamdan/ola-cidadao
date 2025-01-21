@@ -27,6 +27,7 @@
   align-items: center
   justify-content: center
   position: relative
+  background-color: global.$main-fontColor
 
   &:hover
     cursor: pointer
@@ -82,7 +83,7 @@
 
 .containerUserImg 
   border: 4px solid global.$main-bg
-  background: global.$main-fontColor
+  background: global.$btn-alt-bg
   width: 110px
   height: 110px
   border-radius: 50%
@@ -90,12 +91,17 @@
   overflow: hidden
   display: flex
   justify-content: center
+  align-items: center
   position: relative
 
   &:hover
     cursor: pointer
     &::before, &::after
       opacity: 1
+    
+  h1
+    color: white
+    font-size: 3.5em
       
 
   &::before

@@ -9,9 +9,13 @@
 
   <div class="userInfo">
     <div class="containerUserImg">
-      <a routerLink="/user"
-        ><img class="userImg" [src]="userCidadao.imagem_perfil" alt=""
-      /></a>
+      <a routerLink="/user">
+        @if (userCidadao.imagem_perfil) {
+          <img class="userImg" [src]="userCidadao.imagem_perfil" alt="" />
+        } @else {
+          <h1>{{ userCidadao.nome.substring(0, 1) | uppercase }}</h1>
+        }
+      </a>
     </div>
 
     <a routerLink="/user">
