@@ -1,3 +1,5 @@
+import { Resposta } from "./Resposta";
+
 export interface Manifestacao {
   id: number;
   conteudo: string;
@@ -11,6 +13,8 @@ export interface Manifestacao {
   qtd_up: number;
   qtd_down: number;
   status: string;
-  liked: boolean; 
+  liked: boolean;
   disliked: boolean;
+  respostas: Resposta[];
+  show: boolean;
 }
