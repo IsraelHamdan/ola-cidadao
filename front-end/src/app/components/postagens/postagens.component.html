@@ -1,0 +1,93 @@
+<div
+  (scroll)="onScroll($event)"
+  class="manifestations-container"
+  [style.padding]="padding"
+>
+  <div
+    class="manifestation"
+    *ngFor="let postagem of postagens; let i = index"
+    (scroll)="onScroll($event)"
+  >
+    <p>
+      {{ postagem.conteudo }}
+    </p>
+
+    <i
+      *ngIf="userLogged"
+      (click)="moreOptions(i)"
+      id="more"
+      class="fa-solid fa-ellipsis"
+    ></i>
+
+    <div *ngIf="options[i]" class="moreOptions">
+      <button type="button">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>Editar</span>
+      </button>
+      <button (click)="deletePostagem(postagem.id)" type="button">
+        <i class="fa-solid fa-trash"></i>
+        <span>Apagar</span>
+      </button>
+    </div>
+
+    <div *ngIf="postagem.imagem" class="feed-image">
+      <img [src]="postagem.imagem" alt="" />
+    </div>
+
+    <div class="feed-information-1">
+      <div class="tags">
+        <!-- @if (postagem.orgao) {
+        } -->
+        <div class="tag-item">
+          <i class="fa-solid fa-hashtag"></i>
+          <span> Secretaria Segurança </span>
+        </div>
+        
+      </div>
+
+      <a class="share" href="#" title="Compartilhar"
+        ><i class="fa-solid fa-share-from-square"></i
+      ></a>
+    </div>
+
+    <div class="container-information-feed">
+      <div class="user-information">
+        <div class="user-information-image">
+          <img [src]="postagem.imagem" alt="" loading="lazy" />
+
+          <!-- <h2>{{ postagem.nome_cidadao.substring(0, 1) | uppercase }}</h2> -->
+        </div>
+
+        <div class="name">
+          <h4>
+            Prefeitura de {{ postagem.nome_prefeitura }}
+            <i class="fa-solid fa-certificate"></i>
+          </h4>
+          <span>{{ postagem.data_criacao | timeAgo }}</span>
+        </div>
+      </div>
+
+      <div class="container-btn-interation">
+        <div
+          [class.disliked]="postagem.disliked"
+          (click)="dislike(postagem)"
+          class="btn-interation">
+          <i class="fa-solid fa-arrow-down"></i>
+          <span>Descer</span>
+        </div>
+
+        <div [class.liked]="postagem.liked" (click)="like(postagem)" class="btn-interation">
+          <i class="fa-solid fa-arrow-up"></i>
+          <span>Subir</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments">
+      <span>{{ postagem.qtd_up }} Apoiam</span>
+      <span>155 Visualizações</span>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner"></div>
+</div>
