@@ -133,12 +133,19 @@
         <div
           [class.disliked]="manifestation.disliked"
           (click)="dislike(manifestation)"
-          class="btn-interation">
+          class="btn-interation"
+        >
+          <span>{{ manifestation.qtd_down }}</span>
           <i class="fa-solid fa-arrow-down"></i>
           <span>Descer</span>
         </div>
 
-        <div [class.liked]="manifestation.liked" (click)="like(manifestation)" class="btn-interation">
+        <div
+          [class.liked]="manifestation.liked"
+          (click)="like(manifestation)"
+          class="btn-interation"
+        >
+          <span>{{ manifestation.qtd_up }}</span>
           <i class="fa-solid fa-arrow-up"></i>
           <span>Subir</span>
         </div>

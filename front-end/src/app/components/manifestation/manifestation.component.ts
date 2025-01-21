@@ -99,13 +99,38 @@ export class ManifestationComponent implements OnInit {
     });
   }
 
+
   like(manifestacao: Manifestacao) {
     manifestacao.liked = !manifestacao.liked;
     manifestacao.disliked = false;
+
+    if (manifestacao.liked) {
+      manifestacao.qtd_up++;
+
+      if(manifestacao.qtd_down) {
+        manifestacao.qtd_down--;
+      }
+    } else {
+      manifestacao.qtd_up--;
+    }
   }
 
   dislike(manifestacao: Manifestacao) {
     manifestacao.disliked = !manifestacao.disliked;
     manifestacao.liked = false;
+
+    if (manifestacao.disliked) {
+      manifestacao.qtd_down++;
+
+      if(manifestacao.qtd_up) {
+        manifestacao.qtd_up--;
+      }
+    } else {
+      manifestacao.qtd_down--;
+    }
+  }
+
+  showComments(manifestacao: Manifestacao) {
+    manifestacao.show = !manifestacao.show;
   }
 }
