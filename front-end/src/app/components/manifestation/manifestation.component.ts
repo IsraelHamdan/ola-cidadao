@@ -1,10 +1,10 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { Manifestacao } from '../../../interfaces/Manifestacao';
+import { Manifestacao } from '../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 
 @Component({
@@ -99,14 +99,13 @@ export class ManifestationComponent implements OnInit {
     });
   }
 
-
   like(manifestacao: Manifestacao) {
     manifestacao.liked = !manifestacao.liked;
-    
+
     if (manifestacao.liked) {
       manifestacao.qtd_up++;
-      
-      if(manifestacao.disliked) {
+
+      if (manifestacao.disliked) {
         manifestacao.qtd_down--;
         manifestacao.disliked = false;
       }
@@ -117,11 +116,11 @@ export class ManifestationComponent implements OnInit {
 
   dislike(manifestacao: Manifestacao) {
     manifestacao.disliked = !manifestacao.disliked;
-    
+
     if (manifestacao.disliked) {
       manifestacao.qtd_down++;
-      
-      if(manifestacao.liked) {
+
+      if (manifestacao.liked) {
         manifestacao.qtd_up--;
         manifestacao.liked = false;
       }

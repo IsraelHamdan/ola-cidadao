@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { LoginCredentials } from '../../../interfaces/loginCredentials';
-import { LoginResponse } from '../../../interfaces/LoginResponse';
+import { LoginCredentials } from '../../interfaces/loginCredentials';
+import { LoginResponse } from '../../interfaces/LoginResponse';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({

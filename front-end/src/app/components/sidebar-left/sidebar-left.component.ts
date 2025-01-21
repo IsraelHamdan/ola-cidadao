@@ -4,7 +4,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/token/auth.service';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
 import { Token } from '@angular/compiler';
@@ -51,12 +51,14 @@ export class SidebarLeftComponent {
   onLogout(): void {
     this.authService.logout();
     this.user = false;
-    
   }
 
   userCidadao!: CidadaoDTO | undefined | null;
 
-  constructor(private authService: AuthService, private manifestacaoService: ManfestacoesService) {}
+  constructor(
+    private authService: AuthService,
+    private manifestacaoService: ManfestacoesService
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('user')) {

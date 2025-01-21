@@ -26,7 +26,7 @@
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared"],
       "@components/*": ["src/app/components/*"],
-      "@interfaces/*": ["src/interfaces/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
       "@services/*": ["src/app/services"],
       "@enviroments/*": ["src/environments/*"],
       "@pages/*": ["src/app/pages/*"],

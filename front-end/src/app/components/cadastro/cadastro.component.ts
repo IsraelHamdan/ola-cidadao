@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { tick } from '@angular/core/testing';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
 
 @Component({

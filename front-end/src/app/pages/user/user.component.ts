@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 

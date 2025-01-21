@@ -2,10 +2,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ResponsePostagens } from '../../../interfaces/ResponsePostagens';
-import { Postagens } from '../../../interfaces/Postagens';
-import { Manifestacao } from '../../../interfaces/Manifestacao';
-import { ResponseManifestacao } from '../../../interfaces/ResponseManifestacao';
+import { ResponsePostagens } from '../../interfaces/ResponsePostagens';
+import { Postagens } from '../../interfaces/Postagens';
+import { Manifestacao } from '../../interfaces/Manifestacao';
+import { ResponseManifestacao } from '../../interfaces/ResponseManifestacao';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +21,7 @@ export class PostagensService {
 
   // Obtém todas as manifestações
   getAllPostagens(): Observable<ResponsePostagens<Postagens[]>> {
-    return this.http.get<ResponsePostagens<Postagens[]>>(
-      `${this.apiUrl}/`
-    );
+    return this.http.get<ResponsePostagens<Postagens[]>>(`${this.apiUrl}/`);
   }
 
   // Obtém manifestações paginadas

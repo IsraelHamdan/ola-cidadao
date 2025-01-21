@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CreateAdminDTO } from '../../../interfaces/CreateAdminDTO';
+import { CreateAdminDTO } from '../../interfaces/CreateAdminDTO';
 import { Observable } from 'rxjs';
-import { AdminDTO } from '../../../interfaces/AdminDTO';
+import { AdminDTO } from '../../interfaces/AdminDTO';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({

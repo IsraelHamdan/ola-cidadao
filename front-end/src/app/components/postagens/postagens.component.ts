@@ -4,7 +4,7 @@ import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.s
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
-import { Postagens } from '../../../interfaces/Postagens';
+import { Postagens } from '../../interfaces/Postagens';
 import { PostagensService } from '../../services/postagens/postagens.service';
 
 @Component({

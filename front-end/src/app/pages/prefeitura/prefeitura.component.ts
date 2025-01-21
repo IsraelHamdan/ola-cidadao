@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { PrefeiturasService } from '../../services/prefeituras/prefeituras.service';
-import { Prefeitura } from '../../../interfaces/PrefeituraDTO';
 import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
 import { CommonModule } from '@angular/common';
 import { PostagensComponent } from '../../components/postagens/postagens.component';
+import { Prefeitura } from '../../interfaces/PrefeituraDTO';
 
 @Component({
   selector: 'app-prefeitura',

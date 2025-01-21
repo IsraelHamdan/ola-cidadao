@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/token/auth.service';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import {
   FormBuilder,
   FormGroup,
@@ -12,7 +12,7 @@ import {
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SecretariasService } from '../../services/secretarias/secretarias.service';
-import { Secretaria } from '../../../interfaces/SecretariaDTO';
+import { Secretaria } from '../../interfaces/SecretariaDTO';
 
 @Component({
   selector: 'app-nova-manifestacao',

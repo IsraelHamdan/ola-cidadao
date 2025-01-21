@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CidadaoDTO } from '../../../interfaces/CidadaoDTO';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NovaManifestacaoComponent } from "../../pages/nova-manifestacao/nova-manifestacao.component";
+import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 
 @Component({
   selector: 'app-header-mobile',
