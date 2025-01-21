@@ -9,7 +9,7 @@ import { PostagensComponent } from "../../components/postagens/postagens.compone
 @Component({
   selector: 'app-prefeitura',
   standalone: true,
-  imports: [ManifestationComponent, CommonModule, PostagensComponent],
+  imports: [CommonModule, PostagensComponent],
   templateUrl: './prefeitura.component.html',
   styleUrl: './prefeitura.component.sass',
 })
