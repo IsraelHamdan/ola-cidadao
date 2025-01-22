@@ -6,6 +6,8 @@ import { TimeAgoPipe } from '../../pipes/timeAgo';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
+import { Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manifestation',
@@ -26,13 +28,25 @@ export class ManifestationComponent implements OnInit {
   constructor(
     private manifestacoesService: ManfestacoesService,
     private spinner: NgxSpinnerService,
-    private auth: AuthService
+    private auth: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   userLogged: boolean = false;
+
   ngOnInit(): void {
+    // Carregar as manifestações iniciais antes de aplicar o filtro
     this.loadInitialData();
 
+    // Obtém o valor de 'filterResponded' da rota
+    const filterResponded = this.route.snapshot.data['filterResponded'];
+
+    if (filterResponded) {
+      // Filtra as manifestações com comentários após a carga inicial
+      this.manifestations = this.filterManifestationsWithComments();
+    }
+
+    // Assina o evento de login para recarregar as manifestações
     this.userLogged = this.auth.isLoggedIn();
     this.auth.userLogged.subscribe(() => {
       this.loadInitialData();
@@ -43,36 +57,6 @@ export class ManifestationComponent implements OnInit {
     this.manifestacoesService.manifestationCreated.subscribe(() => {
       this.loadInitialData();
     });
-  }
-
-  loadInitialData(): void {
-    this.loading = true;
-    this.manifestacoesService.getAllManifestations().subscribe((response) => {
-      this.manifestations = response.results;
-      this.nextUrl = response.next;
-      this.loading = false;
-
-      this.options = new Array(this.manifestations.length).fill(false);
-    });
-  }
-
-  loadNextPage(): void {
-    if (this.nextUrl && !this.loading) {
-      this.loading = true;
-      this.manifestacoesService
-        .getPaginatedManifestations(this.nextUrl)
-        .subscribe((response) => {
-          this.manifestations = [...this.manifestations, ...response.results];
-          this.nextUrl = response.next;
-          this.loading = false;
-
-          // Expande o array options para incluir novas manifestações
-          this.options = [
-            ...this.options,
-            ...new Array(response.results.length).fill(false),
-          ];
-        });
-    }
   }
 
   onScroll(event: Event): void {
@@ -98,7 +82,65 @@ export class ManifestationComponent implements OnInit {
       this.spinner.hide();
     });
   }
-
+  
+  loadInitialData(): void {
+    this.loading = true;
+    this.manifestacoesService.getAllManifestations().subscribe((response) => {
+      this.manifestations = response.results;
+      this.nextUrl = response.next;
+      this.loading = false;
+  
+      this.options = new Array(this.manifestations.length).fill(false);
+  
+      // Aplica o filtro após o carregamento dos dados iniciais
+      this.applyFilter();
+    });
+  }
+  
+  loadNextPage(): void {
+    if (this.nextUrl && !this.loading) {
+      this.loading = true;
+      this.manifestacoesService
+        .getPaginatedManifestations(this.nextUrl)
+        .subscribe((response) => {
+          // Carrega as novas manifestações
+          const newManifestations = response.results;
+          
+          // Adiciona as novas manifestações à lista existente
+          this.manifestations = [...this.manifestations, ...newManifestations];
+          this.nextUrl = response.next;
+          this.loading = false;
+  
+          // Expande o array options para incluir novas manifestações
+          this.options = [
+            ...this.options,
+            ...new Array(newManifestations.length).fill(false),
+          ];
+  
+          // Aplica o filtro às manifestações já carregadas (iniciais + paginadas)
+          this.applyFilter();
+        });
+    }
+  }
+  
+  // Função para aplicar o filtro de manifestações com comentários
+  applyFilter(): void {
+    const filterResponded = this.route.snapshot.data['filterResponded'];
+  
+    if (filterResponded) {
+      this.manifestations = this.filterManifestationsWithComments();
+    }
+  }
+  
+  filterManifestationsWithComments(): Manifestacao[] {
+    const filtered = this.manifestations.filter(
+      (manifestacao) =>
+        Array.isArray(manifestacao.respostas) && manifestacao.respostas.length > 0
+    );
+    console.log('Filtered Manifestations:', filtered); // Verifique no console
+    return filtered;
+  }
+  
   like(manifestacao: Manifestacao) {
     manifestacao.liked = !manifestacao.liked;
 

@@ -17,16 +17,18 @@ export const routes: Routes = [
     component: FeedComponent, // Componente que contém o router-outlet principal
     children: [
       {
-        path: '', // Rota padrão dentro de FeedComponent
+        path: '', // Rota para o componente Manifestation
         component: ManifestationComponent,
+        data: { filterResponded: false }, // Por padrão, sem filtro
       },
       {
-        path: 'postagens', // Rota para o componente Postagens
+        path: 'respondidas', // Rota para mostrar manifestações com comentários
+        component: ManifestationComponent,
+        data: { filterResponded: true }, // Com filtro para respondidas
+      },
+      {
+        path: 'postagens', // Rota para o componente Manifestation
         component: PostagensComponent,
-      },
-      {
-        path: 'manifestacoes', // Rota para o componente Manifestation
-        component: ManifestationComponent,
       },
     ],
   },
