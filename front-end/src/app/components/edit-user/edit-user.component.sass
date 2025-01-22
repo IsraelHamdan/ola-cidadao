@@ -1,0 +1,83 @@
+/* modal.component.css */
+@use '../../../styles.sass' as global
+
+.modal-overlay
+  position: fixed
+  z-index: 9999
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: rgba(0, 0, 0, 0.5)
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 10px
+
+.modal-content 
+  background: white
+  border-radius: 15px
+  max-width: 600px
+  width: 100%
+  text-align: center
+  padding-bottom: 15px
+
+legend
+  padding: 10px 12px 10px 10px
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  border-bottom: 1px solid global.$border-color
+  color: global.$main-fontColor
+  font-size: .9em
+  font-weight: 500
+
+  *
+    transition: all .15s ease
+    &:hover
+      cursor: pointer
+      color: global.$main-fontColor
+
+.body
+  display: flex
+  flex-direction: column
+  gap: 10px
+  min-height: 200px
+  color: global.$main-fontColor
+
+fieldset
+  border: none
+
+  &:last-of-type
+    padding-bottom: 10px
+    border-bottom: 1px solid global.$border-color
+
+.form-group
+  display: flex
+  padding: 5px 15px
+  gap: 20px
+
+  label
+    text-align: left
+    font-size: .85em
+
+  input
+    border-radius: 20px
+    border: 1px solid global.$border-color
+    padding: 5px 10px
+
+
+.form-data
+  display: flex
+  flex-direction: column
+  width: 50%
+  gap: 3px
+
+button
+  margin-left: 15px
+  padding: 5px 15px !important
+
+.error
+  border-color: #DE4545
+  color: #DE4545

@@ -1,0 +1,69 @@
+<!-- modal.component.html -->
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- <div class="header">
+      <p>Informações pessoais</p>
+      <i (click)="close()" class="fa-solid fa-x"></i>
+    </div> -->
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="formUserEdit">
+      <div class="body">
+        <fieldset>
+          <legend class="header">
+            <h4>Informações pessoais</h4>
+            <i (click)="close()" class="fa-solid fa-x"></i>
+          </legend>
+
+          <div class="form-group">
+            <div class="form-data">
+              <label for="name">Nome de usuário</label>
+              <input type="text" name="name" id="name" />
+            </div>
+
+            <div class="form-data">
+              <label for="social_name">Nome social</label>
+              <input type="text" name="social_name" id="social_name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-data">
+              <label for="email">Email</label>
+              <input type="text" name="email" id="email" />
+            </div>
+
+            <div class="form-data">
+              <label for="data_nascimento">Data de nascimento</label>
+              <input type="text" name="data_nascimento" id="data_nascimento" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="header">
+            <h4>Informações endereço</h4>
+          </legend>
+
+          <div class="form-group">
+            <div class="form-data">
+              <label for="logradouro">Logradouro</label>
+              <input type="text" name="logradouro" id="logradouro" />
+            </div>
+
+            <div class="form-data">
+              <label for="bairro">Bairro</label>
+              <input type="text" name="bairro" id="bairro" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-data">
+              <label for="numero">Número</label>
+              <input type="text" name="numero" id="numero" />
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="btn-default" type="submit">Salvar</button>
+    </form>
+  </div>
+</div>

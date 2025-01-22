@@ -4,16 +4,30 @@ import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
+import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ManifestationComponent, CommonModule],
+  imports: [ManifestationComponent, CommonModule, EditUserComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.sass',
 })
 export class UserComponent {
   user!: CidadaoDTO | undefined | null;
+
+  isModalEditOpen: boolean = true;
+
+  openModal() {
+    this.isModalEditOpen = true;
+  }
+  closeModalEdit() {
+    this.isModalEditOpen = false;
+  }
+
+  edit() {
+    this.isModalEditOpen = true;
+  }
 
   constructor(private authService: AuthService) {}
 
