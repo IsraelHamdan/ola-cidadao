@@ -16,7 +16,7 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
 export class UserComponent {
   user!: CidadaoDTO | undefined | null;
 
-  isModalEditOpen: boolean = true;
+  isModalEditOpen: boolean = false;
 
   openModal() {
     this.isModalEditOpen = true;
