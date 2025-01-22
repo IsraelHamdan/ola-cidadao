@@ -29,10 +29,17 @@ export class UserComponent {
     this.isModalEditOpen = true;
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cidadaoService: CidadaoService
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
+
+    this.cidadaoService.userUpdated.subscribe(() => {
+      this.user = this.authService.getUser();
+    });
   }
 
   // constructor(private cidadaoService: CidadaoService) {}

@@ -6,6 +6,7 @@ import { Endereco } from './endereco';
 // }
 
 export interface CidadaoDTO {
+  id: number;
   nome: string;
   cpf: string;
   data_nascimento: Date;

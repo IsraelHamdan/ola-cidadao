@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CidadaoService {
+  private baseUrl = environment.baseURL;
+  private apiUrl = `${this.baseUrl}`;
+
+  userUpdated = new EventEmitter<void>();
+
   private urlRequest = `${environment.baseURL}/cidadaos/cadastro/`;
   constructor(private http: HttpClient) {}
 
@@ -27,7 +32,10 @@ export class CidadaoService {
     id: number,
     cidadao: Partial<CidadaoDTO>
   ): Observable<CidadaoDTO> {
-    return this.http.patch<CidadaoDTO>(`${this.urlRequest}/${id}`, cidadao);
+    return this.http.patch<CidadaoDTO>(
+      `${this.apiUrl}/cidadaos/${id}`,
+      cidadao
+    );
   }
 
   deleteCidadao(id: number) {
