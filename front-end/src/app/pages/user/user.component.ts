@@ -29,6 +29,7 @@ export class UserComponent {
     this.isModalEditOpen = true;
   }
 
+  
   constructor(
     private authService: AuthService,
     private cidadaoService: CidadaoService

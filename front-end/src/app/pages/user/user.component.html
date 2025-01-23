@@ -3,7 +3,7 @@
     <h3>Meu perfil</h3>
   </div>
 
-  <div class="background">
+  <div (click)="edit()" class="background">
     @if (user?.imagem_background) {
     <img [src]="user!.imagem_background" alt="" loading="lazy" />
     }
@@ -11,7 +11,7 @@
 
   <div class="row">
     <div class="userInfo">
-      <div class="containerUserImg">
+      <div (click)="edit()" class="containerUserImg">
         @if (user!.imagem_perfil) {
         <img class="userImg" [src]="user!.imagem_perfil" alt="" />
         } @else {
@@ -23,7 +23,9 @@
 
       <p class="countUserName">{{ user?.email }}</p>
     </div>
-    <button (click)="edit()" class="btn-default" type="button">Editar Perfil</button>
+    <button (click)="edit()" class="btn-default" type="button">
+      Editar Perfil
+    </button>
   </div>
 
   <nav>
