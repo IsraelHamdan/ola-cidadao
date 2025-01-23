@@ -9,6 +9,7 @@ import {
 import { AuthService } from '../../services/token/auth.service';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-user',
@@ -30,7 +31,8 @@ export class EditUserComponent implements OnInit {
       email: [''],
       data_nascimento: [''],
       telefone: [''],
-      // imagem_perfil: [null],
+      imagem_perfil: [null],
+      imagem_background: [null],
 
       logradouro: [''],
       bairro: [''],
@@ -47,7 +49,8 @@ export class EditUserComponent implements OnInit {
       email: this.user.email,
       data_nascimento: this.user.data_nascimento,
       telefone: this.user.telefone,
-      // imagem_perfil: null,
+      imagem_perfil: null,
+      imagem_background: null,
 
       logradouro: this.user.endereco.logradouro,
       bairro: this.user.endereco.bairro,
@@ -61,30 +64,12 @@ export class EditUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private cidadaoService: CidadaoService
+    private cidadaoService: CidadaoService,
+    private spinner: NgxSpinnerService
   ) {}
 
   onSubmit() {
-    // const updateData = this.formUserEdit.value;
-
-    // const cidadaoPatch: Partial<CidadaoDTO> = {
-    //   nome: updateData.nome,
-    //   email: updateData.email,
-    //   data_nascimento: updateData.data_nascimento,
-    //   telefone: updateData.telefone,
-    //   imagem_perfil: updateData.imagem_perfil,
-
-    //   endereco: {
-    //     logradouro: updateData.logradouro,
-    //     bairro: updateData.bairro,
-    //     numero: updateData.numero,
-
-
-    //     cidade: updateData.cidade,
-    //     estado: updateData.estado,
-    //     cep: updateData.cep,
-    //   },
-    // };
+    this.spinner.show();
 
     const formValue = this.formUserEdit.value;
     const formData = new FormData();
@@ -95,13 +80,21 @@ export class EditUserComponent implements OnInit {
     formData.append('email', formValue.email);
     formData.append('telefone', formValue.telefone);
 
-    // const imagemPerfilInput = (
-    //   document.getElementById('imagem_perfil') as HTMLInputElement
-    // ).files;
+    const imagemPerfilInput = (
+      document.getElementById('imagem_perfil') as HTMLInputElement
+    ).files;
 
-    // if (imagemPerfilInput && imagemPerfilInput.length > 0) {
-    //   formData.append('imagem_perfil', imagemPerfilInput[0]);
-    // }
+    if (imagemPerfilInput && imagemPerfilInput.length > 0) {
+      formData.append('imagem_perfil', imagemPerfilInput[0]);
+    }
+
+    const imagemBackgroundInput = (
+      document.getElementById('imagem_background') as HTMLInputElement
+    ).files;
+
+    if (imagemBackgroundInput && imagemBackgroundInput.length > 0) {
+      formData.append('imagem_background', imagemBackgroundInput[0]);
+    }
 
     //
 
@@ -124,12 +117,13 @@ export class EditUserComponent implements OnInit {
         // Atualiza o usuário local para refletir os dados novos na interface
         this.user = updatedUser;
         this.cidadaoService.userUpdated.emit();
-
         this.close();
+        this.spinner.hide();
       },
       error: (err) => {
         console.log('Erro ao atualizar informações', err);
         console.log('formData: ', formData);
+        this.spinner.hide();
       },
     });
   }
