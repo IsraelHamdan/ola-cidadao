@@ -25,6 +25,9 @@
               name="cpf"
               id="cpf"
               placeholder="CPF"
+              #cpf
+              [value]="formCadastro.get('cpf')?.value | cpf"
+              (input)="onCpfInput(cpf.value)"
             />
             <input
               formControlName="data_nascimento"
@@ -82,6 +85,8 @@
               name="cep"
               id="cep"
               placeholder="cep"
+              [value]="formCadastro.get('cep')?.value | cep"
+              (input)="onCpfInput(cpf.value)"
             />
           </div>
         </fieldset>

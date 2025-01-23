@@ -19,6 +19,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   selector: 'app-cadastro',
   standalone: true,
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, CpfPipe, CepPipe],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.sass',
 })
@@ -106,5 +107,21 @@ export class CadastroComponent {
         this.spinner.hide();
       },
     });
+  }
+
+  onCpfInput(value: string): void {
+    // Remove todos os caracteres não numéricos
+    const cpfNumerico = value.replace(/\D/g, '');
+
+    // Atualiza o valor no FormControl sem formatação
+    this.formCadastro.get('cpf')?.setValue(cpfNumerico);
+  }
+
+  onCepInput(value: string): void {
+    // Remove todos os caracteres não numéricos
+    const cepNumerico = value.replace(/\D/g, '');
+
+    // Atualiza o valor no FormControl sem formatação
+    this.formCadastro.get('cep')?.setValue(cepNumerico);
   }
 }
