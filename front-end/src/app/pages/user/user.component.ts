@@ -5,11 +5,18 @@ import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ManifestationComponent, CommonModule, EditUserComponent],
+  imports: [
+    ManifestationComponent,
+    CommonModule,
+    EditUserComponent,
+    RouterOutlet,
+    RouterModule,
+  ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.sass',
 })
@@ -29,7 +36,6 @@ export class UserComponent {
     this.isModalEditOpen = true;
   }
 
-  
   constructor(
     private authService: AuthService,
     private cidadaoService: CidadaoService

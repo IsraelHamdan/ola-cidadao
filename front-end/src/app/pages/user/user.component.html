@@ -30,12 +30,15 @@
 
   <nav>
     <div>
-      <button type="button">Manifestações</button>
-      <button type="button">Respostas</button>
+      <button routerLink="/user" type="button">Manifestações</button>
+      <button routerLink="/user/respondidas" type="button">Respostas</button>
     </div>
   </nav>
 </div>
-<app-manifestation [padding]="'10px 15px 50px'"></app-manifestation>
+
+<router-outlet></router-outlet>
+
+<!-- <app-manifestation [padding]="'10px 15px 50px'"></app-manifestation> -->
 <app-edit-user
   [isOpen]="isModalEditOpen"
   [close]="closeModalEdit.bind(this)"

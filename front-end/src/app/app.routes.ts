@@ -53,7 +53,22 @@ export const routes: Routes = [
   // },
 
 
-  { path: 'user', component: UserComponent },
+  {
+    path: 'user', // Rota principal
+    component: UserComponent, // Componente que contém o router-outlet principal
+    children: [
+      {
+        path: '', // Rota para o componente Manifestation
+        component: ManifestationComponent,
+        data: { filterResponded: false }, // Por padrão, sem filtro
+      },
+      {
+        path: 'respondidas', // Rota para mostrar manifestações com comentários
+        component: ManifestationComponent,
+        data: { filterResponded: true }, // Com filtro para respondidas
+      }
+    ],
+  },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
   { path: '', redirectTo: '', pathMatch: 'full' },
