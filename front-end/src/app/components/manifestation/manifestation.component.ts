@@ -143,6 +143,11 @@ export class ManifestationComponent implements OnInit {
 
     if (filterResponded) {
       this.manifestations = this.filterManifestationsWithComments();
+
+      if (this.manifestations.length === 0 && this.nextUrl) {
+        // Continua carregando páginas enquanto não encontrar manifestações respondidas
+        this.loadNextPage();
+      }
     }
   }
 
