@@ -98,9 +98,19 @@
     <div class="feed-information-1">
       <div class="tags">
         @if (manifestation.orgao) {
-        <div class="tag-item pending">
+        <div
+          *ngIf="manifestation.respostas.length == 0"
+          class="tag-item pending"
+        >
           <i class="fa-regular fa-clock"></i>
           <span>Pendente de resposta</span>
+        </div>
+        <div
+          *ngIf="manifestation.respostas.length > 0"
+          class="tag-item respondido"
+        >
+          <i class="fa-solid fa-check"></i>
+          <span>Respondido</span>
         </div>
 
         <div class="tag-item">

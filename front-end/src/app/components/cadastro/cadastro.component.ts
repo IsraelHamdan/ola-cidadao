@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { tick } from '@angular/core/testing';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cadastro',
@@ -30,7 +31,8 @@ export class CadastroComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private cidadaoService: CidadaoService
+    private cidadaoService: CidadaoService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,8 @@ export class CadastroComponent {
   }
 
   onSubmit(): void {
+    this.spinner.show();
+
     const formValue = this.formCadastro.value;
     const formData = new FormData();
 
@@ -94,8 +98,13 @@ export class CadastroComponent {
       next: (res) => {
         console.log('Cadastro realizado com sucesso!', res);
         this.formCadastro.reset();
+        this.close();
+        this.spinner.hide();
       },
-      error: (err) => console.error('Erro no cadastro:', err),
+      error: (err) => {
+        console.error('Erro no cadastro:', err);
+        this.spinner.hide();
+      },
     });
   }
 }
