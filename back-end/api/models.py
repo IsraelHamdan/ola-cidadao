@@ -29,13 +29,25 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True, null=False, blank=False)
+    email = models.EmailField(unique=True, max_length=254, null=False, blank=False)
     telefone = models.CharField(max_length=15, blank=True, null=True)
-    status = models.CharField(max_length=100)
+    status = models.CharField(max_length=15)
     data_criacao = models.DateTimeField(auto_now_add=True)
-    endereco = models.ForeignKey('Endereco', on_delete=models.SET_NULL, null=True)
+    endereco = models.ForeignKey('Endereco', on_delete=models.CASCADE, null=True, blank=True)
     is_active = models.BooleanField(default=True)  # Necessário para autenticação
     # is_staff = models.BooleanField(default=False)  # Necessário para Django Admin
+    imagem_perfil = models.ImageField(
+    upload_to='perfil/',
+    null=True,
+    blank=True,
+    validators=[validate_imagem, validate_tamanho]
+    )
+    imagem_background = models.ImageField(
+    upload_to='background/',
+    null=True,
+    blank=True,
+    validators=[validate_imagem, validate_tamanho]
+    )
 
     objects = UsuarioManager()
 
@@ -60,26 +72,35 @@ class Cidadao(Usuario):
     nome = models.CharField(max_length=255, null=False, blank=False)
     cpf = models.CharField(max_length=14, unique=True, null=False, blank=False)
     data_nascimento = models.DateField(null=False, blank=False)
+
+    class Meta:
+        ordering = ['nome']  # Ordena por nome crescente
     
 
 class Administrador(Usuario):
     nome = models.CharField(max_length=255, null=False, blank=False)
     cpf = models.CharField(max_length=14, unique=True, null=False, blank=False)
     data_nascimento = models.DateField(null=False, blank=False)
+
+    class Meta:
+        ordering = ['nome']  # Ordena por nome crescente
     
 class Prefeitura(Usuario):
-    nome = models.CharField(max_length=255, null=False, blank=False)
+    cidade = models.CharField(max_length=255, null=False, blank=False, unique=True)
     descricao = models.CharField(max_length=255, null=True, blank=True)
     gestor = models.CharField(max_length=255)
-    cidade = models.CharField(max_length=100, null=False, blank=False)
-    cnpj = models.CharField(max_length=18, unique=True)
-    periodo_mandato = models.CharField(max_length=100, null=True, blank=True)
+    cnpj = models.CharField(max_length=18, unique=True, blank=False, null=False)
 
-class Secretaria(Usuario):
+    class Meta:
+        ordering = ['cidade']  # Ordena por nome crescente
+
+class Orgao(Usuario):
     nome = models.CharField(max_length=255, null=False, blank=False)
-    descricao = models.CharField(max_length=255)
-    prefeitura_rel = models.ForeignKey(Prefeitura, on_delete=models.CASCADE, related_name="secretarias")
+    descricao = models.CharField(max_length=255, null=True, blank=True)
+    prefeitura_rel = models.ForeignKey(Prefeitura, on_delete=models.CASCADE, related_name="orgaos")
 
+    class Meta:
+        ordering = ['nome']  # Ordena por nome crescente
 
 class Endereco(models.Model):
     estado = models.CharField(max_length=100)
@@ -95,8 +116,8 @@ class Postagem(models.Model):
         ('Publico', 'Público'),
         ('Privado', 'Privado'),
     ]
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Publico', null=True, blank=True)
-    conteudo = models.TextField(null=False, blank=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Publico', null=True, blank=True)
+    conteudo = models.TextField(null=False, blank=False, max_length=25000)
     data_criacao = models.DateTimeField(auto_now_add=True)
     prefeitura = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='postagens')
     qtd_up = models.PositiveIntegerField(default=0)
@@ -108,36 +129,42 @@ class Postagem(models.Model):
     validators=[validate_imagem, validate_tamanho]
     )
 
+    class Meta:
+        ordering = ['-data_criacao']  # Ordena por data de criação decrescente
+
 
 class Manifestacao(models.Model):
     TIPO_CHOICES = [
         ('Denuncia', 'Denúncia'),
         ('Ajuda', 'Ajuda'),
         ('Solicitacao', 'Solicitação'),
+        ('Elogio', 'Elogio'),
+        ('Sugestao', 'Sugestão'),
+        ('Esclarecimento', 'Esclarecimento')
     ]
-    tipo = models.CharField(max_length=50, choices=TIPO_CHOICES)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
     STATUS_CHOICES = [
         ('Publico', 'Público'),
         ('Privado', 'Privado'),
     ]
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Publico', null=True, blank=True)
-    conteudo = models.TextField(null=False, blank=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Publico', null=True, blank=True)
+    conteudo = models.TextField(null=False, blank=False, max_length=400)
     data_criacao = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=100)
     qtd_up = models.PositiveIntegerField(default=0)
     qtd_down = models.PositiveIntegerField(default=0)
     cidadao = models.ForeignKey(Cidadao, on_delete=models.CASCADE)
-    secretaria = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='manifestacoes')
+    orgao = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='manifestacoes')
     imagem = models.ImageField(
     upload_to='manifestacao/',
     null=True,
     blank=True,
     validators=[validate_imagem, validate_tamanho]
     )
-    
+    class Meta:
+        ordering = ['-data_criacao']  # Ordena por data de criação decrescente
 
 class Resposta(models.Model):
-    conteudo = models.TextField(null=False, blank=False)
+    conteudo = models.TextField(null=False, blank=False, max_length=280)
     data_criacao = models.DateTimeField(auto_now_add=True)
     manifestacao = models.ForeignKey(
         Manifestacao,
@@ -145,5 +172,8 @@ class Resposta(models.Model):
         related_name='respostas'  # Adicionado o related_name
     )
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='respostas')
+
+    class Meta:
+        ordering = ['-data_criacao']  # Ordena por data de criação decrescente
 
 

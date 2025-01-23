@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from django.urls import path
-
+from django.conf import settings
+#from django.conf.urls.static import static
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -27,4 +28,4 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),  # Schema gerado automaticamente
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # Redoc
-]
+] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Adiciona a rota para arquivos de mídia em desenvolvimento

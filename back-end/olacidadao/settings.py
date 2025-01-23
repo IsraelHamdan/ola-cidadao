@@ -16,18 +16,19 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-MEDIA_URL = '/media/'  # URL para acessar arquivos de mídia
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Pasta onde os arquivos serão armazenados
+
+# MEDIA_URL = '/media/'  # URL para acessar arquivos de mídia
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Pasta onde os arquivos serão armazenados
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z4%cm84!p@1ek4d+6u3kj4&gihub#p=_os#f7+7uf!7-+@zy!t'
+# SECRET_KEY = 'django-insecure-z4%cm84!p@1ek4d+6u3kj4&gihub#p=_os#f7+7uf!7-+@zy!t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 APPEND_SLASH = True
 
@@ -43,12 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'rest_framework',  # Django REST Framework
     'api',             # O aplicativo criado
     'drf_spectacular',
     'rest_framework_simplejwt',
-     'corsheaders', # Remove a proteção de CORS
+    'django_filters',
+    'corsheaders', # Remove a proteção de CORS
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -62,6 +66,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',  # Necessário para upload de arquivos
+        'rest_framework.parsers.FormParser',
+    ],
+     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # Define o número de itens por página
 }
 
 
@@ -94,6 +105,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
+    'TOKEN_BLACKLIST': True,
 }
 
 AUTH_USER_MODEL = "api.Usuario"
@@ -135,12 +147,12 @@ WSGI_APPLICATION = 'olacidadao.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -177,9 +189,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuração para servir arquivos estáticos no Heroku
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -194,20 +203,78 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Heroku: Configuração do banco de dados
+# import os
+# import dj_database_url
+
+# if 'DATABASE_URL' in os.environ:  # Verifica se está no Heroku
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+# else:  # Ambiente local
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+
+
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
-if 'DATABASE_URL' in os.environ:  # Verifica se está no Heroku
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:  # Ambiente local
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+# Carregar variáveis do arquivo .env
+load_dotenv()
+
+# Configuração do banco de dados
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),  # Carrega a variável DATABASE_URL do .env
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}
+
+
+# Configurar a SECRET_KEY e DEBUG
+SECRET_KEY = os.getenv('SECRET_KEY', 'ujc3ua=5-^7!+x+2a1z^5dy-%z82-i+=6@x=ox8h7r%h8&$s-$')  # Valor padrão adicionado
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'  # Convertido para booleano
+
+
+
+
+# # Configurações do Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Configuração de armazenamento
+STORAGES = {
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+    },
+}
+
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+
+
+
+
+
+
+#Apagar
+# print("DEFAULT_FILE_STORAGE:", DEFAULT_FILE_STORAGE)
+# print("CLOUDINARY_STORAGE:", CLOUDINARY_STORAGE)
+# # Configuração do armazenamento de mídia
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
