@@ -38,12 +38,21 @@
             id="conteudo"
             title="."
             maxlength="400"
+            [(ngModel)]="conteudoLength"
           ></textarea>
         </div>
 
-        @if (manifestation.imagem) {
+        <div class="observations">
+          <p [class.alert]="conteudoLength.length >= 400">
+            {{ 400 - conteudoLength.length }} Caracteres restantes
+          </p>
+        </div>
+
+        @if (selectedImage) {
+        <img [src]="selectedImage" *ngIf="selectedImage" title="." />
+        } @else { @if (manifestation.imagem) {
         <img [src]="manifestation.imagem" alt="a" />
-        }
+        } }
 
         <input
           formControlName="imagem"
@@ -52,11 +61,17 @@
           id="imagem"
           hidden
           title="."
+          (change)="onFileChanged($event)"
         />
       </div>
 
       <div class="container-buttons">
-        <button class="btn-default" id="changeImage" (click)="alterarImagem()" type="button">
+        <button
+          class="btn-default"
+          id="changeImage"
+          (click)="alterarImagem()"
+          type="button"
+        >
           Alterar imagem
         </button>
         <button class="btn-default" type="submit">Salvar</button>

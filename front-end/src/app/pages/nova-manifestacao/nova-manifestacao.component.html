@@ -78,11 +78,10 @@
             <option value="Solicitação">Solicitação</option>
             <option value="Elogio">Elogio</option>
             <option value="Sugestao">Sugestão</option>
-            <option value="Sugestao">Sugestão</option>
             <option value="Esclarecimento">Esclarecimento</option>
           </select>
 
-          <button class="anexo" (click)="anexar()" type="button">
+          <button [class.indexed]="indexed" class="anexo" (click)="anexar()" type="button">
             <i class="fa-solid fa-paperclip"></i>
             <span>Anexar</span>
           </button>

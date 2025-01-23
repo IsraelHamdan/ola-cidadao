@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormGroupDirective,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { Manifestacao } from '../../interfaces/Manifestacao';
@@ -33,7 +34,7 @@ export class EditManifestationComponent implements OnInit {
 
   ngOnInit(): void {
     this.formManifestationEdit = this.fb.group({
-      conteudo: [''],
+      conteudo: ['', [Validators.maxLength(400)]],
       imagem: [null],
     });
   }
@@ -44,6 +45,8 @@ export class EditManifestationComponent implements OnInit {
         conteudo: this.manifestation.conteudo || '',
         imagem: null,
       });
+
+      this.conteudoLength = this.manifestation.conteudo;
     }
   }
 
@@ -81,5 +84,21 @@ export class EditManifestationComponent implements OnInit {
   alterarImagem() {
     const inputChangeImage = document.getElementById('imagem');
     inputChangeImage!.click();
+  }
+
+  conteudoLength!: string;
+
+  selectedImage: any = null;
+
+  onFileChanged(event: any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.selectedImage = reader.result;
+      };
+    }
   }
 }
