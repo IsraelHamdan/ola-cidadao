@@ -21,8 +21,13 @@
             </div>
 
             <div class="form-data">
-              <label for="social_name">Nome social</label>
-              <input type="text" name="social_name" id="social_name" />
+              <label for="telefone">telefone</label>
+              <input
+                formControlName="telefone"
+                type="text"
+                name="telefone"
+                id="telefone"
+              />
             </div>
           </div>
           <div class="form-group">
@@ -46,6 +51,18 @@
               />
             </div>
           </div>
+
+          <!-- <div class="form-group">
+            <div class="form-data">
+              <label for="imagem_perfil">Imagem de perfil</label>
+              <input
+                formControlName="imagem_perfil"
+                type="file"
+                name="imagem_perfil"
+                id="imagem_perfil"
+              />
+            </div>
+          </div> -->
         </fieldset>
 
         <fieldset>
@@ -56,18 +73,58 @@
           <div class="form-group">
             <div class="form-data">
               <label for="logradouro">Logradouro</label>
-              <input formControlName="logradouro" type="text" name="logradouro" id="logradouro" />
+              <input
+                formControlName="logradouro"
+                type="text"
+                name="logradouro"
+                id="logradouro"
+              />
             </div>
 
             <div class="form-data">
               <label for="bairro">Bairro</label>
-              <input formControlName="bairro" type="text" name="bairro" id="bairro" />
+              <input
+                formControlName="bairro"
+                type="text"
+                name="bairro"
+                id="bairro"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-data">
+              <label for="numero">Número</label>
+              <input
+                formControlName="numero"
+                type="text"
+                name="numero"
+                id="numero"
+              />
+            </div>
+            <div class="form-data">
+              <label for="cep">CEP</label>
+              <input formControlName="cep" type="text" name="cep" id="cep" />
             </div>
           </div>
           <div class="form-group">
             <div class="form-data">
-              <label for="numero">Número</label>
-              <input formControlName="numero" type="text" name="numero" id="numero" />
+              <label for="cidade">Cidade</label>
+              <input
+                formControlName="cidade"
+                type="text"
+                name="cidade"
+                id="cidade"
+              />
+            </div>
+            <div class="form-data">
+              <label for="estado">Estado</label>
+              <input
+                formControlName="estado"
+                type="text"
+                name="estado"
+                id="estado"
+              />
             </div>
           </div>
         </fieldset>
