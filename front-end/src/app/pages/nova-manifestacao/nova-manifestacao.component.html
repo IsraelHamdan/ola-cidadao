@@ -23,7 +23,7 @@
             id="conteudo"
             placeholder="Escreva sua manifestação, seja específico."
             [(ngModel)]="conteudoLength"
-            maxlength="300"
+            maxlength="400"
             [class.danger]="
               formNovaManifestacao.get('conteudo')?.touched &&
               formNovaManifestacao.get('conteudo')?.invalid
@@ -32,8 +32,8 @@
         </div>
         <div class="observations">
           <p>Quantidade de manifestações restantes: 3</p>
-          <p [class.error]="conteudoLength.length >= 300">
-            {{ 300 - conteudoLength.length }} Caracteres restantes
+          <p [class.alert]="conteudoLength.length >= 400">
+            {{ 400 - conteudoLength.length }} Caracteres restantes
           </p>
         </div>
       </div>

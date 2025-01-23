@@ -57,4 +57,8 @@ export class ManfestacoesService {
   deleteManifestation(id: number): Observable<FormData> {
     return this.http.delete<FormData>(`${this.apiUrl}/${id}/`);
   }
+
+  editManifestation(id: number, manifestacao: FormData): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}/`, manifestacao);
+  }
 }

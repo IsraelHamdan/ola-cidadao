@@ -30,10 +30,10 @@ export class CidadaoService {
 
   updateCidadao(
     id: number,
-    cidadao: Partial<CidadaoDTO>
-  ): Observable<CidadaoDTO> {
-    return this.http.patch<CidadaoDTO>(
-      `${this.apiUrl}/cidadaos/${id}`,
+    cidadao: Partial<FormData>
+  ): Observable<any> {
+    return this.http.patch<any>(
+      `${this.apiUrl}/cidadaos/${id}/`,
       cidadao
     );
   }
