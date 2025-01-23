@@ -1,1 +1,66 @@
-<p>edit-manifestation works!</p>
+<!-- modal.component.html -->
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- <div class="header">
+      <p>Informações pessoais</p>
+      <i (click)="close()" class="fa-solid fa-x"></i>
+    </div> -->
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="formManifestationEdit">
+      <div class="body">
+        <legend class="header">
+          <h4>Informações pessoais</h4>
+          <i (click)="close()" class="fa-solid fa-x"></i>
+        </legend>
+
+        <!-- <div class="form-group">
+          <div class="form-data">
+            <label for="name">Nome de usuário</label>
+            <input formControlName="nome" type="text" name="name" id="name" />
+          </div>
+
+          <div class="form-data">
+            <label for="telefone">telefone</label>
+            <input
+              formControlName="telefone"
+              type="text"
+              name="telefone"
+              id="telefone"
+            />
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <h4>Descrição</h4>
+          <textarea
+            formControlName="conteudo"
+            name="conteudo"
+            id="conteudo"
+            title="."
+            maxlength="400"
+          ></textarea>
+        </div>
+
+        @if (manifestation.imagem) {
+        <img [src]="manifestation.imagem" alt="a" />
+        }
+
+        <input
+          formControlName="imagem"
+          type="file"
+          name="imagem"
+          id="imagem"
+          hidden
+          title="."
+        />
+      </div>
+
+      <div class="container-buttons">
+        <button class="btn-default" id="changeImage" (click)="alterarImagem()" type="button">
+          Alterar imagem
+        </button>
+        <button class="btn-default" type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
