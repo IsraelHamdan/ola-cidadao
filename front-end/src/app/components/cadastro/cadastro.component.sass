@@ -115,3 +115,36 @@ button
 a
   &:hover
     text-decoration: underline
+
+.alert
+  width: 100%
+  margin: 5px 0px
+  padding: 10px
+  background-color: #ff5858
+  font-size: .85em
+  font-weight: 500
+  border-radius: 5px
+  color: white
+
+#submit
+  &:disabled
+    background-color: #f25656b4
+    cursor: not-allowed
+
+#reset
+  background-color: global.$main-fontColor
+  color: white
+
+.container-buttons
+  width: 100%
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  gap: 5px
+  justify-content: space-between
+  align-items: center
+
+  button
+    width: 45%
+    border-radius: 5px
+

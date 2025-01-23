@@ -14,11 +14,12 @@ import { tick } from '@angular/core/testing';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CpfPipe } from '../../pipes/formtCpf';
+import { CepPipe } from '../../pipes/formtCep';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   imports: [FormsModule, CommonModule, ReactiveFormsModule, CpfPipe, CepPipe],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.sass',
@@ -36,26 +37,33 @@ export class CadastroComponent {
     private spinner: NgxSpinnerService
   ) {}
 
+  cpfF: string | null = '';
+
   ngOnInit(): void {
     this.formCadastro = this.fb.group({
-      nome: ['', Validators.required],
-      cpf: ['', Validators.required],
-      data_nascimento: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(2)]],
+      cpf: ['', [Validators.required, Validators.minLength(11)]],
+      data_nascimento: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      logradouro: ['', Validators.required],
-      bairro: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      logradouro: ['', [Validators.required, Validators.minLength(2)]],
+      bairro: ['', [Validators.required, Validators.minLength(2)]],
       numero: ['', Validators.required],
-      cidade: ['', Validators.required],
-      estado: ['', Validators.required],
-      cep: ['', Validators.required],
+      cidade: ['', [Validators.required, Validators.minLength(2)]],
+      estado: ['', [Validators.required, Validators.minLength(2)]],
+      cep: [
+        '',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(8)],
+      ],
       imagem_perfil: [null],
       imagem_background: [null],
 
-      confirm_password: ['', Validators.required],
+      confirm_password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
+
+  passwordInvalid: boolean = false;
 
   onSubmit(): void {
     this.spinner.show();
@@ -123,5 +131,9 @@ export class CadastroComponent {
 
     // Atualiza o valor no FormControl sem formatação
     this.formCadastro.get('cep')?.setValue(cepNumerico);
+  }
+
+  reset() {
+    this.formCadastro.reset();
   }
 }

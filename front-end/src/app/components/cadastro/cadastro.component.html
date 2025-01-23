@@ -18,16 +18,26 @@
               name="nome"
               id="nome"
               placeholder="Nome"
+              [class.danger]="
+                formCadastro.get('nome')?.touched &&
+                formCadastro.get('nome')?.invalid
+              "
             />
             <input
               formControlName="cpf"
-              type="number"
+              type="text"
               name="cpf"
               id="cpf"
               placeholder="CPF"
               #cpf
               [value]="formCadastro.get('cpf')?.value | cpf"
               (input)="onCpfInput(cpf.value)"
+              maxlength="14"
+              required
+              [class.danger]="
+                formCadastro.get('cpf')?.touched &&
+                formCadastro.get('cpf')?.invalid
+              "
             />
             <input
               formControlName="data_nascimento"
@@ -35,6 +45,11 @@
               name="dataNascimento"
               id="dataNascimento"
               placeholder="Data de nascimento"
+              required
+              [class.danger]="
+                formCadastro.get('data_nascimento')?.touched &&
+                formCadastro.get('data_nascimento')?.invalid
+              "
             />
           </div>
         </fieldset>
@@ -48,6 +63,11 @@
               name="logradouro"
               id="logradouro"
               placeholder="Logradouro"
+              required
+              [class.danger]="
+                formCadastro.get('logradouro')?.touched &&
+                formCadastro.get('logradouro')?.invalid
+              "
             />
             <div>
               <input
@@ -56,6 +76,11 @@
                 name="bairro"
                 id="bairro"
                 placeholder="Bairro"
+                required
+                [class.danger]="
+                  formCadastro.get('bairro')?.touched &&
+                  formCadastro.get('bairro')?.invalid
+                "
               />
               <input
                 formControlName="numero"
@@ -63,6 +88,10 @@
                 name="numero"
                 id="numero"
                 placeholder="Numero"
+                [class.danger]="
+                  formCadastro.get('numero')?.touched &&
+                  formCadastro.get('numero')?.invalid
+                "
               />
             </div>
             <input
@@ -71,6 +100,10 @@
               name="cidade"
               id="cidade"
               placeholder="Cidade"
+              [class.danger]="
+                formCadastro.get('cidade')?.touched &&
+                formCadastro.get('cidade')?.invalid
+              "
             />
             <input
               formControlName="estado"
@@ -78,6 +111,10 @@
               name="estado"
               id="estado"
               placeholder="Estado"
+              [class.danger]="
+                formCadastro.get('estado')?.touched &&
+                formCadastro.get('estado')?.invalid
+              "
             />
             <input
               formControlName="cep"
@@ -87,6 +124,11 @@
               placeholder="cep"
               [value]="formCadastro.get('cep')?.value | cep"
               (input)="onCpfInput(cpf.value)"
+              [class.danger]="
+                formCadastro.get('cep')?.touched &&
+                formCadastro.get('cep')?.invalid
+              "
+              maxlength="8"
             />
           </div>
         </fieldset>
@@ -100,6 +142,10 @@
               name="email"
               id="email"
               placeholder="email"
+              [class.danger]="
+                formCadastro.get('email')?.touched &&
+                formCadastro.get('email')?.invalid
+              "
             />
             <div>
               <input
@@ -108,6 +154,10 @@
                 name="telefone"
                 id="telefone"
                 placeholder="telefone"
+                [class.danger]="
+                  formCadastro.get('telefone')?.touched &&
+                  formCadastro.get('telefone')?.invalid
+                "
               />
               <input
                 formControlName="password"
@@ -116,6 +166,10 @@
                 id="password"
                 placeholder="password"
                 autocomplete="new-password"
+                [class.danger]="
+                  formCadastro.get('password')?.touched &&
+                  formCadastro.get('password')?.invalid
+                "
               />
             </div>
             <input
@@ -125,6 +179,10 @@
               id="confirm-password"
               placeholder="confirm-password"
               autocomplete="new-password"
+              [class.danger]="
+                formCadastro.get('confirm_password')?.touched &&
+                formCadastro.get('confirm_password')?.invalid
+              "
             />
 
             <input
@@ -147,7 +205,12 @@
           </div>
         </fieldset>
 
-        <button type="submit">Cadastrar-se</button>
+        <div class="container-buttons">
+          <button id="reset" (click)="reset()" type="button">reset</button>
+          <button id="submit" [disabled]="formCadastro.invalid" type="submit">
+            Cadastrar-se
+          </button>
+        </div>
       </form>
     </div>
   </div>
