@@ -44,6 +44,8 @@ legend
   flex-direction: column
   gap: 10px
   min-height: 200px
+  max-height: 85vh
+  overflow: scroll
   color: global.$main-fontColor
 
 fieldset
@@ -83,3 +85,10 @@ button
 .error
   border-color: #DE4545
   color: #DE4545
+
+@media screen and (max-width: 463px)
+  .form-group
+    flex-direction: column
+
+  .form-data
+    width: 100%
