@@ -101,4 +101,18 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
       },
     });
   }
+
+  indexed: boolean = false;
+
+  onFileChanged() {
+    const imageManifestacaoInput = (
+      document.getElementById('manifestacao-image') as HTMLInputElement
+    ).files;
+
+    if (imageManifestacaoInput && imageManifestacaoInput.length > 0) {
+      this.indexed = true;
+    } else {
+      this.indexed = false;
+    }
+  }
 }

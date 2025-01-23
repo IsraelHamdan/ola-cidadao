@@ -94,6 +94,7 @@
             name="manifestacao-image"
             id="manifestacao-image"
             title="manifestacao-image"
+            (change)="onFileChanged()"
           />
         </div>
         <button class="btn-default" id="submit" type="submit" [disabled]="formNovaManifestacao.invalid">Manifestar</button>
