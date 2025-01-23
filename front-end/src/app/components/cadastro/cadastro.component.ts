@@ -28,6 +28,9 @@ import { ToastrService } from 'ngx-toastr';
 export class CadastroComponent {
   @Input() isOpen: boolean = false;
   @Input() close: () => void = () => {};
+  
+  @Input() isOpenCadastro: boolean = false;
+  @Input() closeCadastro: () => void = () => {};
 
   formCadastro!: FormGroup;
 

@@ -63,9 +63,31 @@
   <button id="manifestar" (click)="openModal()" type="button" title=".">
     <i class="fa-solid fa-plus"></i>
   </button>
+  } @else {
+  <div id="not-user">
+    <p id="out-message">Entre ou cadastre-se para se manifestar</p>
+    <div class="buttons-not-user">
+      <button (click)="openLogin()" class="btnSidebar entrar out" type="button">
+        Entrar
+      </button>
+      <button (click)="openCadastro()" type="button" class="btnSidebar out">
+        Cadastrar
+      </button>
+    </div>
+  </div>
   }
-
 </header>
+
+<app-login
+  (autorizacao)="autorizado($event)"
+  [isOpen]="isLoginOpen"
+  [close]="closeLogin.bind(this)"
+></app-login>
+
+<app-cadastro
+  [isOpen]="isCadastroOpen"
+  [close]="closeCadastro.bind(this)"
+></app-cadastro>
 
 <app-nova-manifestacao
   [isOpen]="isModalOpen"
