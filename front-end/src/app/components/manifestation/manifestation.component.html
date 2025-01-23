@@ -81,7 +81,7 @@
     ></i>
 
     <div *ngIf="options[i]" class="moreOptions">
-      <button type="button">
+      <button (click)="editarManifestation(manifestation)" type="button">
         <i class="fa-solid fa-pen-to-square"></i>
         <span>Editar</span>
       </button>
@@ -156,20 +156,27 @@
       <span id="showComments" (click)="showComments(manifestation)"
         >Comentários ({{ manifestation.respostas.length }})</span
       >
-      <span>155 Visualizações</span>
     </div>
 
-    <div *ngIf="manifestation.respostas.length > 0 && manifestation.show" class="container-comments">
+    <div
+      *ngIf="manifestation.respostas.length > 0 && manifestation.show"
+      class="container-comments"
+    >
       <div *ngFor="let resposta of manifestation.respostas" class="comment">
         <h4>Usuário: {{ resposta.usuario }}</h4>
-        <span>{{ resposta.data_criacao | date: 'short' }} </span>
+        <span>{{ resposta.data_criacao | date : "short" }} </span>
         <p>
           {{ resposta.conteudo }}
         </p>
-        
       </div>
     </div>
   </div>
 
   <div *ngIf="loading" class="loading-spinner"></div>
 </div>
+
+<app-edit-manifestation
+  [isOpen]="isModalEditManifestationOpen"
+  [close]="closeModalEditManifestation.bind(this)"
+  [manifestation]="manifestation"
+></app-edit-manifestation>

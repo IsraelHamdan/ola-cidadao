@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, input, Input, OnInit } from '@angular/core';
 import { Manifestacao } from '../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
@@ -8,16 +8,30 @@ import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { Route } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { EditManifestationComponent } from '../edit-manifestation/edit-manifestation.component';
 
 @Component({
   selector: 'app-manifestation',
   standalone: true,
-  imports: [CommonModule, TimeAgoPipe],
+  imports: [CommonModule, TimeAgoPipe, EditManifestationComponent],
   templateUrl: './manifestation.component.html',
   styleUrl: './manifestation.component.sass',
 })
 export class ManifestationComponent implements OnInit {
   @Input() padding!: string;
+  manifestation!: Manifestacao;
+
+  isModalEditManifestationOpen: boolean = false;
+
+  editarManifestation(manifestacao: Manifestacao) {
+    this.isModalEditManifestationOpen = true;
+    this.manifestation = manifestacao;
+    console.log(manifestacao);
+  }
+
+  closeModalEditManifestation() {
+    this.isModalEditManifestationOpen = false;
+  }
 
   manifestations: Manifestacao[] = [];
   nextUrl: string | null = null;
@@ -82,21 +96,21 @@ export class ManifestationComponent implements OnInit {
       this.spinner.hide();
     });
   }
-  
+
   loadInitialData(): void {
     this.loading = true;
     this.manifestacoesService.getAllManifestations().subscribe((response) => {
       this.manifestations = response.results;
       this.nextUrl = response.next;
       this.loading = false;
-  
+
       this.options = new Array(this.manifestations.length).fill(false);
-  
+
       // Aplica o filtro após o carregamento dos dados iniciais
       this.applyFilter();
     });
   }
-  
+
   loadNextPage(): void {
     if (this.nextUrl && !this.loading) {
       this.loading = true;
@@ -105,42 +119,43 @@ export class ManifestationComponent implements OnInit {
         .subscribe((response) => {
           // Carrega as novas manifestações
           const newManifestations = response.results;
-          
+
           // Adiciona as novas manifestações à lista existente
           this.manifestations = [...this.manifestations, ...newManifestations];
           this.nextUrl = response.next;
           this.loading = false;
-  
+
           // Expande o array options para incluir novas manifestações
           this.options = [
             ...this.options,
             ...new Array(newManifestations.length).fill(false),
           ];
-  
+
           // Aplica o filtro às manifestações já carregadas (iniciais + paginadas)
           this.applyFilter();
         });
     }
   }
-  
+
   // Função para aplicar o filtro de manifestações com comentários
   applyFilter(): void {
     const filterResponded = this.route.snapshot.data['filterResponded'];
-  
+
     if (filterResponded) {
       this.manifestations = this.filterManifestationsWithComments();
     }
   }
-  
+
   filterManifestationsWithComments(): Manifestacao[] {
     const filtered = this.manifestations.filter(
       (manifestacao) =>
-        Array.isArray(manifestacao.respostas) && manifestacao.respostas.length > 0
+        Array.isArray(manifestacao.respostas) &&
+        manifestacao.respostas.length > 0
     );
     console.log('Filtered Manifestations:', filtered); // Verifique no console
     return filtered;
   }
-  
+
   like(manifestacao: Manifestacao) {
     manifestacao.liked = !manifestacao.liked;
 
@@ -173,5 +188,9 @@ export class ManifestationComponent implements OnInit {
 
   showComments(manifestacao: Manifestacao) {
     manifestacao.show = !manifestacao.show;
+  }
+
+  editManifestation(id: number, manifestacao: FormData) {
+    this.manifestacoesService.editManifestation(id, manifestacao);
   }
 }
