@@ -16,6 +16,7 @@ import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CpfPipe } from '../../pipes/formtCpf';
 import { CepPipe } from '../../pipes/formtCep';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro',
@@ -34,7 +35,8 @@ export class CadastroComponent {
     private fb: FormBuilder,
     private router: Router,
     private cidadaoService: CidadaoService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {}
 
   cpfF: string | null = '';
@@ -106,6 +108,7 @@ export class CadastroComponent {
     this.cidadaoService.createCidadao(formData).subscribe({
       next: (res) => {
         console.log('Cadastro realizado com sucesso!', res);
+        this.toastr.success('Usuário cadastrado!', 'Sucesso');
         this.formCadastro.reset();
         this.close();
         this.spinner.hide();
@@ -113,6 +116,7 @@ export class CadastroComponent {
       error: (err) => {
         console.error('Erro no cadastro:', err);
         this.spinner.hide();
+        this.toastr.error("CPF ou email já cadastrados", 'Erro!');
       },
     });
   }
