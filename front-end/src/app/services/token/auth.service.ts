@@ -15,6 +15,8 @@ export class AuthService {
   private tokenEndpoint = 'token/';
   private cidadaoEndpoint = '/cidadaos/';
 
+  logoutEmitter = new EventEmitter<void>();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   userLogged = new EventEmitter<void>();
@@ -41,6 +43,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.isLoggedInSubject.next(false); // Atualiza o estado de login
+    this.logoutEmitter.emit();
     this.router.navigate(['/dashboard']);
     this.userLogged.emit();
   }

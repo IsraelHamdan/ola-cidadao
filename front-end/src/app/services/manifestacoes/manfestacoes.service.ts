@@ -61,4 +61,8 @@ export class ManfestacoesService {
   editManifestation(id: number, manifestacao: FormData): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/`, manifestacao);
   }
+
+  getInfo(): Observable<any> {
+    return this.http.get<any>(`${this.baseApiUrl}/info/`);
+  }
 }

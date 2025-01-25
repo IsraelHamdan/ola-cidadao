@@ -47,6 +47,8 @@ export class ManifestationComponent implements OnInit {
   ) {}
 
   userLogged: boolean = false;
+  user!: CidadaoDTO;
+  infoId!: number;
 
   ngOnInit(): void {
     // Carregar as manifestações iniciais antes de aplicar o filtro
@@ -70,6 +72,20 @@ export class ManifestationComponent implements OnInit {
     // Inscreve-se no evento de criação para atualizar a lista automaticamente
     this.manifestacoesService.manifestationCreated.subscribe(() => {
       this.loadInitialData();
+    });
+
+    this.manifestacoesService.getInfo().subscribe((response) => {
+      this.infoId = response.dados.id;
+    });
+    this.auth.logoutEmitter.subscribe(() => {
+      this.manifestacoesService.getInfo().subscribe((response) => {
+        this.infoId = response.dados.id;
+      });
+    });
+    this.auth.userLogged.subscribe(() => {
+      this.manifestacoesService.getInfo().subscribe((response) => {
+        this.infoId = response.dados.id;
+      });
     });
   }
 
