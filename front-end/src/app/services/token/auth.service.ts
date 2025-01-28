@@ -33,6 +33,7 @@ export class AuthService {
             localStorage.setItem('token', response.access);
             this.fetchUserDetails();
             this.isLoggedInSubject.next(true); // Atualiza o estado de login
+            this.startTokenExpirationTimer();
             this.userLogged.emit();
           }
         })
@@ -42,10 +43,9 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.isLoggedInSubject.next(false); // Atualiza o estado de login
+    this.isLoggedInSubject.next(false);
     this.logoutEmitter.emit();
-    this.router.navigate(['/dashboard']);
-    this.userLogged.emit();
+    this.router.navigate(['/dashboard']); // Redireciona após logout
   }
 
   getToken(): string | null {
@@ -60,16 +60,39 @@ export class AuthService {
       return null;
     }
     try {
-      const payload = token.split('.')[1]; // Extrai a segunda parte (payload)
-      console.log('Payload do token:', payload);
-      const decodedPayload = atob(payload); // Decodifica da base64
-      console.log('Payload decodificado:', decodedPayload);
-      return JSON.parse(decodedPayload); // Converte de JSON para objeto
+      const payload = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payload));
+      return decodedPayload; // Retorna o payload decodificado
     } catch (error) {
       console.error('Erro ao decodificar o token:', error);
       return null;
     }
   }
+  
+  getTokenExpiration(): number | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      return decoded?.exp ? decoded.exp * 1000 : null; // Retorna o timestamp de expiração em milissegundos
+    }
+    return null;
+  }
+  
+
+  startTokenExpirationTimer(): void {
+    const expirationTime = this.getTokenExpiration();
+    if (expirationTime) {
+      const currentTime = new Date().getTime();
+      const timeUntilExpiration = expirationTime - currentTime;
+  
+      if (timeUntilExpiration > 0) {
+        setTimeout(() => {
+          this.logout(); // Desloga o usuário quando o token expira
+        }, timeUntilExpiration);
+      }
+    }
+  }
+  
 
   fetchUserDetails(): void {
     const token = this.getToken();

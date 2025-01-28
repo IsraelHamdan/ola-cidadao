@@ -61,11 +61,20 @@ export class SidebarLeftComponent {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
-      this.userCidadao = this.authService.getUser();
-      this.user = true;
+    if (this.authService.isLoggedIn()) {
+      const expirationTime = this.authService.getTokenExpiration();
+      const currentTime = new Date().getTime();
+  
+      if (expirationTime && expirationTime > currentTime) {
+        this.userCidadao = this.authService.getUser();
+        this.user = true;
+        this.authService.startTokenExpirationTimer(); // Configura o temporizador no carregamento
+      } else {
+        this.onLogout(); // Desloga se o token já expirou
+      }
     }
   }
+  
 
   ngDoCheck(): void {
     this.userCidadao = this.authService.getUser();
