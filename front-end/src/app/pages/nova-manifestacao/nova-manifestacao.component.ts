@@ -31,6 +31,9 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   user!: CidadaoDTO | undefined | null;
   formNovaManifestacao!: FormGroup;
 
+  selectedTipo: string = '';
+  selectedOrgao: string = '';
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -49,8 +52,6 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
       imagem: [null],
     });
 
-
-
     this.secretariaService.getAllSecretarias().subscribe((response) => {
       this.secretarias = response.results;
     });
@@ -58,16 +59,12 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.user = this.authService.getUser();
-    
   }
 
   anexar() {
     const inputFile = document.getElementById('manifestacao-image');
     inputFile!.click();
   }
-
-  selectedTipo: string = '';
-  selectedOrgao: string = '';
 
   onSubmit(): void {
     this.spinner.show();
@@ -97,9 +94,9 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
     this.manifestacaoService.createManifestation(formData).subscribe({
       next: (res) => {
         console.log('Manifestação criada com sucesso!', res);
-        
+
         this.formNovaManifestacao.get('conteudo')!.reset();
-    
+
         this.selectedTipo = ''; // Exemplo
         this.selectedOrgao = ''; // Exemplo
 

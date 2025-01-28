@@ -1,10 +1,3 @@
-import { Endereco } from './endereco';
-
-// enum status {
-//   'LOGADO',
-//   'DESLOGADO',
-// }
-
 export interface CidadaoDTO {
   id: number;
   nome: string;

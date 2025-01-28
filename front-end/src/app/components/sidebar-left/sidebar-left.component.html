@@ -1,5 +1,3 @@
-<head> </head>
-
 <div class="container">
   @if(userCidadao){
   <button (click)="onLogout()" type="button" class="btn-logout">
@@ -11,9 +9,9 @@
     <div class="containerUserImg">
       <a routerLink="/user">
         @if (userCidadao.imagem_perfil) {
-          <img class="userImg" [src]="userCidadao.imagem_perfil" alt="" />
+        <img class="userImg" [src]="userCidadao.imagem_perfil" alt="Perfil" />
         } @else {
-          <h1>{{ userCidadao.nome.substring(0, 1) | uppercase }}</h1>
+        <h1>{{ userCidadao.nome.substring(0, 1) | uppercase }}</h1>
         }
       </a>
     </div>

@@ -9,11 +9,11 @@ export class TimeAgoPipe implements PipeTransform {
     if (!value) return 'Data inválida';
 
     const date = new Date(value);
-    const now = new Date(); 
+    const now = new Date();
 
     const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-    if (diff < 0) return 'Data no futuro'; 
+    if (diff < 0) return 'Data no futuro';
     if (diff < 60) return 'há poucos segundos';
     if (diff < 3600) return `há ${Math.floor(diff / 60)} minutos`;
     if (diff < 86400) return `há ${Math.floor(diff / 3600)} horas`;

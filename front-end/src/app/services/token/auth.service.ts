@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { tap, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginCredentials } from '../../interfaces/loginCredentials';
 import { LoginResponse } from '../../interfaces/LoginResponse';
 import { environment } from '../../../environments/environment.development';
@@ -68,7 +68,7 @@ export class AuthService {
       return null;
     }
   }
-  
+
   getTokenExpiration(): number | null {
     const token = this.getToken();
     if (token) {
@@ -77,14 +77,13 @@ export class AuthService {
     }
     return null;
   }
-  
 
   startTokenExpirationTimer(): void {
     const expirationTime = this.getTokenExpiration();
     if (expirationTime) {
       const currentTime = new Date().getTime();
       const timeUntilExpiration = expirationTime - currentTime;
-  
+
       if (timeUntilExpiration > 0) {
         setTimeout(() => {
           this.logout(); // Desloga o usuário quando o token expira
@@ -92,7 +91,6 @@ export class AuthService {
       }
     }
   }
-  
 
   fetchUserDetails(): void {
     const token = this.getToken();

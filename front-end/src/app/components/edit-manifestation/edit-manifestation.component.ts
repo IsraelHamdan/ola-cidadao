@@ -87,7 +87,6 @@ export class EditManifestationComponent implements OnInit {
   }
 
   conteudoLength!: string;
-
   selectedImage: any = null;
 
   onFileChanged(event: any) {

@@ -1,11 +1,6 @@
 <!-- modal.component.html -->
 <div class="modal-overlay" *ngIf="isOpen" (click)="close()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <!-- <div class="header">
-      <p>Informações pessoais</p>
-      <i (click)="close()" class="fa-solid fa-x"></i>
-    </div> -->
-
     <form (ngSubmit)="onSubmit()" [formGroup]="formUserEdit">
       <div class="body">
         <fieldset>
@@ -13,13 +8,11 @@
             <h4>Informações pessoais</h4>
             <i (click)="close()" class="fa-solid fa-x"></i>
           </legend>
-
           <div class="form-group">
             <div class="form-data">
               <label for="name">Nome de usuário</label>
               <input formControlName="nome" type="text" name="name" id="name" />
             </div>
-
             <div class="form-data">
               <label for="telefone">telefone</label>
               <input
@@ -40,7 +33,6 @@
                 id="email"
               />
             </div>
-
             <div class="form-data">
               <label for="data_nascimento">Data de nascimento</label>
               <input
@@ -51,7 +43,6 @@
               />
             </div>
           </div>
-
           <div class="form-group inputs">
             <div class="form-data">
               <label for="imagem_perfil">Imagem de perfil</label>
@@ -89,7 +80,6 @@
                 id="logradouro"
               />
             </div>
-
             <div class="form-data">
               <label for="bairro">Bairro</label>
               <input
@@ -100,7 +90,6 @@
               />
             </div>
           </div>
-
           <div class="form-group">
             <div class="form-data">
               <label for="numero">Número</label>

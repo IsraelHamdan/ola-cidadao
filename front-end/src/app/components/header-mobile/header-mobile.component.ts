@@ -23,6 +23,22 @@ import { LoginComponent } from '../login/login.component';
 })
 export class HeaderMobileComponent {
   user: boolean = false;
+  userCidadao!: CidadaoDTO | undefined | null;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    if (localStorage.getItem('user')) {
+      this.userCidadao = this.authService.getUser();
+      this.user = true;
+    }
+  }
+
+  ngDoCheck(): void {
+    this.userCidadao = this.authService.getUser();
+  }
+
+  // ---------- NOVA MANIFESTAÇÃO ---------- //
 
   isModalOpen: boolean = false;
 
@@ -33,7 +49,7 @@ export class HeaderMobileComponent {
     this.isModalOpen = false;
   }
 
-  // ---------- LOGIN
+  // ---------- LOGIN ---------- //
 
   isLoginOpen: boolean = false;
 
@@ -49,38 +65,14 @@ export class HeaderMobileComponent {
     this.user = false;
   }
 
-  userCidadao!: CidadaoDTO | undefined | null;
-
-  constructor(
-    private authService: AuthService,
-    private manifestacaoService: ManfestacoesService
-  ) {}
-
-  ngOnInit(): void {
-    if (localStorage.getItem('user')) {
-      this.userCidadao = this.authService.getUser();
-      this.user = true;
-    }
-  }
-
-  ngDoCheck(): void {
-    this.userCidadao = this.authService.getUser();
-  }
-
   autorizado(isAutorizado: boolean) {
     this.user = isAutorizado;
     if (isAutorizado) {
       this.userCidadao = this.authService.getUser();
-
-      // const userData = this.authService.getUser();
-      // if (userData) {
-      //   this.user = true; // Define que o usuário está logado
-      //   this.userCidadao = userData; // Carrega os dados do usuário
-      // }
     }
   }
 
-  // CADASTRO
+  // ---------- CADASTRO ---------- //
 
   isCadastroOpen: boolean = false;
 

@@ -10,10 +10,7 @@ import { CidadaoService } from '../../services/cidadao/cidadao.service';
   styleUrl: './configuracoes.component.sass',
 })
 export class ConfiguracoesComponent {
-  constructor(
-    private cidadaoService: CidadaoService,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   user: boolean = false;
 

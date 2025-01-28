@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -28,14 +28,8 @@ export class CidadaoService {
     return this.http.get<CidadaoDTO[]>(`${this.urlRequest}`);
   }
 
-  updateCidadao(
-    id: number,
-    cidadao: Partial<FormData>
-  ): Observable<any> {
-    return this.http.patch<any>(
-      `${this.apiUrl}/cidadaos/${id}/`,
-      cidadao
-    );
+  updateCidadao(id: number, cidadao: Partial<FormData>): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/cidadaos/${id}/`, cidadao);
   }
 
   deleteCidadao(id: number) {

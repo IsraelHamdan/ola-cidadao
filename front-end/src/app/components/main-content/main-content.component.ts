@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ManifestationComponent } from '../manifestation/manifestation.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

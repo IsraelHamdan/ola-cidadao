@@ -15,7 +15,9 @@ export class SecretariasService {
   constructor(private http: HttpClient) {}
 
   getAllSecretarias(): Observable<ResponseSecretaria<Secretaria[]>> {
-    return this.http.get<ResponseSecretaria<Secretaria[]>>(`${this.apiUrl}/?prefeitura=${2}`);
+    return this.http.get<ResponseSecretaria<Secretaria[]>>(
+      `${this.apiUrl}/?prefeitura=${2}`
+    );
   }
 
   getSecretaria(id: number): Observable<ResponseSecretaria<Secretaria>> {

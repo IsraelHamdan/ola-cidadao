@@ -1,4 +1,4 @@
-import { Component, DoCheck, input, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Manifestacao } from '../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
@@ -6,7 +6,6 @@ import { TimeAgoPipe } from '../../pipes/timeAgo';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
-import { Route } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { EditManifestationComponent } from '../edit-manifestation/edit-manifestation.component';
 
@@ -20,24 +19,16 @@ import { EditManifestationComponent } from '../edit-manifestation/edit-manifesta
 export class ManifestationComponent implements OnInit {
   @Input() padding!: string;
   manifestation!: Manifestacao;
-
   isModalEditManifestationOpen: boolean = false;
-
-  editarManifestation(manifestacao: Manifestacao) {
-    this.isModalEditManifestationOpen = true;
-    this.manifestation = manifestacao;
-    console.log(manifestacao);
-  }
-
-  closeModalEditManifestation() {
-    this.isModalEditManifestationOpen = false;
-  }
 
   manifestations: Manifestacao[] = [];
   nextUrl: string | null = null;
   loading = false;
-
   options: boolean[] = [];
+
+  userLogged: boolean = false;
+  user!: CidadaoDTO;
+  infoId!: number;
 
   constructor(
     private manifestacoesService: ManfestacoesService,
@@ -45,10 +36,6 @@ export class ManifestationComponent implements OnInit {
     private auth: AuthService,
     private route: ActivatedRoute
   ) {}
-
-  userLogged: boolean = false;
-  user!: CidadaoDTO;
-  infoId!: number;
 
   ngOnInit(): void {
     // Carregar as manifestações iniciais antes de aplicar o filtro
@@ -111,6 +98,16 @@ export class ManifestationComponent implements OnInit {
       this.loadInitialData();
       this.spinner.hide();
     });
+  }
+
+  editarManifestation(manifestacao: Manifestacao) {
+    this.isModalEditManifestationOpen = true;
+    this.manifestation = manifestacao;
+    console.log(manifestacao);
+  }
+
+  closeModalEditManifestation() {
+    this.isModalEditManifestationOpen = false;
   }
 
   loadInitialData(): void {

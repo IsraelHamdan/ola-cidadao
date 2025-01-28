@@ -1,17 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/token/auth.service';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { tick } from '@angular/core/testing';
-import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CpfPipe } from '../../pipes/formtCpf';
@@ -28,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CadastroComponent {
   @Input() isOpen: boolean = false;
   @Input() close: () => void = () => {};
-  
+
   @Input() isOpenCadastro: boolean = false;
   @Input() closeCadastro: () => void = () => {};
 
@@ -119,7 +115,7 @@ export class CadastroComponent {
       error: (err) => {
         console.error('Erro no cadastro:', err);
         this.spinner.hide();
-        this.toastr.error("CPF ou email já cadastrados", 'Erro!');
+        this.toastr.error('CPF ou email já cadastrados', 'Erro!');
       },
     });
   }

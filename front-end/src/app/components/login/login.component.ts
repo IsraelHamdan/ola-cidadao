@@ -8,7 +8,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { timeout } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

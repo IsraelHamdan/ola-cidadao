@@ -1,34 +1,12 @@
 <!-- modal.component.html -->
 <div class="modal-overlay" *ngIf="isOpen" (click)="close()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <!-- <div class="header">
-      <p>Informações pessoais</p>
-      <i (click)="close()" class="fa-solid fa-x"></i>
-    </div> -->
-
     <form (ngSubmit)="onSubmit()" [formGroup]="formManifestationEdit">
       <div class="body">
         <legend class="header">
           <h4>Informações pessoais</h4>
           <i (click)="close()" class="fa-solid fa-x"></i>
         </legend>
-
-        <!-- <div class="form-group">
-          <div class="form-data">
-            <label for="name">Nome de usuário</label>
-            <input formControlName="nome" type="text" name="name" id="name" />
-          </div>
-
-          <div class="form-data">
-            <label for="telefone">telefone</label>
-            <input
-              formControlName="telefone"
-              type="text"
-              name="telefone"
-              id="telefone"
-            />
-          </div>
-        </div> -->
 
         <div class="form-group">
           <h4>Descrição</h4>
@@ -49,9 +27,13 @@
         </div>
 
         @if (selectedImage) {
-        <img [src]="selectedImage" *ngIf="selectedImage" title="." />
+        <img
+          [src]="selectedImage"
+          *ngIf="selectedImage"
+          title="Imagem da manifestação"
+        />
         } @else { @if (manifestation.imagem) {
-        <img [src]="manifestation.imagem" alt="a" />
+        <img [src]="manifestation.imagem" alt="Imagem da manifestação" />
         } }
 
         <input
@@ -60,7 +42,7 @@
           name="imagem"
           id="imagem"
           hidden
-          title="."
+          title="imagem"
           (change)="onFileChanged($event)"
         />
       </div>

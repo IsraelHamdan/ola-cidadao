@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
@@ -20,8 +19,9 @@ export class PostagensComponent {
   postagens: Postagens[] = [];
   nextUrl: string | null = null;
   loading = false;
-
   options: boolean[] = [];
+
+  userLogged: boolean = false;
 
   constructor(
     private postagensService: PostagensService,
@@ -29,7 +29,6 @@ export class PostagensComponent {
     private auth: AuthService
   ) {}
 
-  userLogged: boolean = false;
   ngOnInit(): void {
     this.loadInitialData();
 

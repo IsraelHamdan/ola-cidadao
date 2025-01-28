@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ManifestationComponent } from "../manifestation/manifestation.component";
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { PostagensComponent } from "../postagens/postagens.component";
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, RouterModule, CommonModule],
   templateUrl: './feed.component.html',
-  styleUrl: './feed.component.sass'
+  styleUrl: './feed.component.sass',
 })
 export class FeedComponent {
   showAppManifestacao: boolean = true;
@@ -24,9 +22,5 @@ export class FeedComponent {
   showPostagens() {
     this.showAppPostagens = true;
     this.showAppManifestacao = false;
-  }
-
-  showRespostas() {
-
   }
 }

@@ -10,31 +10,12 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [
-    ManifestationComponent,
-    CommonModule,
-    EditUserComponent,
-    RouterOutlet,
-    RouterModule,
-  ],
+  imports: [CommonModule, EditUserComponent, RouterOutlet, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.sass',
 })
 export class UserComponent {
   user!: CidadaoDTO | undefined | null;
-
-  isModalEditOpen: boolean = false;
-
-  openModal() {
-    this.isModalEditOpen = true;
-  }
-  closeModalEdit() {
-    this.isModalEditOpen = false;
-  }
-
-  edit() {
-    this.isModalEditOpen = true;
-  }
 
   constructor(
     private authService: AuthService,
@@ -49,15 +30,19 @@ export class UserComponent {
     });
   }
 
-  // constructor(private cidadaoService: CidadaoService) {}
+  // ---------- EDITAR PERFIL ---------- //
 
-  // // user?: User | undefined | null;
+  isModalEditOpen: boolean = false;
 
-  // ngOnInit(): void {
-  //   this.cidadaoService.getCidadao(1).subscribe((user) => (this.user = user));
+  openModal() {
+    this.isModalEditOpen = true;
+  }
 
-  //   // this.auth.user$.subscribe((user) => {
-  //   //   this.user = user;
-  //   // });
-  // }
+  closeModalEdit() {
+    this.isModalEditOpen = false;
+  }
+
+  edit() {
+    this.isModalEditOpen = true;
+  }
 }

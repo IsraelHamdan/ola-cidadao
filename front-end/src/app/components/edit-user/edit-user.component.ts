@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/token/auth.service';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
@@ -96,8 +91,7 @@ export class EditUserComponent implements OnInit {
       formData.append('imagem_background', imagemBackgroundInput[0]);
     }
 
-    //
-
+    // Endereço
     formData.append('endereco.logradouro', formValue.logradouro);
     formData.append('endereco.bairro', formValue.bairro);
     formData.append('endereco.numero', formValue.numero);

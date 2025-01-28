@@ -4,8 +4,6 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ResponsePostagens } from '../../interfaces/ResponsePostagens';
 import { Postagens } from '../../interfaces/Postagens';
-import { Manifestacao } from '../../interfaces/Manifestacao';
-import { ResponseManifestacao } from '../../interfaces/ResponseManifestacao';
 
 @Injectable({
   providedIn: 'root',
@@ -30,20 +28,6 @@ export class PostagensService {
   ): Observable<ResponsePostagens<Postagens[]>> {
     return this.http.get<ResponsePostagens<Postagens[]>>(url);
   }
-
-  // Cria uma nova manifestação e emite um evento ao concluir
-  // createManifestation(manifestacao: FormData): Observable<any> {
-  //   return new Observable((observer) => {
-  //     this.http.post(`${this.apiUrl}/`, manifestacao).subscribe({
-  //       next: (res) => {
-  //         this.manifestationCreated.emit(); // Notifica a criação
-  //         observer.next(res);
-  //         observer.complete();
-  //       },
-  //       error: (err) => observer.error(err),
-  //     });
-  //   });
-  // }
 
   createPostagem(postagem: FormData): Observable<FormData> {
     return this.http.post<FormData>(`${this.apiUrl}/`, postagem).pipe(
