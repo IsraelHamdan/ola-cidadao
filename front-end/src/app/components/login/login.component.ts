@@ -2,47 +2,66 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../../services/token/auth.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { timeout } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass',
 })
 export class LoginComponent {
   @Input() isOpen: boolean = false;
   @Input() close: () => void = () => {};
+  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter();
 
-  @Output() autorizacao: EventEmitter<boolean> = new EventEmitter(); // Expor com @Output
-
-  userAutorizado: boolean = true;
+  formLogin!: FormGroup;
   alert: boolean = false;
-
-  credentials = { email: '', password: '' };
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formLogin = this.fb.group({
+      email: [localStorage.getItem('email') || ''],
+      senha: [localStorage.getItem('senha') || ''],
+      remenber: [!!localStorage.getItem('email')], // Define o estado inicial do checkbox
+    });
+  }
 
   onSubmit() {
     this.spinner.show();
+    const { email, senha, remenber } = this.formLogin.value;
 
     const payload = {
-      email: this.credentials.email, // Converte 'email' para 'username'
-      password: this.credentials.password,
+      email,
+      password: senha,
     };
 
     this.authService.login(payload).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.access);
+
+        if (remenber) {
+          localStorage.setItem('email', email);
+          localStorage.setItem('senha', senha);
+        } else {
+          localStorage.removeItem('email');
+          localStorage.removeItem('senha');
+        }
+
         this.router.navigate(['/dashboard']);
         this.close();
         this.autorizacao.emit(true);

@@ -9,31 +9,32 @@
     <div class="body">
       <h3>Olá, Cidadão! Seja bem vindo.</h3>
 
-      <form (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" [formGroup]="formLogin">
         <div class="alert" *ngIf="alert">
           <span>Usuário não encontrado</span>
         </div>
         <div class="form-data">
           <input
-            [(ngModel)]="credentials.email"
             type="email"
             name="email"
             id="email"
             placeholder="E-mail"
+            formControlName="email"
           />
           <input
-            [(ngModel)]="credentials.password"
             type="password"
             name="senha"
             id="senha"
             placeholder="Senha"
+            formControlName="senha"
           />
         </div>
 
         <div>
           <div>
-            <input type="checkbox" name="lembrarAcesso" id="lembrarAcesso" />
-            <label for="lembrarAcesso"> Lembrar acesso </label>
+            <input type="checkbox" name="lembrarAcesso" id="remenberAccess"
+            formControlName="remenber" />
+            <label for="remenberAccess"> Lembrar acesso </label>
           </div>
 
           <a href="">Esqueceu?</a>
