@@ -50,4 +50,13 @@ export class ManfestacoesService {
   getInfo(): Observable<any> {
     return this.http.get<any>(`${this.baseApiUrl}/info/`);
   }
+
+  getUserManifestations(): Observable<{
+    results: Manifestacao[];
+    next: string | null;
+  }> {
+    return this.http.get<{ results: Manifestacao[]; next: string | null }>(
+      `${this.apiUrl}/usuario/`
+    );
+  }
 }

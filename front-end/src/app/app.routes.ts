@@ -41,12 +41,12 @@ export const routes: Routes = [
       {
         path: '', // Rota para o componente Manifestation
         component: ManifestationComponent,
-        data: { filterResponded: false }, // Por padrão, sem filtro
+        data: { loadUserManifestations: true, filterResponded: false }, // Por padrão, sem filtro
       },
       {
         path: 'respondidas', // Rota para mostrar manifestações com comentários
         component: ManifestationComponent,
-        data: { filterResponded: true }, // Com filtro para respondidas
+        data: { loadUserManifestations: true, filterResponded: true }, // Com filtro para respondidas
       },
     ],
   },

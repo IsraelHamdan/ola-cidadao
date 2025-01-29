@@ -30,6 +30,8 @@ export class ManifestationComponent implements OnInit {
   user!: CidadaoDTO;
   infoId!: number;
 
+  loadUserManifestations: boolean = false;
+
   constructor(
     private manifestacoesService: ManfestacoesService,
     private spinner: NgxSpinnerService,
@@ -39,6 +41,14 @@ export class ManifestationComponent implements OnInit {
 
   ngOnInit(): void {
     // Carregar as manifestações iniciais antes de aplicar o filtro
+    console.log(
+      'loadUserManifestations:',
+      this.route.snapshot.data['loadUserManifestations']
+    );
+
+    this.loadUserManifestations =
+      this.route.snapshot.data['loadUserManifestations'] || false;
+
     this.loadInitialData();
 
     // Obtém o valor de 'filterResponded' da rota
@@ -112,7 +122,12 @@ export class ManifestationComponent implements OnInit {
 
   loadInitialData(): void {
     this.loading = true;
-    this.manifestacoesService.getAllManifestations().subscribe((response) => {
+
+    const loadManifestations$ = this.loadUserManifestations
+      ? this.manifestacoesService.getUserManifestations()
+      : this.manifestacoesService.getAllManifestations();
+
+    loadManifestations$.subscribe((response) => {
       this.manifestations = response.results;
       this.nextUrl = response.next;
       this.loading = false;
