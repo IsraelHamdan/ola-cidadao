@@ -11,46 +11,78 @@ import { ManifestationComponent } from './components/manifestation/manifestation
 
 export const routes: Routes = [
   {
-    path: '', // Rota principal
-    component: FeedComponent, // Componente que contém o router-outlet principal
+    path: '',
+    component: FeedComponent,
     children: [
       {
-        path: '', // Rota para o componente Manifestation
+        path: '',
         component: ManifestationComponent,
-        data: { filterResponded: false }, // Por padrão, sem filtro
+        data: { filterResponded: false },
       },
       {
-        path: 'respondidas', // Rota para mostrar manifestações com comentários
-        component: ManifestationComponent,
-        data: { filterResponded: true }, // Com filtro para respondidas
+        path: 'respondidas',
+        loadComponent: () =>
+          import('./components/manifestation/manifestation.component').then(
+            (m) => m.ManifestationComponent
+          ),
+        data: { filterResponded: true },
       },
       {
-        path: 'postagens', // Rota para o componente Manifestation
-        component: PostagensComponent,
+        path: 'postagens',
+        loadComponent: () =>
+          import('./components/postagens/postagens.component').then(
+            (m) => m.PostagensComponent
+          ),
       },
     ],
   },
-  { path: 'metricas', component: MetricasComponent },
-  { path: 'prefeitura', component: PrefeituraComponent },
-  { path: 'configuracoes', component: ConfiguracoesComponent },
-  { path: 'nova-manifestacao', component: NovaManifestacaoComponent },
   {
-    path: 'user', // Rota principal
-    component: UserComponent, // Componente que contém o router-outlet principal
+    path: 'metricas',
+    loadComponent: () =>
+      import('./pages/metricas/metricas.component').then(
+        (m) => m.MetricasComponent
+      ),
+  },
+  {
+    path: 'prefeitura',
+    loadComponent: () =>
+      import('./pages/prefeitura/prefeitura.component').then(
+        (m) => m.PrefeituraComponent
+      ),
+  },
+  {
+    path: 'configuracoes',
+    loadComponent: () =>
+      import('./pages/configuracoes/configuracoes.component').then(
+        (m) => m.ConfiguracoesComponent
+      ),
+  },
+  {
+    path: 'nova-manifestacao',
+    loadComponent: () =>
+      import('./pages/nova-manifestacao/nova-manifestacao.component').then(
+        (m) => m.NovaManifestacaoComponent
+      ),
+  },
+  {
+    path: 'user',
+    loadComponent: () =>
+      import('./pages/user/user.component').then((m) => m.UserComponent),
     children: [
       {
-        path: '', // Rota para o componente Manifestation
+        path: '',
         component: ManifestationComponent,
-        data: { loadUserManifestations: true, filterResponded: false }, // Por padrão, sem filtro
+        data: { loadUserManifestations: true, filterResponded: false },
       },
       {
-        path: 'respondidas', // Rota para mostrar manifestações com comentários
-        component: ManifestationComponent,
-        data: { loadUserManifestations: true, filterResponded: true }, // Com filtro para respondidas
+        path: 'respondidas',
+        loadComponent: () =>
+          import('./components/manifestation/manifestation.component').then(
+            (m) => m.ManifestationComponent
+          ),
+        data: { loadUserManifestations: true, filterResponded: true },
       },
     ],
   },
-  // { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
-  // { path: '', redirectTo: '', pathMatch: 'full' },
 ];
