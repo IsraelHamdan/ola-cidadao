@@ -27,7 +27,7 @@ export class ManifestationComponent implements OnInit {
   options: boolean[] = [];
 
   userLogged: boolean = false;
-  user!: CidadaoDTO;
+  // user!: CidadaoDTO;
   infoId!: number;
 
   loadUserManifestations: boolean = false;
@@ -71,14 +71,17 @@ export class ManifestationComponent implements OnInit {
       this.loadInitialData();
     });
 
-    this.manifestacoesService.getInfo().subscribe((response) => {
-      this.infoId = response.dados.id;
-    });
-    this.auth.logoutEmitter.subscribe(() => {
+    if (this.userLogged) {
       this.manifestacoesService.getInfo().subscribe((response) => {
         this.infoId = response.dados.id;
       });
+    }
+
+    this.auth.logoutEmitter.subscribe(() => {
+      this.userLogged = this.auth.isLoggedIn();
+      this.loadInitialData();
     });
+
     this.auth.userLogged.subscribe(() => {
       this.manifestacoesService.getInfo().subscribe((response) => {
         this.infoId = response.dados.id;
