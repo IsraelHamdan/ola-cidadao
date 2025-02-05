@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
@@ -25,7 +24,7 @@ export class PostagensComponent {
 
   constructor(
     private postagensService: PostagensService,
-    private spinner: NgxSpinnerService,
+
     private auth: AuthService
   ) {}
 
@@ -90,11 +89,8 @@ export class PostagensComponent {
   }
 
   deletePostagem(id: number) {
-    this.spinner.show();
-
     this.postagensService.deletePostagem(id).subscribe(() => {
       this.loadInitialData();
-      this.spinner.hide();
     });
   }
 

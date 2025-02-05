@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NovaManifestacaoComponent } from '../../pages/nova-manifestacao/nova-manifestacao.component';
 import { CadastroComponent } from '../cadastro/cadastro.component';
-import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({

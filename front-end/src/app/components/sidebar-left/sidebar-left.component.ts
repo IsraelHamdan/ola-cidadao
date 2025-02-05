@@ -6,7 +6,6 @@ import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/token/auth.service';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { CadastroComponent } from '../cadastro/cadastro.component';
-import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 
 @Component({
   selector: 'app-sidebar-left',

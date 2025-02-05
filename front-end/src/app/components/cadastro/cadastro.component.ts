@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CidadaoService } from '../../services/cidadao/cidadao.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { CpfPipe } from '../../pipes/formtCpf';
 import { CepPipe } from '../../pipes/formtCep';
 import { ToastrService } from 'ngx-toastr';
@@ -34,7 +33,7 @@ export class CadastroComponent {
     private fb: FormBuilder,
     private router: Router,
     private cidadaoService: CidadaoService,
-    private spinner: NgxSpinnerService,
+
     private toastr: ToastrService
   ) {}
 
@@ -67,8 +66,6 @@ export class CadastroComponent {
   passwordInvalid: boolean = false;
 
   onSubmit(): void {
-    this.spinner.show();
-
     const formValue = this.formCadastro.value;
     const formData = new FormData();
 
@@ -110,11 +107,10 @@ export class CadastroComponent {
         this.toastr.success('Usuário cadastrado!', 'Sucesso');
         this.formCadastro.reset();
         this.close();
-        this.spinner.hide();
       },
       error: (err) => {
         console.error('Erro no cadastro:', err);
-        this.spinner.hide();
+
         this.toastr.error('CPF ou email já cadastrados', 'Erro!');
       },
     });

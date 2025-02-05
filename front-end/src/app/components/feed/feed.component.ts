@@ -9,18 +9,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.sass',
 })
-export class FeedComponent {
-  showAppManifestacao: boolean = true;
-  showAppPostagens: boolean = false;
-  showAppRespostas: boolean = false;
-
-  showManifestacoes() {
-    this.showAppManifestacao = true;
-    this.showAppPostagens = false;
-  }
-
-  showPostagens() {
-    this.showAppPostagens = true;
-    this.showAppManifestacao = false;
-  }
-}
+export class FeedComponent {}

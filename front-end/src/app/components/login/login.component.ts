@@ -8,7 +8,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private spinner: NgxSpinnerService,
+
     private fb: FormBuilder
   ) {}
 
@@ -41,7 +40,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.spinner.show();
     const { email, senha, remenber } = this.formLogin.value;
 
     const payload = {
@@ -64,13 +62,11 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
         this.close();
         this.autorizacao.emit(true);
-        this.spinner.hide();
       },
       error: (err) => {
         console.error('Erro de login:', err);
         this.autorizacao.emit(false);
         this.alert = true;
-        this.spinner.hide();
       },
     });
   }

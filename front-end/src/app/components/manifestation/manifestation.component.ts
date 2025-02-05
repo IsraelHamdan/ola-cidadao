@@ -3,8 +3,6 @@ import { Manifestacao } from '../../interfaces/Manifestacao';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/timeAgo';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { EditManifestationComponent } from '../edit-manifestation/edit-manifestation.component';
@@ -34,7 +32,7 @@ export class ManifestationComponent implements OnInit {
 
   constructor(
     private manifestacoesService: ManfestacoesService,
-    private spinner: NgxSpinnerService,
+
     private auth: AuthService,
     private route: ActivatedRoute
   ) {}
@@ -105,11 +103,8 @@ export class ManifestationComponent implements OnInit {
   }
 
   deleteManifestation(id: number) {
-    this.spinner.show();
-
     this.manifestacoesService.deleteManifestation(id).subscribe(() => {
       this.loadInitialData();
-      this.spinner.hide();
     });
   }
 

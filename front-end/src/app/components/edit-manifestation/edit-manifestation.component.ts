@@ -3,13 +3,11 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ManfestacoesService } from '../../services/manifestacoes/manfestacoes.service';
 import { Manifestacao } from '../../interfaces/Manifestacao';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-manifestation',
@@ -28,8 +26,7 @@ export class EditManifestationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private manifestationService: ManfestacoesService,
-    private spinner: NgxSpinnerService
+    private manifestationService: ManfestacoesService
   ) {}
 
   ngOnInit(): void {
@@ -51,8 +48,6 @@ export class EditManifestationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.spinner.show();
-
     const formValue = this.formManifestationEdit.value;
     const formData = new FormData();
 
@@ -72,11 +67,9 @@ export class EditManifestationComponent implements OnInit {
           console.log('Atulizado', response);
           this.manifestationService.manifestationCreated.emit();
           this.close();
-          this.spinner.hide();
         },
         error: (err) => {
           console.log('Erro na atualizacao:', err);
-          this.spinner.hide();
         },
       });
   }
