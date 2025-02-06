@@ -25,7 +25,7 @@ export class ManifestationComponent implements OnInit {
   options: boolean[] = [];
 
   userLogged: boolean = false;
-  // user!: CidadaoDTO;
+
   infoId!: number;
 
   loadUserManifestations: boolean = false;
@@ -57,33 +57,18 @@ export class ManifestationComponent implements OnInit {
       this.manifestations = this.filterManifestationsWithComments();
     }
 
-    // Assina o evento de login para recarregar as manifestações
-    this.userLogged = this.auth.isLoggedIn();
-    this.auth.userLogged.subscribe(() => {
-      this.loadInitialData();
-      this.userLogged = this.auth.isLoggedIn();
+    this.auth.isLoggedIn$.subscribe((response) => {
+      this.userLogged = response;
+
+      if (this.userLogged) {
+        this.manifestacoesService.getInfo().subscribe((response) => {
+          this.infoId = response.dados.id;
+        });
+      }
     });
 
-    // Inscreve-se no evento de criação para atualizar a lista automaticamente
     this.manifestacoesService.manifestationCreated.subscribe(() => {
       this.loadInitialData();
-    });
-
-    if (this.userLogged) {
-      this.manifestacoesService.getInfo().subscribe((response) => {
-        this.infoId = response.dados.id;
-      });
-    }
-
-    this.auth.logoutEmitter.subscribe(() => {
-      this.userLogged = this.auth.isLoggedIn();
-      this.loadInitialData();
-    });
-
-    this.auth.userLogged.subscribe(() => {
-      this.manifestacoesService.getInfo().subscribe((response) => {
-        this.infoId = response.dados.id;
-      });
     });
   }
 

@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginCredentials } from '../../interfaces/loginCredentials';
 import { LoginResponse } from '../../interfaces/LoginResponse';
 import { environment } from '../../../environments/environment.development';
+import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,10 @@ export class AuthService {
   private tokenEndpoint = 'token/';
   private cidadaoEndpoint = '/cidadaos/';
 
-  logoutEmitter = new EventEmitter<void>();
+  public currentUser = new BehaviorSubject<CidadaoDTO | null>(null);
+  currentUser$ = this.currentUser.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  userLogged = new EventEmitter<void>();
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -34,18 +34,9 @@ export class AuthService {
             this.fetchUserDetails();
             this.isLoggedInSubject.next(true); // Atualiza o estado de login
             this.startTokenExpirationTimer();
-            this.userLogged.emit();
           }
         })
       );
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.isLoggedInSubject.next(false);
-    this.logoutEmitter.emit();
-    this.router.navigate(['/dashboard']); // Redireciona após logout
   }
 
   getToken(): string | null {
@@ -104,13 +95,14 @@ export class AuthService {
 
       if (userId) {
         this.http
-          .get(`${this.baseUrl}${this.cidadaoEndpoint}${userId}/`, {
+          .get<CidadaoDTO>(`${this.baseUrl}${this.cidadaoEndpoint}${userId}/`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .subscribe({
             next: (user) => {
               console.log('Dados do usuário:', user);
               localStorage.setItem('user', JSON.stringify(user));
+              this.currentUser.next(user);
             },
             error: (error) => {
               console.error('Erro ao buscar dados do usuário:', error);
@@ -124,12 +116,30 @@ export class AuthService {
     }
   }
 
-  getUser(): any {
+  getUser(): Observable<CidadaoDTO | null> {
     const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+
+    console.log('ATUALIZOU');
+
+    if (user) {
+      const userSave: CidadaoDTO = JSON.parse(user);
+      this.currentUser.next(userSave);
+    }
+
+    return this.currentUser.asObservable();
   }
 
-  isLoggedIn(): boolean {
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.isLoggedInSubject.next(false);
+
+    this.currentUser.next(null);
+
+    this.router.navigate(['/dashboard']); // Redireciona após logout
+  }
+
+  isLoggedIn() {
     return !!this.getToken();
   }
 }

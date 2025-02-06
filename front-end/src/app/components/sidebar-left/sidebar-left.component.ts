@@ -21,7 +21,7 @@ import { CadastroComponent } from '../cadastro/cadastro.component';
   styleUrl: './sidebar-left.component.sass',
 })
 export class SidebarLeftComponent {
-  userCidadao!: CidadaoDTO | undefined | null;
+  userCidadao?: CidadaoDTO | null;
 
   constructor(private authService: AuthService) {}
 
@@ -31,30 +31,24 @@ export class SidebarLeftComponent {
       const currentTime = new Date().getTime();
 
       if (expirationTime && expirationTime > currentTime) {
-        this.userCidadao = this.authService.getUser();
-        this.user = true;
+        this.authService
+          .getUser()
+          .subscribe((user) => (this.userCidadao = user));
+        // this.user = true;
         this.authService.startTokenExpirationTimer(); // Configura o temporizador no carregamento
       } else {
         this.onLogout(); // Desloga se o token já expirou
       }
     }
-  }
 
-  ngDoCheck(): void {
-    this.userCidadao = this.authService.getUser();
-  }
-
-  autorizado(isAutorizado: boolean) {
-    this.user = isAutorizado;
-    if (isAutorizado) {
-      this.userCidadao = this.authService.getUser();
-    }
+    this.authService.getUser().subscribe((user) => {
+      this.userCidadao = user;
+    });
   }
 
   // ---------- NOVA MANIFESTAÇÃO ---------- //
 
   user: boolean = false;
-
   isModalOpen: boolean = false;
 
   openModal() {

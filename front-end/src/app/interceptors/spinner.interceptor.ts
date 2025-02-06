@@ -16,12 +16,10 @@ export class SpinnerInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('Interceptor iniciou');
     this.spinner.show();
 
     return next.handle(req).pipe(
       finalize(() => {
-        console.log('Interceptor finalizou');
         this.spinner.hide();
       })
     );

@@ -31,11 +31,11 @@ export class PostagensComponent {
   ngOnInit(): void {
     this.loadInitialData();
 
-    this.userLogged = this.auth.isLoggedIn();
-    this.auth.userLogged.subscribe(() => {
-      this.loadInitialData();
-      this.userLogged = this.auth.isLoggedIn();
-    });
+    // this.userLogged = this.auth.isLoggedIn();
+    // this.auth.userLogged.subscribe(() => {
+    //   this.loadInitialData();
+    //   this.userLogged = this.auth.isLoggedIn();
+    // });
 
     // Inscreve-se no evento de criação para atualizar a lista automaticamente
     this.postagensService.postagemCreated.subscribe(() => {

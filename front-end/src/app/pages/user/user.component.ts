@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ManifestationComponent } from '../../components/manifestation/manifestation.component';
-import { CidadaoService } from '../../services/cidadao/cidadao.service';
 import { CidadaoDTO } from '../../interfaces/CidadaoDTO';
 import { AuthService } from '../../services/token/auth.service';
 import { CommonModule } from '@angular/common';
@@ -17,17 +15,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 export class UserComponent {
   user!: CidadaoDTO | undefined | null;
 
-  constructor(
-    private authService: AuthService,
-    private cidadaoService: CidadaoService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUser();
-
-    this.cidadaoService.userUpdated.subscribe(() => {
-      this.user = this.authService.getUser();
-    });
+    this.authService.getUser().subscribe((user) => (this.user = user));
   }
 
   // ---------- EDITAR PERFIL ---------- //

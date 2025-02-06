@@ -21,20 +21,14 @@ import { LoginComponent } from '../login/login.component';
   styleUrl: './header-mobile.component.sass',
 })
 export class HeaderMobileComponent {
-  user: boolean = false;
   userCidadao!: CidadaoDTO | undefined | null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
-      this.userCidadao = this.authService.getUser();
-      this.user = true;
-    }
-  }
-
-  ngDoCheck(): void {
-    this.userCidadao = this.authService.getUser();
+    this.authService.getUser().subscribe((user) => {
+      this.userCidadao = user;
+    });
   }
 
   // ---------- NOVA MANIFESTAÇÃO ---------- //
@@ -61,14 +55,6 @@ export class HeaderMobileComponent {
 
   onLogout(): void {
     this.authService.logout();
-    this.user = false;
-  }
-
-  autorizado(isAutorizado: boolean) {
-    this.user = isAutorizado;
-    if (isAutorizado) {
-      this.userCidadao = this.authService.getUser();
-    }
   }
 
   // ---------- CADASTRO ---------- //

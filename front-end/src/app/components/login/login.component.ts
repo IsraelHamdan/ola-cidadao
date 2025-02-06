@@ -59,13 +59,15 @@ export class LoginComponent {
           localStorage.removeItem('senha');
         }
 
+        this.authService.getUser();
+
         this.router.navigate(['/dashboard']);
         this.close();
-        this.autorizacao.emit(true);
+        // this.autorizacao.emit(true);
       },
       error: (err) => {
         console.error('Erro de login:', err);
-        this.autorizacao.emit(false);
+        // this.autorizacao.emit(false);
         this.alert = true;
       },
     });

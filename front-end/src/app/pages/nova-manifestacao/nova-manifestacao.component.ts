@@ -21,7 +21,7 @@ import { Secretaria } from '../../interfaces/SecretariaDTO';
   templateUrl: './nova-manifestacao.component.html',
   styleUrl: './nova-manifestacao.component.sass',
 })
-export class NovaManifestacaoComponent implements OnInit, DoCheck {
+export class NovaManifestacaoComponent implements OnInit {
   @Input() isOpen: boolean = true;
   @Input() close: () => void = () => {};
 
@@ -43,7 +43,7 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUser();
+    this.authService.currentUser$.subscribe((user) => (this.user = user));
 
     this.formNovaManifestacao = this.fb.group({
       conteudo: ['', [Validators.required]],
@@ -55,10 +55,6 @@ export class NovaManifestacaoComponent implements OnInit, DoCheck {
     this.secretariaService.getAllSecretarias().subscribe((response) => {
       this.secretarias = response.results;
     });
-  }
-
-  ngDoCheck(): void {
-    this.user = this.authService.getUser();
   }
 
   anexar() {

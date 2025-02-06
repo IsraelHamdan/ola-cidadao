@@ -37,7 +37,7 @@ export class EditUserComponent implements OnInit {
       cep: [''],
     });
 
-    this.user = this.authService.getUser();
+    this.authService.currentUser$.subscribe((user) => (this.user = user!));
 
     this.formUserEdit.setValue({
       nome: this.user.nome,
@@ -110,7 +110,7 @@ export class EditUserComponent implements OnInit {
 
         // Atualiza o usuário local para refletir os dados novos na interface
         this.user = updatedUser;
-        this.cidadaoService.userUpdated.emit();
+        this.authService.currentUser.next(updatedUser);
         this.close();
         this.spinner.hide();
       },
