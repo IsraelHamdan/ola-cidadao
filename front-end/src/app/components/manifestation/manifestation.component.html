@@ -67,9 +67,11 @@
     <div class="container-information-feed">
       <div class="user-information">
         <div class="user-information-image">
-          <!-- <img src="images/cat2.jpg" alt="" loading="lazy" /> -->
-
-          <h2>{{ manifestation.nome_cidadao.substring(0, 1) | uppercase }}</h2>
+          @if (manifestation.imagem_perfil) {
+            <img [src]="manifestation.imagem_perfil" alt="" loading="lazy" />
+          } @else {
+            <h2>{{ manifestation.nome_cidadao.substring(0, 1) | uppercase }}</h2>
+          }
         </div>
 
         <div class="name">
@@ -121,7 +123,7 @@
     </div>
   </div>
 
-  <div *ngIf="loading" class="loading-spinner"></div>
+  <!-- <div *ngIf="loading" class="loading-spinner"></div> -->
 </div>
 
 <app-edit-manifestation

@@ -1,4 +1,4 @@
-import { Resposta } from "./Resposta";
+import { Resposta } from './Resposta';
 
 export interface Manifestacao {
   id: number;
@@ -17,4 +17,5 @@ export interface Manifestacao {
   disliked: boolean;
   respostas: Resposta[];
   show: boolean;
+  imagem_perfil: string;
 }
